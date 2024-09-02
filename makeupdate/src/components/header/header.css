@@ -3,14 +3,16 @@
   background-image: url(/src/img/Фон.svg);
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100%;
 }
 .header__row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .header__nav {
   display: flex;
+  justify-content: center;
 }
 .container__icons {
   display: flex;
@@ -24,4 +26,54 @@
   line-height: 57.8px;
   text-align: center;
   color: white;
+}
+.nav__elements {
+  width: 143px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 14px;
+  background-color: #01ffc1;
+  border-radius: 32px;
+  color: white;
+  font-family: Manrope;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 27.32px;
+  text-align: left;
+}
+.nav__elements:nth-last-child(-n + 2) {
+  width: 211px;
+  height: 50px;
+}
+.nav__elements:nth-child(2) {
+  width: 126px;
+}
+img {
+  margin-right: 5px;
+}
+
+.container__icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container_elements {
+  border-radius: 50%;
+  background-color: #4b5f9c;
+  width: 50px;
+  height: 50px;
+  margin-left: 8px;
+}
+
+.container_elements:nth-child(3) {
+  width: 83px;
+  background: none;
+}
+.container_elements:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
