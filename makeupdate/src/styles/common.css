@@ -2,7 +2,8 @@ body {
   font-family: "Jost", "Manrope";
 }
 .container {
-  max-width: 1780px;
+  max-width: 1920px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 100px;
+
 }

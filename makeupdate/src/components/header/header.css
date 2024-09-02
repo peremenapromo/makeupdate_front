@@ -1,9 +1,9 @@
 .header {
   padding: 30px 0px 22px 0px;
   background-image: url(/src/img/Фон.svg);
-  background-position: center center;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: contain;
+  resize: none;
 }
 .header__row {
   display: flex;
@@ -34,7 +34,7 @@
   justify-content: center;
   align-items: center;
   margin: 14px;
-  background-color: #01ffc1;
+  background-color: #3caab4;
   border-radius: 32px;
   color: white;
   font-family: Manrope;
@@ -49,6 +49,9 @@
 }
 .nav__elements:nth-child(2) {
   width: 126px;
+}
+.nav__elements:nth-child(4) {
+  width: 149px;
 }
 img {
   margin-right: 5px;
@@ -76,4 +79,108 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.container__user_img {
+  margin-top: 22px;
+  width: 410px;
+  height: fit-content;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 2px 4px 10px 0px #19128140;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.img {
+  width: 400px;
+  position: relative;
+  top: -35px;
+  margin: 190px auto 0px;
+}
+.container__names {
+  position: absolute;
+  width: 709px;
+  height: 370px;
+  top: 145px;
+  left: 556px;
+  font-family: Jost;
+  font-size: 128px;
+  font-weight: 700;
+  line-height: 184.96px;
+  text-align: left;
+  color: white;
+  margin-left: 50px;
+  margin-top: 62px;
+  margin-bottom: 32px;
+}
+.place {
+  font-family: Manrope;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 30.05px;
+  text-align: left;
+  margin-left: 22px;
+  margin-bottom: 13px;
+}
+.user_info_cont {
+  display: flex;
+  flex-direction: column;
+}
+.container__views {
+}
+.player {
+  width: 22px;
+  height: 22px;
+  font-family: Jost;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 31.79px;
+  text-align: left;
+  margin-left: 20px;
+}
+button {
+  width: 378px;
+  height: 56px;
+  padding: 10px 108px 11px 108px;
+  border-radius: 25px;
+  margin: 0px auto 7px;
+  color: white;
+  border: 1px solid black;
+  
+}
+.btn1 {
+  margin-top: 30px;
+  margin-bottom: 7px;
+  box-shadow: 10px 2px 25px 0px #142f8840;
+  background-color: #2aa5a0;
+  background-image: linear-gradient(
+    89.45deg,
+    #05ad25 0.48%,
+    #0294a1 73.77%,
+    #181381 147.06%
+  );
+  font-family: Manrope;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 30.05px;
+  text-align: left;
+}
+.about {
+  margin-left: 15px;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  font-family: Manrope;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 30.05px;
+  text-align: left;
+}
+
+.about2 {
+  font-family: Manrope;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24.59px;
+  text-align: left;
+  margin: 5px 15px 18px 15px;
 }
