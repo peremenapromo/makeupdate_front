@@ -19,33 +19,33 @@ function Header() {
           <div className="header__logo">MAKEUPDATE</div>
           <div className="header__nav">
             <div className="nav__elements">
-              <img src={logo} alt="Logo" /> Главная
+              <img src={logo} alt="Logo" /> <a href="#">Главная</a>
             </div>
             <div className="nav__elements">
               <img src={lessons} alt="Уроки" />
-              Уроки
+              <a href="#">Уроки</a>
             </div>
             <div className="nav__elements">
               <img src={users} alt="Пользователи" />
-              Пользователи
+              <a href="#">Пользователи</a>
             </div>
             <div className="nav__elements">
               <img src={date} alt="События" />
-              События
+              <a href="#">События</a>
             </div>
           </div>
           <div className="container__icons">
             <div className="container_elements">
-              <img src={notification} alt="Уведомления" />
+             <a href="#"> <img src={notification} alt="Уведомления" /></a>
             </div>
             <div className="container_elements">
-              <img src={Language} alt="Язык" />
+             <a href="#"> <img src={Language} alt="Язык" /></a>
             </div>
             <div className="container_elements">
-              <img src={userIcon} alt="Юзеры" />
+             <a href="#"> <img src={userIcon} alt="Юзеры" /></a>
             </div>
             <div className="container_elements">
-              <img src={hamburger_menu} alt="меню-гамбургер" />
+             <a href="#"> <img src={hamburger_menu} alt="меню-гамбургер" /></a>
             </div>
           </div>
         </div>
@@ -57,18 +57,88 @@ function Header() {
         <div className="container__user_img">
           <img src={userLogo} alt="Фотография пользователя" className="img" />
           <div className="user_info_cont">
-           <span className="place"> <img src={place} alt="Местоположение" />Не задано</span>
-         <div className="container__views">
-          <span className="player"> <img src={player} alt="Плеер" />0</span>
-          <span className="player"> <img src={player} alt="Плеер" />0</span>
-         </div>
-         <button className="btn1">Редактировать</button>
-         <button>Опубликовать урок</button>
-         <button>Опубликовать событие</button>
-         <button>Опубликовать фото</button>
-         <div className="about"><b>Обо мне:</b></div>
-         <div className="about2">Заполните описание</div>
+            <span className="place">
+              {" "}
+              <img src={place} alt="Местоположение" />
+              Не задано
+            </span>
+            <div className="container__views">
+              <span className="player">
+                {" "}
+                <img src={player} alt="Плеер" />0
+              </span>
+              <span className="player">
+                {" "}
+                <img src={player} alt="Плеер" />0
+              </span>
+            </div>
+            <button className="btn1">
+              <a href="#">
+                <span className="btn2">Редактировать</span>
+              </a>
+            </button>
+            <button className="btn4">
+              <a href="#">
+                <span className="btn3">Опубликовать урок</span>
+              </a>
+            </button>
+            <button className="btn4">
+              <a href="#">
+                <span className="btn3">Опубликовать событие</span>
+              </a>
+            </button>
+            <button className="btn4">
+              <a href="#">
+                <span className="btn3">Опубликовать фото</span>
+              </a>
+            </button>
+            <div className="about">
+              <b>Обо мне:</b>
+            </div>
+            <div className="about2">Заполните описание</div>
+          </div>
         </div>
+        <div className="button__container">
+          <button className="buttons">      
+          Мои Уроки
+          <sup> (32)</sup>
+            <a href=""></a>
+          </button>
+          <button className="buttons">
+            Доступ к урокам
+            <sup> (32)</sup>
+            <a href=""></a>
+          </button>
+          <button className="buttons">
+            Избранные уроки
+            <sup> (32)</sup>
+            <a href=""></a>
+          </button>
+          <button className="buttons">
+            Мои события
+            <sup> (32)</sup>
+            <a href=""></a>
+          </button>
+          <button className="buttons">
+            Мое портфолио
+            <sup> (32)</sup>
+            <a href=""></a>
+          </button>
+          <button className="buttons">
+            Подписчики
+            <sup> (32)</sup>
+            <a href=""></a>
+          </button>
+          <button className="buttons">
+            Подписки
+            <sup> (32)</sup>
+            <a href=""></a>
+          </button>
+          <button className="buttons">
+          <sup> (32)</sup>
+            Финансы
+            <a href=""></a>
+          </button>
         </div>
       </div>
     </header>

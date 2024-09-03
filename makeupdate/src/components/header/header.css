@@ -141,17 +141,19 @@ img {
 button {
   width: 378px;
   height: 56px;
-  padding: 10px 108px 11px 108px;
   border-radius: 25px;
   margin: 0px auto 7px;
-  color: white;
-  border: 1px solid black;
-  
+  font-family: Manrope;
+  font-size: 22px;
+  font-weight: 500;
+  background-color: #2aa5a0;
+  padding: 10px 100px 10px 10px;
 }
 .btn1 {
   margin-top: 30px;
   margin-bottom: 7px;
   box-shadow: 10px 2px 25px 0px #142f8840;
+  font-family: Manrope;
   background-color: #2aa5a0;
   background-image: linear-gradient(
     89.45deg,
@@ -159,11 +161,34 @@ button {
     #0294a1 73.77%,
     #181381 147.06%
   );
-  font-family: Manrope;
   font-size: 22px;
   font-weight: 500;
   line-height: 30.05px;
   text-align: left;
+  padding: 10px 108px 11px 108px;
+}
+.btn2 {
+  color: white;
+}
+.btn3 {
+  background-image: linear-gradient(
+    89.45deg,
+    #05ad25 0.48%,
+    #0294a1 73.77%,
+    #181381 147.06%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.btn4 {
+  font-family: Manrope;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 30.05px;
+  text-align: center;
+  box-shadow: 1px 2px 25px 0px #142f8840;
+  padding: 10px 50px 11px 50px;
+  background-color: white;
 }
 .about {
   margin-left: 15px;
@@ -183,4 +208,81 @@ button {
   line-height: 24.59px;
   text-align: left;
   margin: 5px 15px 18px 15px;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+.button__container {
+  font-family: Manrope;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 34.15px;
+  text-align: left;
+  color: #3caab4;
+  position: relative;
+  width: 1400px;
+  left: 400px;
+  top: -500px;
+}
+.buttons {
+  box-shadow: 1px 2px 25px 0px #142f8840;
+}
+
+.buttons:first-child {
+  font-weight: bold;
+  width: 208px;
+  height: 56px;
+  margin: 42px 15px 17px 50px;
+  padding: 10px 51px 11px 30px;
+}
+.buttons:nth-child(2) {
+  font-weight: bold;
+  width: 280px;
+  padding: 10px 30px 11px 30px;
+  margin: 0px 15px;
+}
+.buttons:nth-child(3) {
+  font-weight: bold;
+  width: 293px;
+  height: 56px;
+  padding: 10px 26px 11px 30px;
+  margin: 0px 15px;
+}
+.buttons:nth-child(4) {
+  font-weight: bold;
+  width: 233px;
+  height: 56px;
+  padding: 10px 30px 11px 30px;
+}
+.buttons:nth-child(5) {
+  font-weight: bold;
+  width: 251px;
+  height: 56px;
+  padding: 10px 30px 11px 30px;
+  margin: 17px 15px 0px 47px;
+}
+
+.buttons:nth-child(6) {
+  font-weight: bold;
+  width: 228px;
+  height: 56px;
+  margin: 17px 15px 0px;
+  padding: 10px 30px 11px 30px;
+}
+
+.buttons:nth-child(7) {
+  font-weight: bold;
+  width: 200px;
+  height: 56px;
+  padding: 10px 30px 11px 30px;
+  margin: 17px 15px 0px;
+}
+
+.buttons:nth-child(8) {
+  font-weight: bold;
+  width: 169px;
+  height: 56px;
+  margin: 17px 15px 0px;
+  padding: 10px 30px 11px 30px;
 }
