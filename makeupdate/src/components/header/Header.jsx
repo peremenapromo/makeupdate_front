@@ -10,6 +10,9 @@ import hamburger_menu from "./../../img/Гамбургер меню.svg";
 import userLogo from "./../../img/User_logo.svg";
 import place from "./../../img/Местоположение.svg";
 import player from "./../../img/Group 102.svg";
+import Button from "../button/Button";
+import About from "../about/About";
+
 
 function Header() {
   return (
@@ -72,11 +75,8 @@ function Header() {
                 <img src={player} alt="Плеер" />0
               </span>
             </div>
-            <button className="btn1">
-              <a href="#">
-                <span className="btn2">Редактировать</span>
-              </a>
-            </button>
+           <Button/>
+           
             <button className="btn4">
               <a href="#">
                 <span className="btn3">Опубликовать урок</span>
@@ -94,50 +94,43 @@ function Header() {
             </button>
             <div className="about">
               <b>Обо мне:</b>
+              
             </div>
-            <div className="about2">Заполните описание</div>
+            <About/>
           </div>
         </div>
         <div className="button__container">
           <button className="buttons">      
           Мои Уроки
           <sup> (32)</sup>
-            <a href=""></a>
           </button>
           <button className="buttons">
             Доступ к урокам
             <sup> (32)</sup>
-            <a href=""></a>
           </button>
           <button className="buttons">
             Избранные уроки
             <sup> (32)</sup>
-            <a href=""></a>
           </button>
           <button className="buttons">
             Мои события
             <sup> (32)</sup>
-            <a href=""></a>
           </button>
           <button className="buttons">
             Мое портфолио
             <sup> (32)</sup>
-            <a href=""></a>
           </button>
           <button className="buttons">
             Подписчики
             <sup> (32)</sup>
-            <a href=""></a>
           </button>
           <button className="buttons">
             Подписки
             <sup> (32)</sup>
-            <a href=""></a>
           </button>
-          <button className="buttons">
-          <sup> (32)</sup>
+          <button className="buttons">     
             Финансы
-            <a href=""></a>
+            <sup> (32)</sup>
           </button>
         </div>
       </div>
@@ -146,3 +139,4 @@ function Header() {
 }
 
 export default Header;
+
