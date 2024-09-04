@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/react-gh-pages/static/css/main.728fc32c.css",
-    "main.js": "/react-gh-pages/static/js/main.07fccb0f.js",
-    "static/media/Фон.svg": "/react-gh-pages/static/media/Фон.9c7653fc33a3a2226761.svg",
-    "static/media/Group 83.svg": "/react-gh-pages/static/media/Group 83.9a445f91fba219265925ffdbe33580bb.svg",
-    "static/media/Календарь.svg": "/react-gh-pages/static/media/Календарь.bee98193e40032f0096371989416baa6.svg",
-    "static/media/people.svg": "/react-gh-pages/static/media/people.2d5f74b1bea7747d97afb60645ffba25.svg",
-    "static/media/User_logo.svg": "/react-gh-pages/static/media/User_logo.6e7d685e8181d032e77572712da396cf.svg",
-    "static/media/Group 102.svg": "/react-gh-pages/static/media/Group 102.f6f83c47f098f5ab719e1b0253afb8ed.svg",
-    "index.html": "/react-gh-pages/index.html",
-    "static/media/Главная 2.svg": "/react-gh-pages/static/media/Главная 2.dc39235996e27d2706764f96114a5e64.svg",
-    "static/media/Уроки.svg": "/react-gh-pages/static/media/Уроки.dc39235996e27d2706764f96114a5e64.svg",
-    "static/media/Главная.svg": "/react-gh-pages/static/media/Главная.00c005f6a7b8353db85f9ef21b85ce41.svg",
-    "static/media/Russian.svg": "/react-gh-pages/static/media/Russian.aac2d3412e0dcfba696c567f459b2621.svg",
-    "static/media/Местоположение.svg": "/react-gh-pages/static/media/Местоположение.709736829a27f8d8e733a14037a2230c.svg",
-    "static/media/Гамбургер меню.svg": "/react-gh-pages/static/media/Гамбургер меню.6d6fc555788e825632962e992381a452.svg",
-    "main.728fc32c.css.map": "/react-gh-pages/static/css/main.728fc32c.css.map",
-    "main.07fccb0f.js.map": "/react-gh-pages/static/js/main.07fccb0f.js.map"
+    "main.css": "/makeupdate_front/static/css/main.eefa13f9.css",
+    "main.js": "/makeupdate_front/static/js/main.affa383f.js",
+    "static/media/Фон.svg": "/makeupdate_front/static/media/Фон.e867d9dc45bde0f62523.svg",
+    "static/media/Group 83.svg": "/makeupdate_front/static/media/Group 83.cfd25c2ddd8de3e145e5651ba310c320.svg",
+    "static/media/Календарь.svg": "/makeupdate_front/static/media/Календарь.b287e95f0dfb7be944e6e0d87ff48ec8.svg",
+    "static/media/people.svg": "/makeupdate_front/static/media/people.cad5c02f6ea405fe4fc8c7e8867282de.svg",
+    "static/media/User_logo.svg": "/makeupdate_front/static/media/User_logo.cd978e890b70ea2c1f7c18ebd1f0d19f.svg",
+    "static/media/Group 102.svg": "/makeupdate_front/static/media/Group 102.cf938702f56b8a17a4bd61c2f9d81bfc.svg",
+    "index.html": "/makeupdate_front/index.html",
+    "static/media/Главная 2.svg": "/makeupdate_front/static/media/Главная 2.061e8b96f9f6e9896480fb5c56a31933.svg",
+    "static/media/Уроки.svg": "/makeupdate_front/static/media/Уроки.061e8b96f9f6e9896480fb5c56a31933.svg",
+    "static/media/Главная.svg": "/makeupdate_front/static/media/Главная.99c40436dae8b6010ca230dd28ef753f.svg",
+    "static/media/Russian.svg": "/makeupdate_front/static/media/Russian.f46f8b93b9d49619702c40364ca21366.svg",
+    "static/media/Местоположение.svg": "/makeupdate_front/static/media/Местоположение.17b33ac3833f833c3debbb70a847e1ec.svg",
+    "static/media/Гамбургер меню.svg": "/makeupdate_front/static/media/Гамбургер меню.532e9a790784388bce8c6e08275fba5d.svg",
+    "main.eefa13f9.css.map": "/makeupdate_front/static/css/main.eefa13f9.css.map",
+    "main.affa383f.js.map": "/makeupdate_front/static/js/main.affa383f.js.map"
   },
   "entrypoints": [
-    "static/css/main.728fc32c.css",
-    "static/js/main.07fccb0f.js"
+    "static/css/main.eefa13f9.css",
+    "static/js/main.affa383f.js"
   ]
 }
