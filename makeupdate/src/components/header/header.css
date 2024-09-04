@@ -147,7 +147,7 @@ button {
   font-size: 22px;
   font-weight: 500;
   background-color: #2aa5a0;
-  padding: 10px 100px 10px 10px;
+  /* padding: 10px 100px 10px 10px; */
 }
 .btn1 {
   margin-top: 30px;
@@ -161,11 +161,7 @@ button {
     #0294a1 73.77%,
     #181381 147.06%
   );
-  font-size: 22px;
-  font-weight: 500;
-  line-height: 30.05px;
-  text-align: left;
-  padding: 10px 108px 11px 108px;
+  /* padding: 10px 108px 11px 108px; */
   color: white;
   display: flex;
 }

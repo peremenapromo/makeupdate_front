@@ -2,8 +2,8 @@ import React from "react";
 
 function About() {
   return (
-    <div className="about2">
-      Заполните описание
+    <div className="about2" >
+     <span id="text2" >Заполните описание</span> 
       <textarea
         type="text"
         id="text"
