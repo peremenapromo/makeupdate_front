@@ -13,7 +13,7 @@ import cross from './cross.svg'
 
 export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
 	// Checkbox
-	const [isChecked, setIsChecked] = useState<boolean>(false)
+	const [isChecked, setChecked] = useState(false)
 	// Inputs Form
 	const [username, setUsername] = useState<string>('')
 	const [email, setEmail] = useState<string>('')
@@ -28,6 +28,9 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
 
 	const toggleForm = () => {
 		setIsLogin(prev => !prev)
+	}
+	const handleCheckboxChange = (checked: boolean) => {
+		setChecked(checked)
 	}
 
 	const registrationHandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -142,7 +145,7 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
 
 				{!isLogin && (
 					<div className={styles.rules}>
-						<Checkbox checked={isChecked} onChange={setIsChecked} />
+						<Checkbox checked={isChecked} onChange={handleCheckboxChange} />
 					</div>
 				)}
 				<button className={styles.send_form}>

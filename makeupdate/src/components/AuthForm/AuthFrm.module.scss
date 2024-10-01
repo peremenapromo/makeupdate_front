@@ -147,3 +147,47 @@
 	font-size: 1rem;
 	color: $primary_color;
 }
+
+@media (width <= 1024px) {
+	.box_auth {
+		width: 370px;
+	}
+
+	.title {
+		font-size: 1.5rem;
+	}
+
+	.input_auth {
+		width: 290px;
+		height: 40px;
+		font-size: 0.8rem;
+	}
+}
+
+@media (width <= 768px) {
+	.box_auth {
+		width: 320px;
+	}
+
+	.title {
+		font-size: 1.5rem;
+	}
+
+	.input_auth {
+		width: 240px;
+		height: 35px;
+		font-size: 0.7rem;
+	}
+
+	.rules {
+		width: 280px;
+	}
+
+	.question {
+		font-size: 0.8rem;
+	}
+
+	.login_or_reg {
+		font-size: 0.9rem;
+	}
+}

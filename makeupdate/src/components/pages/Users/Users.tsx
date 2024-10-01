@@ -12,12 +12,20 @@ export const Users: FC = () => {
 			<div className={styles.inputs_container}>
 				<div className={styles.search}>
 					<img className={styles.vol} src={img} alt='' />
-					<input className={styles.input} placeholder='Поиск' type='text' />
+					<input
+						className={styles.input}
+						placeholder='Найти по имени'
+						type='text'
+					/>
 					<img className={styles.search_img} src={search} alt='' />
 				</div>
 				<div className={styles.search}>
 					<img className={styles.vol} src={img} alt='' />
-					<input className={styles.input} placeholder='Поиск' type='text' />
+					<input
+						className={styles.input}
+						placeholder='Найти по локации'
+						type='text'
+					/>
 					<img className={styles.search_img} src={search} alt='' />
 				</div>
 			</div>

@@ -15,7 +15,6 @@
 
 	width: 45px;
 	height: 21px;
-	// border: 2px solid rgb(5, 173, 37);
 	background: linear-gradient(
 		275.51deg,
 		rgb(5, 173, 37) 4.4%,
@@ -58,4 +57,14 @@
 	cursor: pointer;
 
 	display: block; /* Показываем белую галочку при включении чекбокса */
+}
+
+@media (width <= 768px) {
+	.button {
+		width: 250px;
+	}
+
+	.text {
+		font-size: 0.7rem;
+	}
 }

@@ -23,11 +23,11 @@ export const User: FC = () => {
 				</p>
 				<div className={styles.view_video}>
 					<div className={styles.video}>
-						<img src={video} alt='video_img' />
+						<img className={styles.img_vid_view} src={video} alt='video_img' />
 						<span className={styles.num}>12</span>
 					</div>
 					<div className={styles.view}>
-						<img src={view} alt='view_img' />
+						<img className={styles.img_vid_view} src={view} alt='view_img' />
 						<span className={styles.num}>12333</span>
 					</div>
 				</div>

@@ -9,7 +9,7 @@ interface CheckboxProps {
 
 export const Checkbox: FC<CheckboxProps> = ({ checked, onChange }) => {
 	const handleCheckboxChange = () => {
-		onChange(!checked) // меняем состояние
+		onChange(!checked)
 	}
 
 	return (
@@ -24,7 +24,7 @@ export const Checkbox: FC<CheckboxProps> = ({ checked, onChange }) => {
 			<span
 				className={`${styles.checkbox} ${checked ? styles.checked : ''}`}
 			></span>
-			<span className='text'>
+			<span className={styles.text}>
 				Я даю согласие на обработку своих персональных данных и принимаю условия
 				оферты
 			</span>
