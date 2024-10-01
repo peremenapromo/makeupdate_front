@@ -1,0 +1,214 @@
+@import '/src/globalStyle/variables';
+
+.container_home {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-image: url('./img/bg_home.svg');
+	background-repeat: no-repeat;
+	background-size: auto;
+	flex-direction: column;
+	max-width: 1920px;
+	width: 100%;
+	max-height: 1080px;
+	height: 100vh;
+}
+
+.text_box_home {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	gap: 40px;
+	padding-bottom: 160px;
+}
+
+.title {
+	font-size: 6.25rem;
+	color: $primary_color;
+	font-weight: 700;
+	font-family: $secondary_font;
+	height: 0px;
+}
+
+.subtitle {
+	text-align: center;
+	font-size: 1.5rem;
+	color: $primary_color;
+	font-weight: 400;
+	font-family: $secondary_font;
+	width: 700px;
+}
+
+.lessons_users_box {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+	gap: 800px;
+}
+
+.les_us {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+	gap: 10px;
+}
+
+.les_us_text {
+	font-size: 1.5rem;
+	font-weight: 400;
+	color: $primary_color;
+	padding-left: 10px;
+}
+
+.num {
+	font-size: 1.5rem;
+	font-weight: 800;
+	color: $primary_color;
+}
+
+@media (width <= 1440px) {
+	.text_box_home {
+		gap: 30px;
+		padding-bottom: 140px;
+	}
+
+	.title {
+		font-size: 6rem;
+	}
+
+	.subtitle {
+		text-align: center;
+		font-size: 1.3rem;
+	}
+
+	.lessons_users_box {
+		gap: 650px;
+	}
+
+	.les_us {
+		gap: 7px;
+	}
+
+	.img_les_us {
+		width: 50px;
+	}
+
+	.les_us_text {
+		font-size: 1.3rem;
+	}
+
+	.num {
+		font-size: 1.3rem;
+	}
+}
+
+@media (width <= 1024px) {
+	.text_box_home {
+		gap: 20px;
+		padding-bottom: 140px;
+	}
+
+	.title {
+		font-size: 5.7rem;
+	}
+
+	.subtitle {
+		text-align: center;
+		font-size: 1.1rem;
+	}
+
+	.lessons_users_box {
+		gap: 500px;
+	}
+
+	.les_us {
+		gap: 5px;
+	}
+
+	.img_les_us {
+		width: 40px;
+	}
+
+	.les_us_text {
+		font-size: 1.1rem;
+	}
+
+	.num {
+		font-size: 1.1rem;
+	}
+}
+
+@media (width <= 768px) {
+	.text_box_home {
+		gap: 20px;
+		padding-bottom: 140px;
+	}
+
+	.title {
+		font-size: 4rem;
+	}
+
+	.subtitle {
+		width: 400px;
+		text-align: center;
+		font-size: 0.9rem;
+	}
+
+	.lessons_users_box {
+		gap: 350px;
+	}
+
+	.les_us {
+		gap: 3px;
+	}
+
+	.img_les_us {
+		width: 30px;
+	}
+
+	.les_us_text {
+		font-size: 0.9rem;
+	}
+
+	.num {
+		font-size: 0.9rem;
+	}
+}
+
+@media (width <= 425px) {
+	.text_box_home {
+		gap: 10px;
+	}
+
+	.title {
+		font-size: 3rem;
+	}
+
+	.subtitle {
+		width: 300px;
+		text-align: center;
+		font-size: 0.7rem;
+	}
+
+	.lessons_users_box {
+		gap: 150px;
+	}
+
+	.les_us {
+		gap: 1px;
+	}
+
+	.img_les_us {
+		width: 20px;
+	}
+
+	.les_us_text {
+		font-size: 0.7rem;
+	}
+
+	.num {
+		font-size: 0.7rem;
+	}
+}

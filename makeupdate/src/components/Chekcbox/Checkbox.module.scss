@@ -1,0 +1,61 @@
+.button {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.input_checkbox {
+	cursor: pointer;
+
+	display: none; /* Скрываем стандартный чекбокс */
+}
+
+.checkbox {
+	cursor: pointer;
+
+	width: 45px;
+	height: 21px;
+	// border: 2px solid rgb(5, 173, 37);
+	background: linear-gradient(
+		275.51deg,
+		rgb(5, 173, 37) 4.4%,
+		rgb(2, 148, 161) 50%,
+		rgb(24, 19, 129) 95.6%
+	);
+	border-radius: 4px;
+	position: relative;
+	margin-right: 10px;
+	transition: background-color 0.3s, border-color 0.3s;
+}
+
+.checked {
+	cursor: pointer;
+
+	background: linear-gradient(
+		275.51deg,
+		rgb(5, 173, 37) 4.4%,
+		rgb(2, 148, 161) 50%,
+		rgb(24, 19, 129) 95.6%
+	);
+	border: none;
+}
+
+.checkbox:after {
+	content: '';
+	position: absolute;
+	left: 6px;
+	top: 2px;
+	width: 6px;
+	height: 12px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+	display: none;
+	cursor: pointer;
+}
+
+.checked:after {
+	cursor: pointer;
+
+	display: block; /* Показываем белую галочку при включении чекбокса */
+}

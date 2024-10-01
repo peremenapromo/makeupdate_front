@@ -1,0 +1,32 @@
+.App {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	// width: 100%;
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 800;
+}
+
+.overlay_auth {
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.431);
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
