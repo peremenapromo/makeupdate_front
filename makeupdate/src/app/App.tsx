@@ -8,16 +8,18 @@ import { Burger } from "../components/Burger/Burger";
 import { Header } from "../components/Header/Header";
 import { Loading } from "../components/Loading/Loading";
 import AppRouter from "./router";
+import { useLocation } from "react-router";
 
 const App: FC = () => {
   const [loading, setLoading] = useState(true); // Начальное состояние загрузки
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isAuthOpen, setIsAuthOpen] = useState<boolean>(false);
+  const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      setLoading(false); // Устанавливаем loading в false после загрузки
+      setLoading(false);
     };
     fetchData();
   }, []);
@@ -53,7 +55,11 @@ const App: FC = () => {
 
   return (
     <div onClick={handleOverlayClick} className={styles.App}>
-      <Header onOpen={openModal} />
+      {location.pathname !== "/confirmEmail" ? (
+        <Header onOpen={openModal} />
+      ) : (
+        ""
+      )}
       <AppRouter />
       {isModalOpen && (
         <div className={styles.overlay} onClick={handleOverlayClick}>

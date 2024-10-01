@@ -1,30 +1,30 @@
-export async function getTokenFromSessionStorage(): Promise<string> {
-	try {
-		const data = sessionStorage.getItem('token')
-		return data ? JSON.parse(data) : ''
-	} catch (error) {
-		console.error('Error getting token from sessionStorage:', error)
-		return ''
-	}
+export async function getTokenFromLocalStorage(): Promise<string> {
+  try {
+    const data = localStorage.getItem("accessToken");
+    return data ? JSON.parse(data) : "";
+  } catch (error) {
+    console.error("Error getting token from localStorage:", error);
+    return "";
+  }
 }
 
-export async function setTokenToSessionStorage(
-	key: string,
-	token: string
+export async function setTokenToLocalStorage(
+  key: string,
+  token: string,
 ): Promise<void> {
-	try {
-		sessionStorage.setItem(key, JSON.stringify(token))
-	} catch (error) {
-		console.error('Error setting token to sessionStorage:', error)
-	}
+  try {
+    localStorage.setItem(key, JSON.stringify(token));
+  } catch (error) {
+    console.error("Error setting token to localStorage:", error);
+  }
 }
 
-export async function removeTokenFromSessionStorage(
-	key: string
+export async function removeTokenFromLocalStorage(
+  key: string,
 ): Promise<void> {
-	try {
-		sessionStorage.removeItem(key)
-	} catch (error) {
-		console.error('Error removing token from sessionStorage:', error)
-	}
+  try {
+    localStorage.removeItem(key);
+  } catch (error) {
+    console.error("Error removing token from localStorage:", error);
+  }
 }

@@ -1,7 +1,10 @@
 import { FC, useState } from "react";
 import { Bounce, toast } from "react-toastify";
-import { setTokenToSessionStorage } from "../../helpers/localStorage.helper";
-import { useAppDispatch } from "../../app/service/hooks/hooks";
+import {
+  getTokenFromLocalStorage,
+  setTokenToLocalStorage,
+} from "../../helpers/localStorage.helper";
+
 import { AuthService } from "../../app/service/servise";
 import { login } from "../../app/service/user/userSlice";
 import styles from "./AuthFrm.module.scss";
@@ -10,19 +13,27 @@ import styles from "./AuthFrm.module.scss";
 import { AuthForm as AuthFormType } from "../../app/types/modal";
 import { Checkbox } from "../Chekcbox/Checkbox";
 import cross from "./cross.svg";
-
+import { useDispatch } from "app/service/hooks/hooks";
+import { IUser } from "app/types/type";
+import checkedIcon from "../../app/assets/other/checkedIcon.svg";
 export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
   // Checkbox
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  console.log(isChecked);
   // Inputs Form
-  const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [telegram, setTelegram] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   // Confirm password
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   // Check authorized
   const [isLogin, setIsLogin] = useState<boolean>(true);
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
+
+  const handleCheckboxChange = (checked: boolean) => {
+    console.log("Checkbox state changed to:", checked);
+    setIsChecked(checked);
+  };
 
   if (!isOpen) return null;
 
@@ -43,6 +54,7 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
       const data = await AuthService.registration({
         email,
         password,
+        telegram,
       });
       if (data) {
         toast.success("Account created");
@@ -77,8 +89,10 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
         password,
       });
       if (data) {
-        setTokenToSessionStorage("token", data.token);
-        dispatch(login(data));
+        setTokenToLocalStorage("accessToken", data.access);
+        setTokenToLocalStorage("refreshToken", data.refresh);
+        const user: IUser = { email, password };
+        dispatch(login(user));
         toast.success("Ваш вход успешен");
       }
     } catch (error: any) {
@@ -121,7 +135,7 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
           />
           {!isLogin && (
             <input
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setTelegram(e.target.value)}
               id='username'
               className={styles.input_auth}
               placeholder='Телеграмм'
@@ -152,7 +166,35 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
 
         {!isLogin && (
           <div className={styles.rules}>
-            <Checkbox checked={isChecked} onChange={setIsChecked} />
+            {/* <Checkbox
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+            /> */}
+            <button
+              type='button'
+              className={
+                isChecked ? styles.checked : styles.buttonCheckbox
+              }
+              onClick={() => setIsChecked(!isChecked)}></button>
+            <p>
+              Я даю согласие на{" "}
+              <span className={styles.gradientText}>
+                обработку своих персональных данных
+              </span>{" "}
+              {""}и
+              <span className={styles.gradientText}>
+                {" "}
+                принимаю условия оферты
+              </span>
+            </p>
+            {isChecked && (
+              <img
+                onClick={() => setIsChecked(!isChecked)}
+                src={checkedIcon}
+                alt='checkedIcon'
+                className={styles.checkedIcon}
+              />
+            )}
           </div>
         )}
         <button className={styles.send_form}>

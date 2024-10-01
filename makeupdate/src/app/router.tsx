@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
-import { Confirm } from "../components/Confirm/Confirm";
+import { Confirm } from "../pages/Confirm/Confirm";
 import { Error } from "../components/ErrorPage/Error";
 import Events from "../pages/Events/Events";
 import { Home } from "../pages/Home/Home";
