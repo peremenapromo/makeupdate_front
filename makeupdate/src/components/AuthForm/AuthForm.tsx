@@ -19,7 +19,7 @@ import checkedIcon from "../../app/assets/other/checkedIcon.svg";
 export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
   // Checkbox
   const [isChecked, setIsChecked] = useState<boolean>(false);
-  console.log(isChecked);
+
   // Inputs Form
   const [email, setEmail] = useState<string>("");
   const [telegram, setTelegram] = useState<string>("");
@@ -29,11 +29,6 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
   // Check authorized
   const [isLogin, setIsLogin] = useState<boolean>(true);
   const dispatch = useDispatch();
-
-  const handleCheckboxChange = (checked: boolean) => {
-    console.log("Checkbox state changed to:", checked);
-    setIsChecked(checked);
-  };
 
   if (!isOpen) return null;
 
@@ -57,11 +52,13 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
         telegram,
       });
       if (data) {
-        toast.success("Account created");
+        localStorage.setItem("email", data.email);
+        toast.success("Аккаунт успешно создан,проверьте почту");
         setIsLogin(true);
       }
     } catch (error: any) {
-      const err = error.response?.data.message;
+      const err = error.response.data.email;
+      console.log(err);
       toast.error(
         err?.toString() || "Ошибка при создании пользователя",
         {
@@ -89,11 +86,12 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
         password,
       });
       if (data) {
-        setTokenToLocalStorage("accessToken", data.access);
-        setTokenToLocalStorage("refreshToken", data.refresh);
+        localStorage.setItem("accessToken", data.access);
+        localStorage.setItem("refreshToken", data.refresh);
         const user: IUser = { email, password };
         dispatch(login(user));
         toast.success("Ваш вход успешен");
+        onClose();
       }
     } catch (error: any) {
       const err = error.response?.data.message;
@@ -109,10 +107,6 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
       });
     }
   };
-
-  // const handleCheckboxChange = () => {
-  // 	setIsChecked(!isChecked)
-  // }
 
   return (
     <div className={styles.box_auth}>

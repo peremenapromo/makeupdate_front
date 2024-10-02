@@ -26,20 +26,32 @@ export const AuthService = {
   },
 };
 export const confirmEmail = {
-  async confirm(
-    userData: IConfirm,
-  ): Promise<IResponseUserData | undefined> {
+  async confirm(userData: IConfirm): Promise<any | undefined> {
     try {
-      const response = await instance.post<IResponseUserData>(
+      const response = await instance.post<any>(
         "api/v1/auth/users/activation/",
         userData,
       );
       if (response.status === 204) {
         return undefined;
+      } else {
       }
     } catch (error) {
-      console.error("Ошибка при подтверждении:", error);
-      return undefined; // Вернем undefined в случае ошибки
+      return undefined;
     }
+  },
+  async resend(): Promise<void> {
+    const email = localStorage.getItem("email");
+
+    if (!email) {
+      throw new Error("Email не найден в localStorage");
+    }
+
+    await instanceRegistration.post(
+      "api/v1/auth/users/resend_activation/",
+      {
+        email,
+      },
+    );
   },
 };

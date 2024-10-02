@@ -18,7 +18,7 @@ function AppRouter() {
       <Route path='/events' element={<Events />} />
       <Route path='/profile' element={<Profile />} />
       <Route path='*' element={<Error />} />
-      <Route path='/confirmEmail' element={<Confirm />} />
+      <Route path='/confirmEmail/:uid/:token' element={<Confirm />} />
       <Route path='/menu' element={<Menu />} />
     </Routes>
   );

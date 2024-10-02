@@ -72,6 +72,9 @@ export interface IResponseUser {
   refresh: string;
   access: string;
 }
+export interface IRefresh {
+  access: string;
+}
 
 export interface IResponseUserData {
   email: string;
@@ -84,7 +87,7 @@ export interface IUser {
   password: string;
 }
 
-export interface IConfirm{
-  uid:string;
-  token:string;
+export interface IConfirm {
+  uid: string;
+  token: string;
 }

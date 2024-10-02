@@ -23,6 +23,8 @@ import { HeaderProps } from "../../app/types/modal";
 import { InfoModal } from "../InfoModal/InfoModal";
 import styles from "./Header.module.scss";
 
+import { isTokenExpired } from "helpers/localStorage.helper";
+
 // TranslateHeader
 const translations = {
   ru: {

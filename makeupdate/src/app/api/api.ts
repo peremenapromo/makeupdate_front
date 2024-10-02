@@ -1,14 +1,18 @@
 import axios from "axios";
-import { getTokenFromLocalStorage } from "../../helpers/localStorage.helper";
+import {
+  getTokenFromLocalStorage,
+  setTokenToLocalStorage,
+} from "../../helpers/localStorage.helper";
+import { AuthService } from "app/service/servise";
 
 export const instance = axios.create({
   baseURL: "https://api.lr45981.tw1.ru/",
   headers: {
-    Authorization: `Bearer` + getTokenFromLocalStorage(),
+    Authorization: `Bearer` + localStorage.getItem("accessToken"),
   },
 });
 instance.interceptors.request.use((config) => {
-  const token = getTokenFromLocalStorage();
+  const token = localStorage.getItem("accessToken");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -18,3 +22,7 @@ instance.interceptors.request.use((config) => {
 export const instanceRegistration = axios.create({
   baseURL: "https://api.lr45981.tw1.ru/",
 });
+
+
+
+

@@ -6,13 +6,29 @@ import user from "./img/pussykiller.png";
 
 // Types
 import { BurgerAuth, ModalWindow } from "../../app/types/modal";
+import { toast } from "react-toastify";
+import {
+  logoutProfile,
+  removeTokenFromLocalStorage,
+} from "helpers/localStorage.helper";
 
 export const Burger: FC<ModalWindow & BurgerAuth> = ({
   isOpen,
   onOpen,
+  onClose,
 }) => {
   if (!isOpen) return null;
-
+  const access = localStorage.getItem("accessToken");
+  const refresh = localStorage.getItem("refreshToken");
+  const logOut = () => {
+    if (!refresh && !access) {
+      toast.error("Вы уже вышли с аккаунта");
+    } else {
+      logoutProfile();
+      onClose();
+      toast.success("Успешно!");
+    }
+  };
   return (
     <div className={styles.menu}>
       <ul className={styles.list}>
@@ -47,7 +63,11 @@ export const Burger: FC<ModalWindow & BurgerAuth> = ({
           </div>
           <span className={styles.prof_select}>Посетитель</span>
         </div>
-        <li className={styles.list_section}>Выйти из профиля</li>
+        {refresh && access && (
+          <li className={styles.list_section} onClick={logOut}>
+            Выйти из профиля
+          </li>
+        )}
       </ul>
     </div>
   );

@@ -9,6 +9,7 @@ import { Header } from "../components/Header/Header";
 import { Loading } from "../components/Loading/Loading";
 import AppRouter from "./router";
 import { useLocation } from "react-router";
+import { axiosWithRefreshToken } from "helpers/localStorage.helper";
 
 const App: FC = () => {
   const [loading, setLoading] = useState(true); // Начальное состояние загрузки
@@ -24,6 +25,22 @@ const App: FC = () => {
     fetchData();
   }, []);
 
+  const fetchDataTest = async () => {
+    try {
+      const data = await axiosWithRefreshToken<any>(
+        "https://api.lr45981.tw1.ru/api/v1/profile/",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      console.log(data);
+    } catch (error) {
+      console.error("Ошибка при получении данных:", error);
+    }
+  };
   // Обрабатывает нажатия по оверлею
   const handleOverlayClick = (
     event: React.MouseEvent<HTMLDivElement>,
@@ -45,6 +62,7 @@ const App: FC = () => {
 
   const openAuth = () => {
     setIsAuthOpen(true);
+    fetchDataTest();
   };
 
   const closeAuth = () => {
@@ -55,10 +73,10 @@ const App: FC = () => {
 
   return (
     <div onClick={handleOverlayClick} className={styles.App}>
-      {location.pathname !== "/confirmEmail" ? (
-        <Header onOpen={openModal} />
-      ) : (
+      {location.pathname.includes("/confirmEmail") ? (
         ""
+      ) : (
+        <Header onOpen={openModal} />
       )}
       <AppRouter />
       {isModalOpen && (
