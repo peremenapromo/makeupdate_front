@@ -8,13 +8,15 @@ import { Burger } from "../components/Burger/Burger";
 import { Header } from "../components/Header/Header";
 import { Loading } from "../components/Loading/Loading";
 import AppRouter from "./router";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { axiosWithRefreshToken } from "helpers/localStorage.helper";
+import { useSelector } from "./service/hooks/hooks";
 
 const App: FC = () => {
   const [loading, setLoading] = useState(true); // Начальное состояние загрузки
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isAuthOpen, setIsAuthOpen] = useState<boolean>(false);
+  const { isAuth } = useSelector((state) => state.user);
   const location = useLocation();
 
   useEffect(() => {
@@ -25,22 +27,6 @@ const App: FC = () => {
     fetchData();
   }, []);
 
-  const fetchDataTest = async () => {
-    try {
-      const data = await axiosWithRefreshToken<any>(
-        "https://api.lr45981.tw1.ru/api/v1/profile/",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-      );
-      console.log(data);
-    } catch (error) {
-      console.error("Ошибка при получении данных:", error);
-    }
-  };
   // Обрабатывает нажатия по оверлею
   const handleOverlayClick = (
     event: React.MouseEvent<HTMLDivElement>,
@@ -62,15 +48,18 @@ const App: FC = () => {
 
   const openAuth = () => {
     setIsAuthOpen(true);
-    fetchDataTest();
   };
 
   const closeAuth = () => {
     setIsAuthOpen(false);
   };
+  useEffect(() => {
+    if (location.pathname === "/login") {
+      openAuth();
+    }
+  }, [location.pathname]);
 
-  if (loading) return <Loading />; // Простой индикатор загрузки
-
+  if (loading) return <Loading />;
   return (
     <div onClick={handleOverlayClick} className={styles.App}>
       {location.pathname.includes("/confirmEmail") ? (
@@ -78,7 +67,7 @@ const App: FC = () => {
       ) : (
         <Header onOpen={openModal} />
       )}
-      <AppRouter />
+      <AppRouter isAuthenticated={isAuth} />
       {isModalOpen && (
         <div className={styles.overlay} onClick={handleOverlayClick}>
           <Burger

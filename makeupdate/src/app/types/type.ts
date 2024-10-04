@@ -91,3 +91,19 @@ export interface IConfirm {
   uid: string;
   token: string;
 }
+
+export interface IGetUserData {
+  city: string;
+  country: string;
+  description: string;
+  first_name: string;
+  last_name: string;
+  phone: string;
+  photo: string;
+  show_telegram: boolean;
+  show_telephone: boolean;
+  user: {
+    telegram: string;
+  };
+  user_id: 2;
+}

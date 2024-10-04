@@ -14,8 +14,13 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   placeholder,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  // Найти вариант "по популярности" как начальный выбор
+  const defaultOption =
+    options.find((option) => option.value === "popular") || null;
+
   const [selectedOption, setSelectedOption] =
-    useState<SelectOption | null>(null);
+    useState<SelectOption | null>(defaultOption);
 
   const handleSelect = (option: SelectOption) => {
     setSelectedOption(option);
@@ -26,47 +31,52 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
     setIsOpen((prev) => !prev);
   };
 
+  const filteredOptions = options.filter((option) =>
+    selectedOption?.value === "popular"
+      ? option.value !== "popular"
+      : option.value === "popular",
+  );
+
   return (
-    <div className={styles.custom_select}>
-      <button
-        className={styles.btn_custom_select}
-        onClick={toggleOpen}>
-        <img className={styles.img_filter} src={filter} alt='' />
-      </button>
-      <div>
-        {selectedOption ? selectedOption.label : ""}
+    <button className={styles.custom_select} onClick={toggleOpen}>
+      <img
+        className={styles.img_filter}
+        src={filter}
+        alt='filterIcon'
+      />
+      <div className={styles.selectContainer}>
+        <span>
+          {selectedOption ? selectedOption.label : placeholder}
+        </span>
         {isOpen && (
-          <div>
-            {options.map((option) => (
+          <div className={styles.optionBlock} onClick={toggleOpen}>
+            {filteredOptions.map((option) => (
               <div
                 className={styles.option}
                 key={option.value}
                 onClick={() => handleSelect(option)}>
-                <div className={styles.bottom_line}></div>{" "}
-                {option.label}
+                <div className={styles.bottom_line}></div>
+                <span>{option.label}</span>
               </div>
             ))}
           </div>
         )}
       </div>
-    </div>
+    </button>
   );
 };
 
 export const Lessons: FC = () => {
   const options = [
-    { value: "1", label: "По популярности" },
-    { value: "2", label: "По дате публикации" },
+    { value: "popular", label: "По популярности" },
+    { value: "date", label: "По дате публикации" },
   ];
   return (
     <div className={styles.lessons_container}>
       <div className={styles.filter_block}>
         <div className={styles.search_filter}>
           <div className={styles.filter}>
-            <CustomSelect
-              options={options}
-              placeholder='Выберите вариант'
-            />
+            <CustomSelect options={options} />
           </div>
           <div className={styles.search}>
             <img className={styles.vol} src={img} alt='' />

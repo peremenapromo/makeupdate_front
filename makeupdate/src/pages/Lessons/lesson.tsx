@@ -15,14 +15,14 @@ export const Lesson: FC = () => {
     <div className={styles.lesson}>
       <div className={styles.imageContainer}>
         <img className={styles.img_lesson} src={lesson} alt='' />
-        <div className={styles.centerOverlay}>
           <button className={styles.button_play}>
             <img className={styles.play_img} src={play} alt='' />
           </button>
           <div className={styles.time_box}>
             <div className={styles.time_lessons}>10:10</div>
           </div>
-        </div>
+        {/* <div className={styles.centerOverlay}>
+        </div> */}
       </div>
       <div className={styles.name_les_btn_share}>
         <p className={styles.name_les}>

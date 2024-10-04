@@ -24,6 +24,13 @@
     rgba(94, 93, 189, 1) 85%
   );
 }
+.containerHeader {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1920px;
+  width: 100%;
+  padding: 0px 100px;
+}
 .links {
   display: flex;
   flex-direction: row;
@@ -50,7 +57,7 @@
 }
 
 .active {
-  background-color: #f0f0f0cb;
+  background-color: #ffffff;
 }
 
 .activeImage {
@@ -157,6 +164,9 @@
 }
 
 @media (width <= 1440px) {
+  .containerHeader{
+    padding: 0 50px;
+  }
   .title {
     font-size: 1.9rem;
   }
@@ -215,7 +225,10 @@
 @media (width <= 768px) {
 }
 
-@media (width <= 425px) {
+@media (width <= 430px) {
+  .containerHeader {
+    padding: 0 15px;
+  }
   .header {
     padding-top: 60px;
     display: flex;

@@ -1,7 +1,7 @@
 .box_bottom_bar {
 	position: fixed;
 	bottom: 0px;
-	top: 89%;
+	top: 90%;
 	display: none;
 	justify-content: center;
 	align-items: center;
@@ -75,7 +75,7 @@
 	height: 0px;
 }
 
-@media (width <= 425px) {
+@media (width <= 450px) {
 	.box_bottom_bar {
 		display: flex;
 		width: 100%;

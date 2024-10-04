@@ -1,4 +1,3 @@
-"use client";
 import { FC, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -8,41 +7,74 @@ import arrow_top from "../../app/assets/other/arrow_top.svg";
 import burger_img from "../../app/assets/other/burger.svg";
 import english_lang from "../../app/assets/other/english_lang.svg";
 import events from "../../app/assets/other/events.svg";
+import eventsActitve from "../../app/assets/other/eventsActitve.svg";
 import home from "../../app/assets/other/home.svg";
+import homeActive from "../../app/assets/other/homeActive.svg";
+import lessonsActive from "../../app/assets/other/lessonsActive.svg";
 import language_rus from "../../app/assets/other/language_rus.svg";
 import lessons from "../../app/assets/other/lessons.svg";
 import notification from "../../app/assets/other/notification.svg";
 import users from "../../app/assets/other/people.svg";
+import usersActive from "../../app/assets/other/peopleActive.svg";
 import icon_profile from "../../app/assets/other/profile_icon.svg";
-// Active img
 
-// Type header
-
-// Styles
+// Types and styles
 import { HeaderProps } from "../../app/types/modal";
 import { InfoModal } from "../InfoModal/InfoModal";
 import styles from "./Header.module.scss";
 
-import { isTokenExpired } from "helpers/localStorage.helper";
-
-// TranslateHeader
 const translations = {
   ru: {
     title: "MAKEUPDATE",
     links: [
-      { to: "/", img: home, label: "Главная" },
-      { to: "/lessons", img: lessons, label: "Уроки" },
-      { to: "/users", img: users, label: "Пользователи" },
-      { to: "/events", img: events, label: "События" },
+      {
+        to: "/",
+        img: home,
+        img_active: homeActive,
+        label: "Главная",
+      },
+      {
+        to: "/lessons",
+        img: lessons,
+        img_active: lessonsActive,
+        label: "Уроки",
+      },
+      {
+        to: "/users",
+        img: users,
+        img_active: usersActive,
+        label: "Пользователи",
+      },
+      {
+        to: "/events",
+        img: events,
+        img_active: eventsActitve,
+        label: "События",
+      },
     ],
   },
   en: {
     title: "MAKEUPDATE",
     links: [
-      { to: "/", img: home, label: "Home" },
-      { to: "/lessons", img: lessons, label: "Lessons" },
-      { to: "/users", img: users, label: "Users" },
-      { to: "/events", img: events, label: "Events" },
+      { to: "/", img: home, img_active: homeActive, label: "Home" },
+      {
+        to: "/lessons",
+        img: lessons,
+        img_active: lessonsActive,
+        label: "Lessons",
+      },
+      {
+        to: "/users",
+        img: users,
+        img_active: usersActive,
+        label: "Users",
+      },
+      {
+        to: "/events",
+        img: events,
+        img_active: eventsActitve,
+        label: "Events",
+      },
     ],
   },
 };
@@ -71,6 +103,11 @@ export const Header: FC<HeaderProps> = ({ onOpen }) => {
     }
   }, [location.pathname]);
 
+  useEffect(() => {
+    setActiveLink(location.pathname);
+    localStorage.setItem("activeLink", location.pathname);
+  }, [location.pathname]);
+
   const handleLinkClick = (link: string) => {
     setActiveLink(link);
     localStorage.setItem("activeLink", link);
@@ -86,6 +123,7 @@ export const Header: FC<HeaderProps> = ({ onOpen }) => {
     "/lessons",
     "/events",
     "/menu",
+    "/login",
     "*",
   ].includes(location.pathname);
 
@@ -96,74 +134,78 @@ export const Header: FC<HeaderProps> = ({ onOpen }) => {
           ? styles.headerWithBackground
           : styles.header
       }>
-      <h1 className={styles.title}>
-        {translations[language].title}{" "}
-      </h1>
-      <div className={styles.links}>
-        {translations[language].links.map((link) => (
-          <Link
-            key={link.to}
-            className={`${styles.link} ${
-              activeLink === link.to ? styles.active : ""
-            }`}
-            to={link.to}
-            onClick={() => handleLinkClick(link.to)}>
-            <img
-              src={link.img}
-              alt={link.label}
-              className={styles.img_links}
-            />
-            <span
-              className={
-                activeLink === link.to ? styles.activeText : ""
-              }>
-              {link.label}
-            </span>
-          </Link>
-        ))}
-      </div>
-      <div className={styles.buttons}>
-        <button className={styles.button}>
-          <img
-            className={styles.image_radius}
-            src={notification}
-            alt=''
-          />
-        </button>
-        <button className={styles.button} onClick={toggleLanguage}>
-          <img
-            className={styles.img_language}
-            src={language === "ru" ? language_rus : english_lang}
-            alt='Change Language'
-          />
-        </button>
-        <div
-          onClick={() => {
-            toggleArrow();
-            onOpen();
-          }}
-          className={
-            isModalOpen
-              ? styles.active_button_profile
-              : styles.button_profile
-          }>
-          <img
-            className={styles.img_icon}
-            src={icon_profile}
-            alt='icon_profile'
-          />
-          <img
-            src={isArrowUp ? arrow_top : arrow_bottom}
-            alt='arrow'
-          />
+      <div className={styles.containerHeader}>
+        <h1 className={styles.title}>
+          {translations[language].title}{" "}
+        </h1>
+        <div className={styles.links}>
+          {translations[language].links.map((link) => (
+            <Link
+              key={link.to}
+              className={`${styles.link} ${
+                location.pathname === link.to ? styles.active : ""
+              }`}
+              to={link.to}
+              onClick={() => handleLinkClick(link.to)}>
+              <img
+                src={
+                  activeLink === link.to ? link.img_active : link.img
+                }
+                alt={link.label}
+                className={styles.img_links}
+              />
+              <span
+                className={
+                  activeLink === link.to ? styles.activeText : ""
+                }>
+                {link.label}
+              </span>
+            </Link>
+          ))}
         </div>
-        <button className={styles.button}>
-          <img src={burger_img} alt='burger_button' />
-          <InfoModal
-            isOpen={isModalOpen}
-            onClose={handleCloseModal}
-          />
-        </button>
+        <div className={styles.buttons}>
+          <button className={styles.button}>
+            <img
+              className={styles.image_radius}
+              src={notification}
+              alt=''
+            />
+          </button>
+          <button className={styles.button} onClick={toggleLanguage}>
+            <img
+              className={styles.img_language}
+              src={language === "ru" ? language_rus : english_lang}
+              alt='Change Language'
+            />
+          </button>
+          <div
+            onClick={() => {
+              toggleArrow();
+              onOpen();
+            }}
+            className={
+              isModalOpen
+                ? styles.active_button_profile
+                : styles.button_profile
+            }>
+            <img
+              className={styles.img_icon}
+              src={icon_profile}
+              alt='icon_profile'
+            />
+            <img
+              src={isArrowUp ? arrow_top : arrow_bottom}
+              alt='arrow'
+            />
+          </div>
+          <button className={styles.button}>
+            <img src={burger_img} alt='burger_button' />
+            <InfoModal
+              isOpen={isModalOpen}
+              onClose={handleCloseModal}
+            />
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+import { useDispatch } from "app/service/hooks/hooks";
+import { IGetUserData } from "app/types/type";
 import axios, { AxiosRequestConfig } from "axios";
 import { jwtDecode } from "jwt-decode"; // Именованный импорт
 import { useNavigate } from "react-router";
@@ -48,26 +50,6 @@ export const getTokenExpiration = (token: string): string | null => {
   }
 };
 
-// Пример использования для access и refresh токенов
-const getAccessTokenExpiration = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  return accessToken ? getTokenExpiration(accessToken) : null;
-};
-
-const getRefreshTokenExpiration = () => {
-  const refreshToken = localStorage.getItem("refreshToken");
-  return refreshToken ? getTokenExpiration(refreshToken) : null;
-};
-
-// Вывод времени истечения токенов в консоль
-console.log(
-  "Время истечения access токена:",
-  getAccessTokenExpiration(),
-);
-console.log(
-  "Время истечения refresh токена:",
-  getRefreshTokenExpiration(),
-);
 const refreshToken = async (): Promise<any> => {
   const refresh = localStorage.getItem("refreshToken");
 
@@ -84,7 +66,6 @@ export const isTokenExpired = (token: string): boolean => {
   try {
     const decoded: { exp: number } = jwtDecode(token);
     const currentTime = Date.now() / 1000;
-    console.log(new Date(decoded.exp * 1000).toLocaleString());
 
     return decoded.exp < currentTime;
   } catch (error) {
@@ -98,11 +79,6 @@ export const logoutProfile = () => {
 };
 const getAccessToken = () => localStorage.getItem("accessToken");
 const getRefreshToken = () => localStorage.getItem("refreshToken");
-const tokenref = getRefreshToken();
-const tokenacc = getAccessToken();
-
-console.log(isTokenExpired(tokenref!));
-console.log(isTokenExpired(tokenacc!));
 
 export const checkTokens = (): boolean => {
   const accessToken = getAccessToken();
