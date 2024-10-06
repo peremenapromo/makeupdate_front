@@ -84,7 +84,9 @@ const App: FC = () => {
           <AuthForm isOpen={isAuthOpen} onClose={closeAuth} />
         </div>
       )}
-      <BottomBarPhone />
+      <div className={styles.bottomNavigation}>
+        <BottomBarPhone />
+      </div>
       <ToastContainer
         position='top-right'
         autoClose={5000}

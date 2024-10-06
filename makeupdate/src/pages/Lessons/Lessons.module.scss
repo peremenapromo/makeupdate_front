@@ -464,17 +464,17 @@
     max-width: 750px;
   }
   .lesson {
-    max-width: 375px;
+    max-width: 305px;
     width: 100%;
     max-height: 382px;
     height: 100%;
   }
   .name_les {
-    font-size: 22px;
+    font-size: 16px;
   }
   .name_channel {
     span {
-      font-size: 20px;
+      font-size: 14px;
       font-weight: 400;
       line-height: 20px;
     }
@@ -483,10 +483,10 @@
     font-size: 14px;
   }
   .info {
-    font-size: 15px;
+    font-size: 14px;
   }
   .buy_btn {
-    max-width: 165px;
+    max-width: 140px;
     width: 100%;
     p {
       margin: 0;
@@ -501,6 +501,9 @@
   .search_filter {
     max-width: 750px;
   }
+  .all_lessons_box{
+    gap: 10px;
+  }
   .selectContainer {
     font-size: 22px;
   }
@@ -514,7 +517,7 @@
     left: 220px;
   }
   .lesson {
-    max-width: 265px;
+    max-width: 365px;
     width: 100%;
     max-height: 382px;
     height: 100%;

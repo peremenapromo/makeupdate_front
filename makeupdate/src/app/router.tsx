@@ -26,16 +26,14 @@ function AppRouter({
       <Route path='/login' element={<AuthForm />} />
       <Route path='/lessons' element={<Lessons />} />
       <Route path='/events' element={<Events />} />
-
+      <Route path='/confirmEmail/:uid/:token' element={<Confirm />} />
+      <Route path='*' element={<Error />} />
       <Route
         element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
         <Route path='/users' element={<Users />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/menu' element={<Menu />} />
       </Route>
-
-      <Route path='*' element={<Error />} />
-      <Route path='/confirmEmail/:uid/:token' element={<Confirm />} />
     </Routes>
   );
 }

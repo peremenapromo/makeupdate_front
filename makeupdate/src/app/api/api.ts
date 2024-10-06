@@ -1,4 +1,3 @@
-import { useDispatch } from "app/service/hooks/hooks";
 import { setUserData } from "app/service/user/userSlice";
 import { IGetUserData } from "app/types/type";
 import axios from "axios";
@@ -9,10 +8,7 @@ export const instance = axios.create({
   headers: {
     Authorization: `Bearer` + localStorage.getItem("accessToken"),
     "Content-Type": "application/json",
-    Accept: "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods":
-      "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    //
   },
 });
 instance.interceptors.request.use((config) => {

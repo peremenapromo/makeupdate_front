@@ -1,5 +1,5 @@
 @import "/src/app/styles/variables";
-.container_home {
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,45 +7,46 @@
   background-repeat: no-repeat;
   background-size: cover;
   flex-direction: column;
-  // max-width: 1920px;
   width: 100vw;
   height: 100vh;
-  // max-height: 1080px;
-  margin-left: -100px;
   height: 100vh;
 }
 
 .text_box_home {
   display: flex;
-  align-items: center;
   flex-direction: column;
-  gap: 40px;
-  padding-bottom: 160px;
+  width: 100%;
+  align-items: center;
+  font-family: $secondary_font;
+  margin-bottom: 11.2%;
+  // padding-bottom: 160px;
 }
 
 .title {
-  font-size: 6.25rem;
+  font-size: 160px;
   color: $primary_color;
   font-weight: 700;
-  font-family: $secondary_font;
-  height: 0px;
+  margin: 0;
+  line-height: 242.76px;
 }
 
 .subtitle {
+  margin: 0;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 24px;
   color: $primary_color;
   font-weight: 400;
-  font-family: $secondary_font;
-  width: 700px;
+  max-width: 700px;
+  width: 100%;
+  line-height: 34.68px;
 }
 
 .lessons_users_box {
   display: flex;
+  gap: 0;
+  width: calc(100vw - 200px);
   justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-  gap: 800px;
+  font-size: 40px;
 }
 
 .les_us {
@@ -57,14 +58,52 @@
 }
 
 .les_us_text {
-  font-size: 1.5rem;
   font-weight: 400;
+  display: flex;
+  align-items: center;
   color: $primary_color;
   padding-left: 10px;
 }
 
 .num {
-  font-size: 1.5rem;
   font-weight: 800;
   color: $primary_color;
+}
+
+@media screen and (max-width: 1024px) {
+  .title {
+    font-size: 120px;
+  }
+  .lessons_users_box {
+    font-size: 30px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 80px;
+  }
+  .lessons_users_box {
+    font-size: 20px;
+    img{
+      width: 40px;
+    }
+  }
+}
+@media screen and (max-width: 535px) {
+  .title {
+    font-size: 55px;
+  }
+  .lessons_users_box {
+    flex-direction: column;
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 435px) {
+  .title {
+    font-size: 45px;
+  }
+  .lessons_users_box {
+    flex-direction: column;
+    font-size: 20px;
+  }
 }
