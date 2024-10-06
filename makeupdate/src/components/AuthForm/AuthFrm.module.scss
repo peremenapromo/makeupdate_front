@@ -11,7 +11,19 @@
   background-color: rgba(255, 255, 255, 1);
   padding-top: 30px;
 }
-
+.authWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px); // Размытие страницы позади формы
+  background-color: rgba(0, 0, 0, 0.5); // Полупрозрачный темный фон
+  z-index: 1000;
+}
 .closeModal {
   top: 5%;
   left: 80%;
@@ -90,8 +102,14 @@
   align-items: start;
   justify-content: left;
   flex-direction: row;
-  margin-bottom: 100px;
-  width: 355px;
+  // margin-bottom: 100px;
+  font-family: $primary_font;
+  gap: 10px;
+  width: 325px;
+  p {
+    padding: 0;
+    margin: 30px 0px;
+  }
 }
 
 .text {
@@ -144,4 +162,53 @@
   background-image: $gradient_color;
   font-size: 1rem;
   color: $primary_color;
+}
+
+.buttonCheckbox {
+  margin-top: 44px;
+  min-width: 22px;
+  min-height: 22px;
+  background: transparent;
+  border-image: $gradient_border_color;
+  border-radius: 6px;
+  border-width: 2px;
+  border-style: solid;
+
+  cursor: pointer;
+  padding: 5px;
+  z-index: 2;
+}
+.checked {
+  margin-top: 44px;
+  min-width: 22px;
+  min-height: 22px;
+  background: linear-gradient(
+    275.51deg,
+    #05ad25 4.4%,
+    #0294a1 50%,
+    #181381 95.6%
+  );
+  border: none;
+  border-radius: 6px;
+  padding: 5px;
+  position: relative;
+  cursor: pointer;
+}
+.checkedIcon {
+  position: absolute;
+  top: 49px;
+  z-index: 1;
+  left: 4px;
+  cursor: pointer;
+}
+.gradientText {
+  font-weight: 500;
+  background-image: $gradient_color;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+  &:hover {
+    border-bottom: 1px solid;
+    border-image: $gradient_border_color;
+  }
 }

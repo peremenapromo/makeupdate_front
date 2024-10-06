@@ -10,20 +10,25 @@ export const Users: FC = () => {
     <div className={styles.container_users}>
       <header className={styles.header}></header>
       <div className={styles.inputs_container}>
-        <div className={styles.search}>
+        <div className={styles.searchName}>
           <img className={styles.vol} src={img} alt='' />
           <input
-            className={styles.input}
-            placeholder='Поиск'
+            className={styles.inputName}
+            placeholder='Поиск по имени'
             type='text'
           />
           <img className={styles.search_img} src={search} alt='' />
         </div>
-        {/* <div className={styles.search}>
+        <div className={styles.searchLocation}>
 					<img className={styles.vol} src={img} alt='' />
-					<input className={styles.input} placeholder='Поиск' type='text' />
+					<input className={styles.inputLocation} placeholder='Поиск по местоположению' type='text' />
 					<img className={styles.search_img} src={search} alt='' />
-				</div> */}
+				</div>
+        <div className={styles.searchSmall}>
+					<img className={styles.vol} src={img} alt='' />
+					<input className={styles.inputLocation} placeholder='Поиск...' type='text' />
+					<img className={styles.search_img} src={search} alt='' />
+				</div>
       </div>
       <div className={styles.users_box}>
         <User />

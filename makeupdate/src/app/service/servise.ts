@@ -1,23 +1,57 @@
-import { instance } from "../api/api";
-import { IResponseUserData, IUser, IUserData } from "../types/type";
+import { instance, instanceRegistration } from "../api/api";
+import {
+  IConfirm,
+  IResponseUser,
+  IResponseUserData,
+  IUser,
+  IUserData,
+} from "../types/type";
 
 export const AuthService = {
   async registration(
     userData: IUserData,
   ): Promise<IResponseUserData | undefined> {
-    const { data } = await instance.post<
+    const { data } = await instanceRegistration.post<
       IUserData,
       { data: IResponseUserData }
     >("api/v1/auth/users/", userData);
     return data;
   },
-  async login(
-    userData: IResponseUserData,
-  ): Promise<IUser | undefined> {
-    const { data } = await instance.post<IUser>(
+  async login(userData: IUser): Promise<IResponseUser | undefined> {
+    const { data } = await instance.post<IResponseUser>(
       "api/v1/token/",
       userData,
     );
     return data;
+  },
+};
+export const confirmEmail = {
+  async confirm(userData: IConfirm): Promise<any | undefined> {
+    try {
+      const response = await instance.post<any>(
+        "api/v1/auth/users/activation/",
+        userData,
+      );
+      if (response.status === 204) {
+        return undefined;
+      } else {
+      }
+    } catch (error) {
+      return undefined;
+    }
+  },
+  async resend(): Promise<void> {
+    const email = localStorage.getItem("email");
+
+    if (!email) {
+      throw new Error("Email не найден в localStorage");
+    }
+
+    await instanceRegistration.post(
+      "api/v1/auth/users/resend_activation/",
+      {
+        email,
+      },
+    );
   },
 };

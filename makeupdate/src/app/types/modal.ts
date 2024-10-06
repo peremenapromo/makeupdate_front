@@ -12,8 +12,8 @@ export interface ModalInfo {
 }
 
 export interface AuthForm {
-	isOpen: boolean
-	onClose: () => void
+	isOpen?: boolean
+	onClose?: () => void
 }
 
 export interface BurgerAuth {

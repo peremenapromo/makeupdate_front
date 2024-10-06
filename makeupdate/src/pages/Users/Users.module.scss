@@ -15,12 +15,12 @@
   align-items: center;
   gap: 50px;
   flex-direction: row;
-  max-width: 390px;
+  max-width: 790px;
   width: 100%;
 }
 // Input styles
 
-.search {
+.searchName {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -28,6 +28,18 @@
   position: relative;
   height: 50px;
   width: 100%;
+}
+.searchLocation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 50px;
+  width: 100%;
+}
+.searchSmall {
+  display: none;
 }
 
 .vol {
@@ -37,11 +49,11 @@
 
 .search_img {
   position: absolute;
-  margin-left: 95%;
+  left: 87%;
   z-index: 1;
 }
 
-.input {
+.inputName {
   border: none;
   box-shadow: 0px 2px 16px 0px rgba(21, 19, 113, 0.25);
   border-radius: 30px;
@@ -53,18 +65,14 @@
   font-weight: 400;
 }
 
-// All users styles
-// .users_box {
-// 	display: grid;
-// 	grid-template-columns: repeat(5, 1fr);
-// 	gap: 40px;
-// 	margin-top: 50px;
-// }
+.inputLocation {
+  @extend .inputName;
+}
 .users_box {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
+  // justify-content: center;
+  gap: 29px;
   max-width: 1920px;
   width: 100%;
   margin-top: 50px;
@@ -73,26 +81,27 @@
 // One user styles
 .box_user {
   display: grid;
-  max-width: 320px;
+  max-width: 318px;
   width: 100%;
   max-height: 450px;
   height: 450px;
   border-radius: 20px;
   box-shadow: 0px 2px 16px 0px rgba(21, 19, 113, 0.1);
-  padding-bottom: 20px;
 }
 
 .line {
   padding: 0;
   margin: 0;
   background-image: $gradient_color;
-  height: 5px;
+  height: 8px;
   width: 100%;
+  margin-top: -5px;
+  margin-bottom: 12px;
 }
 
 .user_img {
-  max-width: 320px;
-  width: 320px;
+  max-width: 318px;
+  width: 100%;
   max-height: 320px;
   height: 100%;
   border-radius: 20px 20px 0px 0px;
@@ -101,31 +110,38 @@
 }
 
 .container {
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-bottom: 16px;
+  padding-left: 16px;
   padding-top: 0px;
 }
 
 .name {
   font-family: $primary-font;
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 20px;
+  line-height: 27.32px;
+  font-weight: 600;
   background-image: $gradient_color;
   background-size: 100%;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin: 0px;
+  margin-bottom: 11px;
 }
 
 .input_img_search {
-  margin-left: 510px;
+  left: 10px;
 }
 
 .location {
   display: flex;
   justify-content: start;
   align-items: center;
-  gap: 5px;
+  gap: 12px;
+  margin: 0px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20.5px;
+  margin-bottom: 20px;
 }
 
 .view_video {
@@ -163,8 +179,116 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
-@media screen and (max-width: 1024px) {
-  .inputs_container {
-    flex-direction: column;
+@media screen and (max-width: 1440px) {
+  .box_user {
+    max-width: 258px;
+    max-height: 420px;
+    height: 100%;
+  }
+  .users_box {
+    justify-content: flex-start;
+    gap: 10px;
+  }
+}
+@media screen and (max-width: 1140px) {
+  .box_user {
+    max-width: 285px;
+    max-height: 420px;
+    height: 100%;
+  }
+  .users_box {
+    justify-content: flex-start;
+    gap: 29px;
+  }
+}
+@media screen and (max-width: 868px) {
+  .users_box {
+    justify-content: center;
+    gap: 29px;
+  }
+  .box_user {
+    max-width: 310px;
+    max-height: 450px;
+    height: 100%;
+  }
+}
+@media screen and (max-width: 680px) {
+  .box_user {
+    max-width: 195px;
+    max-height: 275px;
+    height: 100%;
+  }
+  .container {
+    padding-left: 10px;
+    padding-bottom: 10px;
+  }
+  .line {
+    height: 4px;
+    margin-top: -3px;
+    margin-bottom: 3px;
+  }
+  .name {
+    font-size: 15px;
+    line-height: 20.5px;
+    margin-bottom: 8px;
+  }
+  .image_location {
+    max-width: 9px;
+    max-height: 13px;
+    width: 100%;
+    height: 100%;
+  }
+  .location {
+    gap: 8px;
+    font-size: 12px;
+    line-height: 16.4px;
+    margin-bottom: 5px;
+  }
+  .view_video {
+    img {
+      width: 14px;
+      height: 14px;
+    }
+  }
+  .num {
+    font-size: 12px;
+  }
+  .users_box {
+    justify-content: center;
+    gap: 10px;
+  }
+  .searchName {
+    display: none;
+  }
+  .searchLocation {
+    display: none;
+  }
+  .searchSmall {
+    display: flex;
+    width: 100%;
+    position: relative;
+    justify-content: center;
+    input {
+      width: 200px;
+    }
+    .vol {
+      left: 95px;
+      top: 1px;
+      width: 40px;
+      height: 40px;
+    }
+    .search_img {
+      left: 73%;
+      top: 1px;
+      width: 40px;
+      height: 40px;
+    }
+  }
+  // img {
+  //
+  //
+  // }
+  .search_img {
+    left: 110%;
   }
 }

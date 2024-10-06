@@ -1,16 +1,18 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import { IUser } from "../../types/type";
+import { IGetUserData, IUser } from "../../types/type";
 import type { RootState } from "../store";
 
 interface IUserState {
   user: IUser | null;
   isAuth: boolean;
+  userData: IGetUserData | null;
 }
 
 const initialState: IUserState = {
   user: null,
-  isAuth: false,
+  isAuth: localStorage.getItem("isAuth") === "true",
+  userData: null,
 };
 
 export const userSlice = createSlice({
@@ -20,15 +22,26 @@ export const userSlice = createSlice({
     login: (state, action: PayloadAction<IUser>) => {
       state.user = action.payload;
       state.isAuth = true;
+      localStorage.setItem("isAuth", "true");
     },
     logout: (state) => {
       state.isAuth = false;
       state.user = null;
+      localStorage.setItem("isAuth", "false");
+      state.userData = null;
+      localStorage.removeItem("userData"); // Очистка данных из localStorage
+    },
+    setUserData: (state, action: PayloadAction<IGetUserData>) => {
+      state.userData = action.payload;
+      localStorage.setItem(
+        "userData",
+        JSON.stringify(action.payload),
+      ); // Сохраняем данные в localStorage
     },
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, setUserData } = userSlice.actions;
 
 export const selectCount = (state: RootState) => state.user;
 

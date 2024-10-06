@@ -1,0 +1,32 @@
+@import "/src/app/styles/variables";
+.box_email {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 90vh;
+  justify-content: center;
+
+  h1 {
+    font-size: 60px;
+
+    background-image: $gradient_color;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  h3 {
+    font-size: 80px;
+    text-align: center;
+    width: 700px;
+  }
+  button {
+    padding: 15px;
+    outline: none;
+    border-radius: 12px;
+    border: none;
+    font-size: 28px;
+    background: $gradient_color;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}

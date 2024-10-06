@@ -6,20 +6,51 @@ import user from "./img/pussykiller.png";
 
 // Types
 import { BurgerAuth, ModalWindow } from "../../app/types/modal";
+import { toast } from "react-toastify";
+import {
+  logoutProfile,
+  removeTokenFromLocalStorage,
+} from "helpers/localStorage.helper";
+import { useDispatch, useSelector } from "app/service/hooks/hooks";
+import { logout } from "app/service/user/userSlice";
 
 export const Burger: FC<ModalWindow & BurgerAuth> = ({
   isOpen,
   onOpen,
+  onClose,
 }) => {
+  const { isAuth,userData } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   if (!isOpen) return null;
+  const access = localStorage.getItem("accessToken");
+  const refresh = localStorage.getItem("refreshToken");
+  console.log(userData)
+  const logOut = () => {
+    if (!refresh && !access) {
+      toast.error("Вы уже вышли с аккаунта");
+    } else {
+      logoutProfile();
+      onClose();
+      dispatch(logout());
+      toast.success("Успешно!");
+    }
+  };
 
   return (
     <div className={styles.menu}>
       <ul className={styles.list}>
-        <li className={styles.list_section}>Вы посетитель</li>
+        <li className={styles.list_section}>
+          {isAuth ? (
+            <span>Вы авторизованы</span>
+          ) : (
+            <span>Вы посетитель</span>
+          )}
+        </li>
+
         <li className={styles.list_section}>Стать пользователем</li>
         <li className={styles.list_section}>Стать продавцом</li>
         <div className={styles.line}></div>
+
         <Link to='/profile' className={styles.list_section}>
           Настройки профиля
         </Link>
@@ -27,16 +58,21 @@ export const Burger: FC<ModalWindow & BurgerAuth> = ({
           Добавить профиль
         </li>
         <div className={styles.line}></div>
-        <div className={styles.profile_section}>
-          <div className={styles.box_img}>
-            <img
-              className={styles.prof_sec_img}
-              src={user}
-              alt='profile_img'
-            />
+        {isAuth && (
+          <div className={styles.profile_section}>
+            <div className={styles.box_img}>
+              <img
+                className={styles.prof_sec_img}
+                src={user}
+                alt='profile_img'
+              />
+            </div>
+
+            <span className={styles.prof_select}>
+              {userData?.first_name ? userData.first_name : "Имя"}
+            </span>
           </div>
-          <span className={styles.prof_select}>View</span>
-        </div>
+        )}
         <div className={styles.profile_section}>
           <div className={styles.box_img}>
             <img
@@ -47,7 +83,11 @@ export const Burger: FC<ModalWindow & BurgerAuth> = ({
           </div>
           <span className={styles.prof_select}>Посетитель</span>
         </div>
-        <li className={styles.list_section}>Выйти из профиля</li>
+        {isAuth && (
+          <li className={styles.list_section} onClick={logOut}>
+            Выйти из профиля
+          </li>
+        )}
       </ul>
     </div>
   );

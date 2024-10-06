@@ -5,30 +5,91 @@ import location from "../../../app/assets/profileCard/location.svg";
 import undefinedImage from "../../../app/assets/profileCard/unknown_user.svg";
 import videos from "../../../app/assets/profileCard/videos.svg";
 import view from "../../../app/assets/profileCard/view.svg";
+import { getDataUser } from "app/api/api";
+import { useDispatch, useSelector } from "app/service/hooks/hooks";
+import axios from "axios";
+import { features } from "process";
+import { toast } from "react-toastify";
 
 const ProfileCard: FC = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [activeButton, setActiveButton] = useState<string | null>(
     null,
   );
-  const [inputData, setInputData] = useState({
-    location: "",
-  });
+  const [inputData, setInputData] = useState({});
+  const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  // console.log(inputData);
 
+  const token = localStorage.getItem("accessToken");
+
+  const { userData } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   useEffect(() => {
+    const fetchData = async () => {
+      await getDataUser(dispatch);
+    };
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+
     const savedButton = localStorage.getItem("activeButton");
     if (savedButton) {
       setActiveButton(savedButton);
     }
-  }, []);
+  }, [dispatch]);
+  const updateUserData = async (inputData: any) => {
+    const fetchData = async () => {
+      await getDataUser(dispatch);
+    };
+    try {
+      const response = await axios.put(
+        "https://api.lr45981.tw1.ru/api/v1/profile/",
+        inputData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      if (response.status === 200) {
+        toast.success("Профиль успешно обновлен");
+        fetchData();
+      }
 
+      return response.status === 200;
+    } catch (error: any) {
+      console.error("Ошибка при сохранении данных:", error);
+
+      if (error.response.data[0] === "first_name already exists") {
+        toast.error("Имя / Фамилию нельзя изменить!");
+      } else if (
+        error.response.data[0] === "last_name already exists"
+      ) {
+        toast.error("Фамилию нельзя изменить!");
+      }
+      return false;
+    }
+  };
   const handleButtonClick = (buttonName: string) => {
     setActiveButton(buttonName);
     localStorage.setItem("activeButton", buttonName);
   };
 
-  const toggleEdit = () => {
-    setIsEditing((prev) => !prev);
+  const toggleEdit = async () => {
+    if (isEditing) {
+      setIsSaving(true);
+      const isSaved = await updateUserData(inputData);
+      setIsSaving(false); // Заканчиваем сохранение
+
+      if (isSaved) {
+        setIsEditing(false); // Если сохранение успешно, выходим из режима редактирования
+      } else {
+        setError("Ошибка при сохранении данных"); // В случае ошибки выводим сообщение
+      }
+    } else {
+      setIsEditing(true); // Включаем режим редактирования
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -54,7 +115,9 @@ const ProfileCard: FC = () => {
             src={location}
             alt='location_icon'
           />
-          {inputData.location ? inputData.location : "Не задано"}
+          {userData?.city && userData?.country
+            ? `${userData.city},${userData.country}`
+            : "Не задано"}
         </p>
         <div className={styles.videos_view}>
           <p className={styles.vid_see}>
@@ -77,7 +140,16 @@ const ProfileCard: FC = () => {
       </div>
 
       {/* Условия для отображения инпутов */}
-      {isEditing && <Inputs onInputChange={handleInputChange} />}
+      {isEditing && (
+        <Inputs
+          onInputChange={handleInputChange}
+          initialFirstName={userData?.first_name}
+          initialLastName={userData?.last_name}
+          initialCity={userData?.city}
+          initialTelegram={userData?.user.telegram}
+          initialPhone={userData?.phone}
+        />
+      )}
 
       <div className={styles.buttons}>
         <button className={`${styles.button}`} onClick={toggleEdit}>

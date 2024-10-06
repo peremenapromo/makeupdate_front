@@ -4,16 +4,45 @@ import lessons from "../../app/assets/home/lessons.svg";
 import users from "../../app/assets/home/users.svg";
 export const Home: FC = () => {
   return (
-    <div className={styles.container_home}>
-      <div className={styles.text_box_home}>
-        <p className={styles.title}>MAKEUPDATE</p>
-        <p className={styles.subtitle}>
+    // <div className={styles.container_home}>
+    //   <div className={styles.text_box_home}>
+    //     <p className={styles.title}>MAKEUPDATE</p>
+    //     <p className={styles.subtitle}>
+    //       Смотри и продавай уроки по макияжу в любой точке мира на
+    //       любом цифровом устройстве и удобном языке
+    //     </p>
+    //   </div>
+    //   <div className={styles.lessons_users_box}>
+    //     <p className={styles.les_us}>
+    //       <img
+    //         className={styles.img_les_us}
+    //         src={lessons}
+    //         alt='lessons_icon'
+    //       />
+    //       <span className={styles.les_us_text}> Уроки</span>
+    //       <span className={styles.num}>12000</span>
+    //     </p>
+    //     <p className={styles.les_us}>
+    //       <img
+    //         className={styles.img_les_us}
+    //         src={users}
+    //         alt='users_icon'
+    //       />
+    //       <span className={styles.les_us_text}>Пользователи</span>
+    //       <span className={styles.num}>12000</span>
+    //     </p>
+    //   </div>
+    // </div>
+    <div className={styles.container}>
+      <section className={styles.text_box_home}>
+        <h1 className={styles.title}>MAKEUPDATE</h1>
+        <h2 className={styles.subtitle}>
           Смотри и продавай уроки по макияжу в любой точке мира на
           любом цифровом устройстве и удобном языке
-        </p>
-      </div>
+        </h2>
+      </section>
       <div className={styles.lessons_users_box}>
-        <p className={styles.les_us}>
+        <div className={styles.les_us}>
           <img
             className={styles.img_les_us}
             src={lessons}
@@ -21,16 +50,16 @@ export const Home: FC = () => {
           />
           <span className={styles.les_us_text}> Уроки</span>
           <span className={styles.num}>12000</span>
-        </p>
-        <p className={styles.les_us}>
+        </div>
+        <div className={styles.les_us}>
+          <span className={styles.les_us_text}>Пользователи</span>
+          <span className={styles.num}>12000</span>
           <img
             className={styles.img_les_us}
             src={users}
             alt='users_icon'
           />
-          <span className={styles.les_us_text}>Пользователи</span>
-          <span className={styles.num}>12000</span>
-        </p>
+        </div>
       </div>
     </div>
   );
