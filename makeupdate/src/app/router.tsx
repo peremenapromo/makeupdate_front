@@ -28,11 +28,11 @@ function AppRouter({
       <Route path='/events' element={<Events />} />
       <Route path='/confirmEmail/:uid/:token' element={<Confirm />} />
       <Route path='*' element={<Error />} />
+      <Route path='/users' element={<Users />} />
+      <Route path='/menu' element={<Menu />} />
       <Route
         element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
-        <Route path='/users' element={<Users />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/menu' element={<Menu />} />
       </Route>
     </Routes>
   );

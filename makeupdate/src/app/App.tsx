@@ -18,7 +18,7 @@ const App: FC = () => {
   const [isAuthOpen, setIsAuthOpen] = useState<boolean>(false);
   const { isAuth } = useSelector((state) => state.user);
   const location = useLocation();
-
+  // console.log(isModalOpen)
   useEffect(() => {
     const fetchData = async () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -39,7 +39,7 @@ const App: FC = () => {
 
   // Функции открытия и закрытия модальных окон
   const openModal = () => {
-    setIsModalOpen(true);
+    setIsModalOpen(!isModalOpen);
   };
 
   const closeModal = () => {
@@ -65,18 +65,27 @@ const App: FC = () => {
       {location.pathname.includes("/confirmEmail") ? (
         ""
       ) : (
-        <Header onOpen={openModal} />
+        <div className={styles.header}>
+          <Header
+            onOpen={openModal}
+            onOpenAuth={openAuth}
+            isOpenBurger={isModalOpen}
+            onClose={closeModal}
+          />
+        </div>
       )}
       <AppRouter isAuthenticated={isAuth} />
-      {isModalOpen && (
-        <div className={styles.overlay} onClick={handleOverlayClick}>
+      {/* {isModalOpen && (
+        // <div className={styles.overlay} onClick={handleOverlayClick}>
+        <div className={styles.burger}>
           <Burger
             onOpen={openAuth}
             isOpen={isModalOpen}
             onClose={closeModal}
           />
         </div>
-      )}
+        // </div>
+      )} */}
       {isAuthOpen && (
         <div
           onClick={handleOverlayClick}

@@ -19,12 +19,13 @@ export const Burger: FC<ModalWindow & BurgerAuth> = ({
   onOpen,
   onClose,
 }) => {
-  const { isAuth,userData } = useSelector((state) => state.user);
+  const { isAuth, userData } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   if (!isOpen) return null;
   const access = localStorage.getItem("accessToken");
   const refresh = localStorage.getItem("refreshToken");
-  console.log(userData)
+  console.log("123", userData);
+  const photoLink = "https://api.lr45981.tw1.ru" + userData?.photo;
   const logOut = () => {
     if (!refresh && !access) {
       toast.error("Вы уже вышли с аккаунта");
@@ -63,7 +64,7 @@ export const Burger: FC<ModalWindow & BurgerAuth> = ({
             <div className={styles.box_img}>
               <img
                 className={styles.prof_sec_img}
-                src={user}
+                src={photoLink}
                 alt='profile_img'
               />
             </div>

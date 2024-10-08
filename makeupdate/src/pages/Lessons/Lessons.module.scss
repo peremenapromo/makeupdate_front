@@ -53,6 +53,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0px 100px;
 }
 
 // .all_lessons_box {
@@ -165,11 +166,12 @@
 .vol {
   position: absolute;
   z-index: 1;
+  left: 0;
 }
 
 .search_img {
   position: absolute;
-  left: 360px;
+  right: 0;
   z-index: 1;
 }
 
@@ -313,6 +315,10 @@
   margin: 0;
   margin-bottom: 13px;
   line-height: 16.39px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 // Channel styles
@@ -423,7 +429,35 @@
 }
 
 // Width <= 1440px
-@media screen and (max-width: 1440px) {
+@media screen and (min-width: 2000px) {
+}
+@media screen and (max-width: 1900px) {
+  .lesson {
+    max-width: 355px;
+    width: 100%;
+    max-height: 382px;
+    height: 100%;
+  }
+  .all_lessons_box {
+    gap: 15px;
+  }
+}
+@media screen and (max-width: 1675px) {
+  .lessons_container {
+    margin: 0px 20px;
+  }
+  .lesson {
+    max-width: 355px;
+    width: 100%;
+    max-height: 382px;
+    height: 100%;
+    margin-bottom: 10px;
+  }
+  .all_lessons_box {
+    gap: 15px;
+  }
+}
+@media screen and (max-width: 1500px) {
   .lesson {
     max-width: 285px;
     width: 100%;
@@ -458,13 +492,115 @@
   height: 100%;
 }
 
-// Width <= 1024px
-@media screen and (max-width: 1024px) {
+// Width <= 1220px
+@media screen and (max-width: 1300px) {
+  .lessons_container {
+    margin: 0px 20px;
+  }
   .search_filter {
     max-width: 750px;
   }
+  .all_lessons_box {
+    gap: 10px;
+  }
   .lesson {
-    max-width: 305px;
+    max-width: 270px;
+    width: 100%;
+    max-height: 382px;
+    height: 100%;
+    margin-bottom: 10px;
+  }
+  .name_les {
+    font-size: 15px;
+  }
+  .name_channel {
+    span {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+    }
+  }
+  .date {
+    font-size: 14px;
+  }
+  .info {
+    font-size: 15px;
+  }
+  .buy_btn {
+    max-width: 105px;
+    width: 100%;
+    p {
+      margin: 0;
+      font-size: 11px;
+    }
+  }
+}
+@media screen and (max-width: 1155px) {
+  .lessons_container {
+    margin: 0px 20px;
+  }
+  .search_filter {
+    max-width: 750px;
+  }
+  .all_lessons_box {
+    gap: 5px;
+  }
+  .lesson {
+    max-width: 230px;
+    width: 100%;
+    max-height: 382px;
+    height: 100%;
+    margin-bottom: 10px;
+  }
+  .name_les {
+    font-size: 13px;
+  }
+  .name_channel {
+    span {
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 20px;
+    }
+  }
+  .date {
+    font-size: 12px;
+  }
+  .info {
+    font-size: 12px;
+  }
+  .buy_btn {
+    max-width: 90px;
+    width: 100%;
+    p {
+      margin: 0;
+      font-size: 9px;
+    }
+  }
+}
+
+// Width <= 768px
+
+@media screen and (max-width: 768px) {
+  .search_filter {
+    max-width: 750px;
+  }
+  .all_lessons_box {
+    gap: 10px;
+  }
+  .selectContainer {
+    font-size: 22px;
+  }
+  .search {
+    max-width: 270px;
+  }
+  .search_filter {
+    max-width: 560px;
+  }
+  .search_img {
+    left: 220px;
+  }
+  .lesson {
+    max-width: 290px;
     width: 100%;
     max-height: 382px;
     height: 100%;
@@ -483,73 +619,21 @@
     font-size: 14px;
   }
   .info {
-    font-size: 14px;
+    font-size: 16px;
   }
   .buy_btn {
-    max-width: 140px;
-    width: 100%;
+    max-width: 125px;
     p {
       margin: 0;
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 }
 
-// Width <= 768px
-
-@media screen and (max-width: 768px) {
-  .search_filter {
-    max-width: 750px;
-  }
-  .all_lessons_box{
-    gap: 10px;
-  }
-  .selectContainer {
-    font-size: 22px;
-  }
-  .search {
-    max-width: 270px;
-  }
-  .search_filter {
-    max-width: 560px;
-  }
-  .search_img {
-    left: 220px;
-  }
-  .lesson {
-    max-width: 365px;
-    width: 100%;
-    max-height: 382px;
-    height: 100%;
-  }
-  .name_les {
-    font-size: 15px;
-  }
-  .name_channel {
-    span {
-      font-size: 12px;
-      font-weight: 400;
-      line-height: 20px;
-    }
-  }
-  .date {
-    font-size: 14px;
-  }
-  .info {
-    font-size: 14px;
-  }
-  .buy_btn {
-    width: 115px;
-    p {
-      margin: 0;
-      font-size: 12px;
-    }
-  }
-}
-
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 635px) {
   .all_lessons_box {
     justify-content: center;
+    margin-bottom: 20px;
   }
   .time_box {
     top: calc(100% - 35px);
@@ -561,7 +645,7 @@
     height: 100%;
   }
   .name_les {
-    font-size: 22px;
+    font-size: 20px;
   }
   .name_channel {
     span {
@@ -575,10 +659,14 @@
   }
   .info {
     font-size: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   .buy_btn {
-   max-width: 167px;
-   width: 100%;
+    max-width: 167px;
+    width: 100%;
     p {
       margin: 0;
       font-size: 16px;
@@ -589,7 +677,62 @@
   }
   .search_filter {
     justify-content: center;
-    margin:0px;
+    margin: 0px;
+    margin-bottom: 20px;
+  }
+  .search {
+    max-width: 250px;
+    img {
+      width: 38px;
+      height: 38px;
+      top: 6px;
+    }
+  }
+}
+@media screen and (max-width: 400px) {
+  .all_lessons_box {
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  .time_box {
+    top: calc(100% - 35px);
+  }
+  .lesson {
+    max-width: 400px;
+    width: 100%;
+    max-height: 382px;
+    height: 100%;
+  }
+  .name_les {
+    font-size: 16px;
+  }
+  .name_channel {
+    span {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 26px;
+    }
+  }
+  .date {
+    font-size: 12px;
+  }
+  .info {
+    font-size: 12px;
+  }
+  .buy_btn {
+    max-width: 140px;
+    width: 100%;
+    p {
+      margin: 0;
+      font-size: 16px;
+    }
+  }
+  .custom_select {
+    display: none;
+  }
+  .search_filter {
+    justify-content: center;
+    margin: 0px;
     margin-bottom: 20px;
   }
   .search {

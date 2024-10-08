@@ -30,7 +30,7 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
   const getDataUser = async () => {
     try {
       const data = await axiosWithRefreshToken<IGetUserData>(
-        "https://api.lr45981.tw1.ru/api/v1/profile/",
+        "https://api.lr45981.tw1.ru/api/v1/profile/my-profile/",
         {
           method: "GET",
           headers: {
@@ -82,7 +82,7 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
       toast.error(
         err?.toString() || "Ошибка при создании пользователя",
         {
-          position: "top-right",
+          position: "top-left",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -121,6 +121,7 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
     } catch (error: any) {
       const err = error.response?.data.message;
       toast.error(err ? err.toString() : "Ошибка при входе", {
+        position: "top-left",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -132,7 +133,15 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
       });
     }
   };
-
+  const errorHandler = (e: any) => [
+    e.preventDefault(),
+    toast.error(
+      "Вы не дали согласие на обработку персональных данных ",
+      {
+        position: "top-left",
+      },
+    ),
+  ];
   return (
     <div className={styles.authWrapper}>
       <div className={styles.box_auth}>
@@ -140,10 +149,16 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
           <img src={cross} alt='close' />
         </button>
         <form
-          onSubmit={isLogin ? loginHandler : registrationHandler}
+          onSubmit={
+            !isLogin && !isChecked
+              ? errorHandler
+              : isLogin
+              ? loginHandler
+              : registrationHandler
+          }
           className={styles.form}>
           <h1 className={styles.title}>
-            {isLogin ? "Вход" : "Регистрация"}
+            {isLogin ? "ВХОД" : "РЕГИСТРАЦИЯ"}
           </h1>
           <div className={styles.inputs}>
             <input
@@ -215,11 +230,19 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
               )}
             </div>
           )}
-          <button className={styles.send_form}>
+
+          <button
+            className={
+              isChecked && !isLogin
+                ? styles.send_form
+                : isLogin
+                ? styles.send_form
+                : styles.nonActive
+            }>
             {isLogin ? "Войти" : "Зарегистрироваться"}
           </button>
           <p className={styles.question}>
-            {isLogin ? "Нет аккаунта?" : "Уже есть аккаунт?"}
+            {isLogin ? "У вас нет аккаунта?" : "Уже есть аккаунт?"}
             <button
               type='button'
               onClick={toggleForm}

@@ -1,15 +1,14 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./Profile.module.scss";
-import ProfileCard from "./ProfileCard/ProfileCard";
+import ProfileCard from "../../components/Profile/Card/ProfileCard";
 import profile_top from "../../app/assets/profileCard/profile_top.svg";
+import bgMobile from "../../app/assets/profileCard/BgMobile.png";
 import { useDispatch, useSelector } from "app/service/hooks/hooks";
 import { getDataUser } from "app/api/api";
+import { NavigationProfile } from "components/Profile/Navigation/Navigation";
+import { ProfileMobile } from "components/Profile/ProfileMobile";
 
 export const Profile: FC = () => {
-  const [inputData, setInputData] = useState({
-    name: "",
-    surname: "",
-  });
   const { userData } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -18,15 +17,9 @@ export const Profile: FC = () => {
     };
     fetchData();
     console.log(userData);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  const handleInputChange = (field: string, value: string) => {
-    setInputData((prevData) => ({
-      ...prevData,
-      [field]: value,
-    }));
-  };
   return (
     <div className={styles.profile_all_container}>
       <img
@@ -34,63 +27,22 @@ export const Profile: FC = () => {
         src={profile_top}
         alt='profile_bg'
       />
-      <div className={styles.username_box}>
-        <p className={styles.username}>
-          {userData?.first_name ? userData.first_name : "ИМЯ"}
-        </p>
-        <p className={styles.username}>
-		{userData?.last_name ? userData.last_name : "ФАМИЛИЯ"}
-        </p>
+      <img
+        className={styles.profile_top_img_mobile}
+        src={bgMobile}
+        alt='profile_bg'
+      />
+
+      <div className={styles.profileContainer}>
+        <ProfileCard />
+
+        <NavigationProfile />
       </div>
-      <ProfileCard />
-      <div className={styles.buttons_page_profile}>
-        <div className={styles.buttons_containers_profile}>
-          <button className={styles.button_main_profile}>
-            <span className={styles.button_main_profile_text}>
-              Мои уроки<sup className={styles.sup}>(13)</sup>
-            </span>
-          </button>
-          <button className={styles.button_main_profile}>
-            <span className={styles.button_main_profile_text}>
-              Доступ к урокам
-              <sup className={styles.sup}>(13)</sup>
-            </span>
-          </button>
-          <button className={styles.button_main_profile}>
-            <span className={styles.button_main_profile_text}>
-              Избранные уроки
-              <sup className={styles.sup}>(13)</sup>
-            </span>
-          </button>
-          <button className={styles.button_main_profile}>
-            <span className={styles.button_main_profile_text}>
-              Мои события<sup className={styles.sup}>(13)</sup>
-            </span>
-          </button>
-        </div>
-        <div className={styles.buttons_containers_profile}>
-          <button className={styles.button_main_profile}>
-            <span className={styles.button_main_profile_text}>
-              Мое портфолио
-            </span>
-          </button>
-          <button className={styles.button_main_profile}>
-            <span className={styles.button_main_profile_text}>
-              Подписчиким <sup className={styles.sup}>(13)</sup>
-            </span>
-          </button>
-          <button className={styles.button_main_profile}>
-            <span className={styles.button_main_profile_text}>
-              Подписки <sup className={styles.sup}>(13)</sup>
-            </span>
-          </button>
-          <button className={styles.button_main_profile}>
-            <span className={styles.button_main_profile_text}>
-              Финансы
-            </span>
-          </button>
-        </div>
-        <div className={styles.buttons}></div>
+      <div className={styles.profileContainerMobile}>
+        <ProfileMobile
+          userData={{ ...userData }}
+          photoLink={"https://api.lr45981.tw1.ru/" + userData?.photo}
+        />
       </div>
     </div>
   );

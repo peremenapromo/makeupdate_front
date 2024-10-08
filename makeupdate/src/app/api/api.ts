@@ -25,7 +25,7 @@ export const instanceRegistration = axios.create({
 export const getDataUser = async (dispatch: any) => {
   try {
     const data = await axiosWithRefreshToken<IGetUserData>(
-      "https://api.lr45981.tw1.ru/api/v1/profile/",
+      "https://api.lr45981.tw1.ru/api/v1/profile/my-profile/",
       {
         method: "GET",
         headers: {
@@ -38,3 +38,19 @@ export const getDataUser = async (dispatch: any) => {
     console.error("Ошибка при получении данных:", error);
   }
 };
+// wexport const setPhotoUser = async (dispatch: any) => {
+//   try {
+//     const data = await axiosWithRefreshToken<IGetUserData>(
+//       "https://api.lr45981.tw1.ru/api/v1/profile/my-profile/update-photo",
+//       {
+//         method: "post",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       },
+//     );
+//     dispatch(setUserData(data));
+//   } catch (error) {
+//     console.error("Ошибка при получении данных:", error);
+//   }
+// };
