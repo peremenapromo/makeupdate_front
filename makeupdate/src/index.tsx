@@ -12,7 +12,7 @@ const userDataFromLocalStorage = localStorage.getItem('userData');
 if (userDataFromLocalStorage) {
   const parsedUserData = JSON.parse(userDataFromLocalStorage);
   store.dispatch(setUserData(parsedUserData));
-  console.log(parsedUserData)
+  // console.log(parsedUserData)
 }
 
 const root = ReactDOM.createRoot(

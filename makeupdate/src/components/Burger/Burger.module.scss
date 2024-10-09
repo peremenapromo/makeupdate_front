@@ -78,6 +78,11 @@
   background-color: $primary_color;
   border-radius: 100%;
   padding: 2px;
+  img {
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+  }
 }
 
 .prof_sec_img {
@@ -91,7 +96,10 @@
   font-weight: 400;
   color: $primary_color;
 }
-
+.icon_profile {
+  width: 21;
+  height: 21;
+}
 // Styles line
 .line {
   height: 2px;
@@ -99,4 +107,8 @@
   background-color: $primary_color;
   margin: 2px 0;
   transition: all 0.3s ease;
+}
+.linkProfile {
+  color: white;
+  text-decoration: none;
 }

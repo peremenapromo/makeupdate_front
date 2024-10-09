@@ -17,7 +17,9 @@ import { UpdateProfilePhoto } from "../LoadPhoto/LoadPhoto";
 
 export const ProfileMobile = ({ photoLink, userData }: any) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [inputData, setInputData] = useState({});
+  const [inputData, setInputData] = useState({
+    
+  });
   const [isSaving, setIsSaving] = useState(false);
   let descriptionInitial: string | undefined = userData?.description;
   const [description, setDescription] = useState<string | null>(
@@ -34,11 +36,14 @@ export const ProfileMobile = ({ photoLink, userData }: any) => {
   ) => {
     setDescription(e.target.value);
   };
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = (
+    field: string,
+    value: string | boolean,
+  ) => {
     setInputData((prev) => ({ ...prev, [field]: value }));
   };
   const token = localStorage.getItem("accessToken");
-  console.log(userData);
+  // console.log(userData);
   const dispatch = useDispatch();
   const updateUserData = async (inputData: any) => {
     const fetchData = async () => {
@@ -147,12 +152,14 @@ export const ProfileMobile = ({ photoLink, userData }: any) => {
         {isEditing && (
           <Inputs
             onInputChange={handleInputChange}
-            initialFirstName={userData.first_name}
-            initialLastName={userData.last_name}
-            initialCity={userData.city}
-            initialCountry={userData.country}
-            initialTelegram={userData.telegram}
-            initialPhone={userData.phone}
+            initialFirstName={userData?.first_name}
+            initialLastName={userData?.last_name}
+            initialCity={userData?.city}
+            initialCountry={userData?.country}
+            initialTelegram={userData?.telegram}
+            initialPhone={userData?.phone}
+            initialShowTelegram={userData?.show_telegram}
+            initialShowPhone={userData?.show_telephone}
           />
         )}
 

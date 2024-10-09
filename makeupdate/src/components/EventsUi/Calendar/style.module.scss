@@ -1,0 +1,75 @@
+
+.calendarWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1740px;
+  width: 100%;
+  position: relative;
+}
+
+.navButton {
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  position: absolute;
+  right: -30px;
+  border: 1px solid rgba(225, 225, 225, 1);
+  outline: none;
+  height: 70px;
+  border-radius: 12px;
+}
+
+.calendarContainer {
+  display: flex;
+  flex-direction: column;
+  width: 1700px;
+}
+
+.monthContainer {
+  display: flex;
+  //   flex-direction: column;
+  position: relative;
+}
+
+.monthName {
+  position: absolute;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  transform: rotateZ(270deg);
+  left: -50px;
+  bottom: 25px;
+  border-bottom: 1px solid rgba(150, 150, 150, 1);
+  color: rgba(150, 150, 150, 1);
+}
+
+.daysContainer {
+  display: flex;
+  justify-content: start;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
+  height: 70px;
+  text-align: center;
+  background-color: #f9f9f9;
+  justify-content: center;
+}
+
+.dayAbbr {
+  font-size: 12px;
+}
+
+.dayNumber {
+  font-size: 24px;
+  font-weight: bold;
+}
+.red {
+  color: red;
+}

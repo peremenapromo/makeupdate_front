@@ -16,11 +16,19 @@ export const UpdateProfilePhoto = ({
   initialPhotoUrl: string;
   isEditing: boolean;
 }) => {
-  const userDataUrl = "https://api.lr45981.tw1.ru" + initialPhotoUrl;
-  const [, setPhoto] = useState<File | null>(null);
+  const userDataUrl = initialPhotoUrl
+    ? "https://api.lr45981.tw1.ru" + initialPhotoUrl
+    : null;
+
+  // Проверяем, если userDataUrl не null, и содержит ли он 'null'
+  const validPhotoUrl =
+    userDataUrl && userDataUrl.includes("null") ? null : userDataUrl;
+
   const [photoUrl, setPhotoUrl] = useState<string | null>(
-    userDataUrl || null,
+    validPhotoUrl || null,
   );
+  const [, setPhoto] = useState<File | null>(null);
+
   const token = localStorage.getItem("accessToken");
 
   const updatePhoto = async (selectedPhoto: File) => {

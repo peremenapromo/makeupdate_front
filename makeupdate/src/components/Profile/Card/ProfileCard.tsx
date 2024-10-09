@@ -10,11 +10,22 @@ import { toast } from "react-toastify";
 import mockImage from "../../../app/assets/profileCard/MockImage.png";
 import { axiosWithRefreshToken } from "helpers/localStorage.helper";
 import { UpdateProfilePhoto } from "components/Profile/LoadPhoto/LoadPhoto";
+import { IGetUserData } from "app/types/type";
 
 const ProfileCard: FC = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [, setActiveButton] = useState<string | null>(null);
-  const [inputData, setInputData] = useState({});
+  const [inputData, setInputData] = useState({
+    first_name: "",
+    last_name: "",
+    city: "",
+    country: "",
+    telegram: "",
+    phone: "",
+    show_telegram: true,
+    show_telephone: true,
+  });
+
   const [isSaving, setIsSaving] = useState(false);
   const token = localStorage.getItem("accessToken");
 
@@ -23,7 +34,20 @@ const ProfileCard: FC = () => {
   const [description, setDescription] = useState<string | null>(
     descriptionInitial!,
   );
-
+  useEffect(() => {
+    if (userData) {
+      setInputData({
+        first_name: userData.first_name || "",
+        last_name: userData.last_name || "",
+        city: userData.city || "",
+        country: userData.country || "",
+        telegram: userData.telegram || "",
+        phone: userData.phone || "",
+        show_telegram: userData.show_telegram ?? true,
+        show_telephone: userData.show_telephone ?? true,
+      });
+    }
+  }, [userData]);
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchData = async () => {
@@ -56,15 +80,21 @@ const ProfileCard: FC = () => {
 
       toast.success("Профиль успешно обновлен");
       fetchData();
+      return true;
     } catch (error: any) {
-      console.error("Ошибка при сохранении данных:", error);
-
       if (error.response.data[0] === "first_name already exists") {
         toast.error("Имя / Фамилию нельзя изменить!");
       } else if (
         error.response.data[0] === "last_name already exists"
       ) {
         toast.error("Фамилию нельзя изменить!");
+      } else if (
+        error.response.data.phone[0] ===
+        "Phone number must be format: '+999999999'. Allow from 7 to 15 digits."
+      ) {
+        toast.error(
+          "Телефон должен быть формата: +999999999. От 7 до 15 символов ",
+        );
       }
       return false;
     }
@@ -80,26 +110,47 @@ const ProfileCard: FC = () => {
   ) => {
     setDescription(e.target.value);
   };
+
+  const handleInputChange = (
+    field: string,
+    value: string | boolean,
+  ) => {
+    setInputData((prev) => ({ ...prev, [field]: value }));
+  };
   const toggleEdit = async () => {
     if (isEditing) {
-      console.log("true");
       setIsSaving(true);
-      await updateUserData({
-        ...inputData,
-        description,
-      });
-      setIsSaving(false);
+      const updatedData: Partial<IGetUserData> = {};
 
+      Object.keys(inputData).forEach((key) => {
+        const newValue = inputData[key as keyof typeof inputData];
+        const oldValue = userData?.[key as keyof IGetUserData];
+
+        if (newValue !== oldValue) {
+          if (newValue !== undefined) {
+            updatedData[key as keyof IGetUserData] =
+              newValue as never;
+          }
+        }
+      });
+
+      if (description !== userData?.description) {
+        updatedData.description = description as string;
+      }
+
+      if (Object.keys(updatedData).length > 0) {
+        const isUpdated = await updateUserData(updatedData);
+        if (isUpdated) {
+          setIsEditing(false);
+        }
+      }
+      setIsSaving(false);
       if (!isSaving) {
         setIsEditing(false);
       }
     } else {
       setIsEditing(true);
     }
-  };
-
-  const handleInputChange = (field: string, value: string) => {
-    setInputData((prev) => ({ ...prev, [field]: value }));
   };
 
   return (
@@ -171,6 +222,8 @@ const ProfileCard: FC = () => {
             initialCountry={userData?.country}
             initialTelegram={userData?.telegram}
             initialPhone={userData?.phone}
+            initialShowTelegram={userData?.show_telegram!}
+            initialShowPhone={userData?.show_telephone!}
           />
         )}
 

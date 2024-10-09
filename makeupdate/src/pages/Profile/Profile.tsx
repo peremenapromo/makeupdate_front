@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import styles from "./Profile.module.scss";
 import ProfileCard from "../../components/Profile/Card/ProfileCard";
 import profile_top from "../../app/assets/profileCard/profile_top.svg";
@@ -13,10 +13,10 @@ export const Profile: FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchData = async () => {
-      await getDataUser(dispatch); // Передайте dispatch
+      await getDataUser(dispatch);
     };
     fetchData();
-    console.log(userData);
+    // console.log(userData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 

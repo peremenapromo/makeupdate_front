@@ -63,7 +63,7 @@ const translations = {
         to: "/lessons",
         img: lessons,
         img_active: lessonsActive,
-        label: "Lessons",
+        label: "Tutorials",
       },
       {
         to: "/users",
@@ -196,7 +196,7 @@ export const Header: FC<HeaderProps> = ({
                 ? styles.active_button_profile
                 : styles.button_profile
             }>
-            {userData && photoLink ? (
+            {userData?.photo ? (
               <img
                 className={styles.img_icon}
                 src={photoLink}

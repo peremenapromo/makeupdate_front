@@ -2,8 +2,7 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Burger.module.scss";
 import noUser from "./img/photo_undefined.svg";
-import user from "./img/pussykiller.png";
-
+import icon_profile from "../../app/assets/other/profile_icon.svg";
 // Types
 import { BurgerAuth, ModalWindow } from "../../app/types/modal";
 import { toast } from "react-toastify";
@@ -24,7 +23,7 @@ export const Burger: FC<ModalWindow & BurgerAuth> = ({
   if (!isOpen) return null;
   const access = localStorage.getItem("accessToken");
   const refresh = localStorage.getItem("refreshToken");
-  console.log("123", userData);
+  // console.log("123", userData);
   const photoLink = "https://api.lr45981.tw1.ru" + userData?.photo;
   const logOut = () => {
     if (!refresh && !access) {
@@ -59,31 +58,43 @@ export const Burger: FC<ModalWindow & BurgerAuth> = ({
           Добавить профиль
         </li>
         <div className={styles.line}></div>
-        {isAuth && (
+        {isAuth ? (
+          <Link to='/profile' className={styles.linkProfile}>
+            <div className={styles.profile_section}>
+              <div className={styles.box_img}>
+                {userData?.photo ? (
+                  <img
+                    className={styles.img_icon}
+                    src={photoLink}
+                    alt='icon_profile'
+                  />
+                ) : (
+                  <img
+                    className={styles.img_icon}
+                    src={icon_profile}
+                    alt='icon_profile'
+                  />
+                )}
+              </div>
+
+              <span className={styles.prof_select}>
+                {userData?.first_name ? userData.first_name : "Имя"}
+              </span>
+            </div>
+          </Link>
+        ) : (
           <div className={styles.profile_section}>
             <div className={styles.box_img}>
               <img
                 className={styles.prof_sec_img}
-                src={photoLink}
+                src={noUser}
                 alt='profile_img'
               />
             </div>
 
-            <span className={styles.prof_select}>
-              {userData?.first_name ? userData.first_name : "Имя"}
-            </span>
+            <span className={styles.prof_select}>Посетитель</span>
           </div>
         )}
-        <div className={styles.profile_section}>
-          <div className={styles.box_img}>
-            <img
-              className={styles.prof_sec_img}
-              src={noUser}
-              alt='profile_img'
-            />
-          </div>
-          <span className={styles.prof_select}>Посетитель</span>
-        </div>
         {isAuth && (
           <li className={styles.list_section} onClick={logOut}>
             Выйти из профиля

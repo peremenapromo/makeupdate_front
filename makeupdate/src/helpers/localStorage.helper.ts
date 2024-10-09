@@ -128,7 +128,6 @@ export const axiosWithRefreshToken = async <T>(
       isTokenExpired(getAccessToken()!)
     ) {
       // Если токен истек, пробуем обновить токен
-      console.log(localStorage);
       const refresh = getRefreshToken();
 
       if (refresh && !isTokenExpired(refresh)) {
@@ -141,14 +140,14 @@ export const axiosWithRefreshToken = async <T>(
           const retryResponse = await axios(url, options);
           return retryResponse.data;
         } catch (refreshError) {
+          logoutProfile();
           console.error(
             "Ошибка при обновлении токена:",
             refreshError,
           );
-          logoutProfile();
           // window.location.href = "/"; // Если обновление токена не удалось, перенаправляем на главную страницу
 
-          return Promise.reject("Ошибка обновления токена");
+          // return Promise.reject("Ошибка обновления токена");
         }
       } else {
         console.error("Рефреш токен устарел");

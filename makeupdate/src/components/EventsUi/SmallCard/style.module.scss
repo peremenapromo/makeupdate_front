@@ -1,0 +1,57 @@
+@import "../../../app/styles/variables";
+.wrapper {
+  max-width: 400px;
+  width: 100%;
+  max-height: 324px;
+  height: 100%;
+  font-family: $primary_font;
+  .container {
+    display: flex;
+    flex-direction: column;
+    .photoWithBtn {
+      position: relative;
+      margin-bottom: 11px;
+      .signUp {
+        position: absolute;
+        right: 8px;
+        bottom: 10px;
+        background: linear-gradient(
+          90deg,
+          #09af25 0%,
+          #0393a0 52.5%,
+          #251885 100%
+        );
+        max-width: 146px;
+        width: 100%;
+        font-size: 18px;
+        font-weight: 700;
+
+        line-height: 24.6px;
+        max-height: 34px;
+        height: 100%;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        outline: none;
+      }
+    }
+    .info {
+      display: flex;
+      flex-direction: column;
+      .title {
+        color: black;
+        margin: 0;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 30px;
+      }
+      .description {
+        color: rgba(130, 130, 130, 1);
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 20.5px;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

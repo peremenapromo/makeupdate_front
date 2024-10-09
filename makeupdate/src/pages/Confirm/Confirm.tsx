@@ -11,33 +11,58 @@ export const Confirm = () => {
   const [text, setText] = useState<string>("");
   useEffect(() => {
     const handleConfirmEmail = async () => {
-      if (uid && token) {
+      const email = localStorage.getItem("email");
+
+      if (email && uid && token) {
         try {
-          const response = await confirmEmail.confirm({ uid, token });
-          if (response?.status !== 204) {
-            throw new Error("Invalid response status");
+          const response = await confirmEmail.confirm({
+            uid,
+            token,
+          });
+          console.log(response);
+          if (response?.status === 204) {
+            localStorage.removeItem("email");
+            setText("Почта успешно подтверждена!");
+            toast.success("Почта успешно подтверждена!");
+            setTimeout(() => {
+              window.location.pathname = "/";
+            }, 5000);
+          } else {
+            console.log(response);
+            await confirmEmail.resend();
+            toast.success(
+              "Повторное письмо подтверждения успешно отправлено.",
+            );
           }
-          console.log("Email подтверждён!");
-          setText("Вы успешно подтвердили почту!");
         } catch (error) {
           toast.error(
-            "Ссылка подтверждения устарела,проверьте,пожалуйста почту.",
+            "Ссылка подтверждения устарела, проверьте почту.",
           );
           setText("Ошибка при подтверждении почты, ссылка устарела.");
 
           try {
             await confirmEmail.resend();
             toast.success(
-              "Повторное письмо подтверждения успешно отправлено",
+              "Повторное письмо подтверждения успешно отправлено.",
             );
           } catch (resendError) {
-            toast.error("Ошибка при повторной отправке активации");
+            toast.error("Ошибка при повторной отправке активации.");
           }
         }
+      } else {
+        toast.error(
+          "Email не найден. Пожалуйста, повторите подтверждение.",
+        );
       }
     };
 
-    handleConfirmEmail();
+    // Задержка перед проверкой (например, 2 секунды)
+    const timer = setTimeout(() => {
+      handleConfirmEmail();
+    }, 2000);
+
+    // Очистка таймера при размонтировании компонента
+    return () => clearTimeout(timer);
   }, [uid, token]);
 
   return (

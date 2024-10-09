@@ -124,13 +124,17 @@ export interface InputFieldProps {
   readOnly?: boolean;
   icon?: string;
   isPassword?: boolean;
+  isVisible?: boolean;
+  onVisibilityToggle?: any
 }
 export interface InputsProps {
-  onInputChange: (field: string, value: string) => void;
+  onInputChange: (field: string, value: string | boolean) => void;
   initialFirstName?: string;
   initialLastName?: string;
   initialCity?: string;
   initialCountry?: string;
   initialTelegram?: string;
   initialPhone?: string;
+  initialShowPhone: boolean;
+  initialShowTelegram: boolean;
 }

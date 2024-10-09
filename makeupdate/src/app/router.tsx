@@ -2,7 +2,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 
 import { Confirm } from "../pages/Confirm/Confirm";
 import { Error } from "../components/ErrorPage/Error";
-import Events from "../pages/Events/Events";
+
 import { Home } from "../pages/Home/Home";
 import { Lessons } from "../pages/Lessons/Lessons";
 import { Profile } from "../pages/Profile/Profile";
@@ -10,6 +10,7 @@ import { Users } from "../pages/Users/Users";
 import { Menu } from "../Menu/Menu";
 import { AuthForm } from "components/AuthForm/AuthForm";
 import PrivateRoute from "components/PrivateRoute/PrivateRoute";
+import { Events } from "pages/Events/Events";
 
 function AppRouter({
   isAuthenticated,
