@@ -1,10 +1,10 @@
-import { useDispatch } from "app/service/hooks/hooks";
+import { useDispatch, useSelector } from "app/service/hooks/hooks";
+import { logout } from "app/service/user/userSlice";
 import { IGetUserData } from "app/types/type";
 import axios, { AxiosRequestConfig } from "axios";
 import { jwtDecode } from "jwt-decode"; // Именованный импорт
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-
 export async function getTokenFromLocalStorage(
   key: string,
 ): Promise<string> {
@@ -76,6 +76,7 @@ export const isTokenExpired = (token: string): boolean => {
 export const logoutProfile = () => {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
+  localStorage.removeItem("isAuth");
 };
 const getAccessToken = () => localStorage.getItem("accessToken");
 const getRefreshToken = () => localStorage.getItem("refreshToken");
@@ -96,6 +97,7 @@ export const checkTokens = (): boolean => {
 export const axiosWithRefreshToken = async <T>(
   url: string,
   options?: AxiosRequestConfig,
+  data?: any,
 ): Promise<T> => {
   if (!checkTokens()) {
     console.log("Токены устарели,нужно зайти еще раз");
@@ -138,21 +140,24 @@ export const axiosWithRefreshToken = async <T>(
           const retryResponse = await axios(url, options);
           return retryResponse.data;
         } catch (refreshError) {
+          logoutProfile();
           console.error(
             "Ошибка при обновлении токена:",
             refreshError,
           );
-          logoutProfile();
           // window.location.href = "/"; // Если обновление токена не удалось, перенаправляем на главную страницу
 
-          return Promise.reject("Ошибка обновления токена");
+          // return Promise.reject("Ошибка обновления токена");
         }
       } else {
         console.error("Рефреш токен устарел");
+
         toast.error("Токен авторизации отсутствует");
-        // setTimeout(() => {
-        //   window.location.href = "/";
-        // }, 2000); // Если токенов нет
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 2000); // Если токенов нет
+        logoutProfile();
+
         return Promise.reject("Refresh token is expired or missing");
       }
     }

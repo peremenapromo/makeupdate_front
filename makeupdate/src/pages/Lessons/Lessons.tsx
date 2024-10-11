@@ -15,7 +15,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Найти вариант "по популярности" как начальный выбор
+
   const defaultOption =
     options.find((option) => option.value === "popular") || null;
 

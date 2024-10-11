@@ -28,10 +28,19 @@
   align-items: center;
   z-index: 1000;
 }
+.header {
+  position: relative;
+}
+// .burger {
+  //   width: 100%;
+//   position: absolute;
+//   top: 65px;
+//   right: 75px;
+// }
+
 ::-webkit-scrollbar {
   width: 6px;
 }
-
 ::-webkit-scrollbar-thumb {
   background-color: rgba(35, 154, 5, 0.518);
   border-radius: 6px;

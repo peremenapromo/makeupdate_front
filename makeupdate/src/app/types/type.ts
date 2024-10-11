@@ -102,8 +102,66 @@ export interface IGetUserData {
   photo: string;
   show_telegram: boolean;
   show_telephone: boolean;
-  user: {
-    telegram: string;
-  };
+  telegram: string;
   user_id: 2;
+}
+
+export interface IProfileMobileProps {
+  photoLink: string;
+  name: string;
+  last_name: string;
+  description: string;
+  city: string;
+  country: string;
+}
+
+export interface InputFieldProps {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string;
+  label: string;
+  required?: boolean;
+  readOnly?: boolean;
+  icon?: string;
+  isPassword?: boolean;
+  isVisible?: boolean;
+  onVisibilityToggle?: any;
+}
+export interface InputsProps {
+  onInputChange: (field: string, value: string | boolean) => void;
+  initialFirstName?: string;
+  initialLastName?: string;
+  initialCity?: string;
+  initialCountry?: string;
+  initialTelegram?: string;
+  initialPhone?: string;
+  initialShowPhone: boolean;
+  initialShowTelegram: boolean;
+}
+
+export interface IInitialStateAuth {
+  email: string;
+  telegram: string;
+  password: string;
+  confirmPassword: string;
+  isLogin: boolean;
+  isConfirmEmail: boolean;
+  isChecked: boolean;
+}
+
+export interface IInputData {
+  first_name: string;
+  last_name: string;
+  city: string;
+  country: string;
+  telegram: string;
+  phone: string;
+  show_telegram: boolean;
+  show_telephone: boolean;
+}
+
+export interface IInitialStateProfileCard {
+  isEditing: boolean;
+  isSaving: boolean;
+  description: string;
 }

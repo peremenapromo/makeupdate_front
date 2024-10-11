@@ -20,8 +20,10 @@ import icon_profile from "../../app/assets/other/profile_icon.svg";
 
 // Types and styles
 import { HeaderProps } from "../../app/types/modal";
-import { InfoModal } from "../InfoModal/InfoModal";
+// import { InfoModal } from "../InfoModal/InfoModal";
 import styles from "./Header.module.scss";
+import { Burger } from "components/Burger/Burger";
+import { useSelector } from "app/service/hooks/hooks";
 
 const translations = {
   ru: {
@@ -61,7 +63,7 @@ const translations = {
         to: "/lessons",
         img: lessons,
         img_active: lessonsActive,
-        label: "Lessons",
+        label: "Tutorials",
       },
       {
         to: "/users",
@@ -79,20 +81,24 @@ const translations = {
   },
 };
 
-export const Header: FC<HeaderProps> = ({ onOpen }) => {
+export const Header: FC<HeaderProps> = ({
+  onOpen,
+  onOpenAuth,
+  isOpenBurger,
+  onClose,
+}) => {
   const location = useLocation();
   const [activeLink, setActiveLink] = useState<string>("");
   const [language, setLanguage] = useState<"ru" | "en">("ru");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isArrowUp, setIsArrowUp] = useState<boolean>(false);
-
+  const { userData } = useSelector((store) => store.user);
+  const photoLink = "https://api.lr45981.tw1.ru" + userData?.photo;
   const toggleArrow = () => {
     setIsArrowUp((prev) => !prev); // Переключаем состояние стрелки
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+  const handleCloseModal = () => {};
 
   useEffect(() => {
     const savedActiveLink = localStorage.getItem("activeLink");
@@ -156,7 +162,9 @@ export const Header: FC<HeaderProps> = ({ onOpen }) => {
               />
               <span
                 className={
-                  activeLink === link.to ? styles.activeText : ""
+                  activeLink === link.to
+                    ? styles.activeText
+                    : styles.text
                 }>
                 {link.label}
               </span>
@@ -188,23 +196,43 @@ export const Header: FC<HeaderProps> = ({ onOpen }) => {
                 ? styles.active_button_profile
                 : styles.button_profile
             }>
+            {userData?.photo ? (
+              <img
+                className={styles.img_icon}
+                src={photoLink}
+                alt='icon_profile'
+              />
+            ) : (
+              <img
+                className={styles.img_icon}
+                src={icon_profile}
+                alt='icon_profile'
+              />
+            )}
             <img
-              className={styles.img_icon}
-              src={icon_profile}
-              alt='icon_profile'
-            />
-            <img
+              className={styles.arrow}
               src={isArrowUp ? arrow_top : arrow_bottom}
               alt='arrow'
             />
+            {isOpenBurger && (
+              // <div className={styles.overlay} onClick={handleOverlayClick}>
+              <div className={styles.burger}>
+                <Burger
+                  onOpen={onOpenAuth}
+                  isOpen={isOpenBurger}
+                  onClose={handleCloseModal}
+                />
+              </div>
+              // </div>
+            )}
           </div>
-          <button className={styles.button}>
+          {/* <button className={styles.button}>
             <img src={burger_img} alt='burger_button' />
             <InfoModal
-              isOpen={isModalOpen}
+              isOpen={isOpenBurger}
               onClose={handleCloseModal}
             />
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

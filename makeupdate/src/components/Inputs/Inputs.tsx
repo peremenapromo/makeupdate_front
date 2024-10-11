@@ -1,147 +1,173 @@
 import { useState } from "react";
 import styles from "./Inputs.module.scss";
+import showIcon from "../../app/assets/profileCard/ShowIcon.svg";
+import hideIcon from "../../app/assets/profileCard/NotShowIcon.svg";
+import { InputFieldProps, InputsProps } from "app/types/type";
+import arrowBottomBlack from "../../app/assets/profileCard/bottomArrowBlack.svg";
+import { useSelector } from "app/service/hooks/hooks";
+import {
+  CountryDropdown,
+  RegionDropdown,
+} from "react-country-region-selector";
 
-interface InputsProps {
-  onInputChange: (field: string, value: string) => void;
-  initialFirstName?: string;
-  initialLastName?: string;
-  initialCity?: string;
-  initialTelegram?: string;
-  initialPhone?: string;
-}
+const InputField: React.FC<InputFieldProps> = ({
+  value,
+  onChange,
+  error,
+  label,
+  required = false,
+  readOnly = false,
+  isPassword = false,
+  isVisible = true,
+  onVisibilityToggle,
+}) => {
+  return (
+    <div className={styles.group}>
+      <input
+        value={value ?? ""}
+        onChange={onChange}
+        className={readOnly ? styles.inputRead : styles.input}
+        type={isPassword && !isVisible ? "password" : "text"}
+        required={required}
+        readOnly={readOnly}
+      />
+      {isPassword && (
+        <img
+          src={isVisible ? hideIcon : showIcon}
+          alt='icon'
+          className={styles.showIcon}
+          onClick={onVisibilityToggle}
+        />
+      )}
+      <span className={styles.highlight}></span>
+      <label className={readOnly ? styles.labelRead : styles.label}>
+        {value === "" || value === null ? `Введите ${label}` : label}
+      </label>
+      {error && <p className={styles.error}>{error}</p>}
+    </div>
+  );
+};
 
 export const Inputs: React.FC<InputsProps> = ({
-	onInputChange,
-	initialFirstName = "",
-	initialLastName = "",
-	initialCity = "",
-	initialTelegram = "",
-	initialPhone = "",
-  }) => {
-	const [inputValue, setInputValue] = useState<string>(initialFirstName);
-	const [secondValue, setSecondValue] = useState<string>(initialLastName);
-	const [locationValue, setLocationValue] = useState<string>(initialCity);
-	const [telegramValue, setTelegramValue] = useState<string>(initialTelegram);
-	const [phoneValue, setPhoneValue] = useState<string>(initialPhone);
-  
-	const [error, setError] = useState<string>("");
-	const [errorSecondName, setErrorSecondName] = useState<string>("");
-	const [errorLocation, setErrorLocation] = useState<string>("");
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setInputValue(value);
-    onInputChange("first_name", value); // Передача значения родителю
+  onInputChange,
 
-    if (value.trim() === "") {
-      setError("Поле не должно быть пустым!");
+  initialShowPhone = true,
+  initialShowTelegram = true,
+}) => {
+  const { userData } = useSelector((state) => state.user);
+  const name = userData?.first_name;
+  const lastName = userData?.last_name;
+  // const [country, setCountry] = useState<string>("");
+  const [inputValues, setInputValues] = useState({
+    first_name: name || "",
+    last_name: lastName || "",
+    city: userData?.city || null,
+    country: userData?.country || null,
+    telegram: userData?.telegram || "",
+    phone: userData?.phone || "",
+  });
+
+  const [showTelegram, setShowTelegram] = useState<boolean>(
+    initialShowTelegram,
+  );
+  const [showPhone, setShowPhone] =
+    useState<boolean>(initialShowPhone);
+
+  const [errors, setErrors] = useState({
+    first_name: "",
+    last_name: "",
+    city: "",
+    phone: "",
+  });
+
+  const handleChange = (field: string, value: string | boolean) => {
+    onInputChange(field, value);
+
+    if (typeof value === "boolean") {
+      if (field === "show_telegram") {
+        setShowTelegram(value);
+      } else if (field === "show_telephone") {
+        setShowPhone(value);
+      }
     } else {
-      setError("");
+      setInputValues((prev) => ({ ...prev, [field]: value }));
+
+      setErrors((prev) => ({
+        ...prev,
+        [field]:
+          value.trim() === "" ? "Поле не должно быть пустым!" : "",
+      }));
     }
-  };
-
-  const inputSecond = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSecondValue(value);
-    onInputChange("last_name", value); // Передача значения родителю
-
-    if (value.trim() === "") {
-      setErrorSecondName("Поле не должно быть пустым!");
-    } else {
-      setErrorSecondName("");
-    }
-  };
-
-  const inputLocation = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setLocationValue(value);
-    onInputChange("city", value); // Передача значения родителю
-
-    if (value.trim() === "") {
-      setErrorLocation("Поле не должно быть пустым!");
-    } else {
-      setErrorLocation("");
-    }
-  };
-
-  const handleTelegramChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const value = e.target.value;
-    setTelegramValue(value);
-    onInputChange("telegram", value); // Передача значения родителю
-  };
-
-  const handlePhoneChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const value = e.target.value;
-    setPhoneValue(value);
-    onInputChange("phone", value); // Передача значения родителю
   };
 
   return (
     <div className={styles.inputs_box}>
-      <div className={styles.group}>
-        <input
-          value={inputValue}
-          onChange={handleChange}
-          className={styles.input}
-          type='text'
-          required
+      {/* Имя */}
+      <InputField
+        value={name!}
+        onChange={(e) => handleChange("first_name", e.target.value)}
+        error={errors.first_name}
+        label='Имя'
+        required
+        readOnly={name !== null}
+      />
+
+      {/* Фамилия */}
+      <InputField
+        value={lastName!}
+        onChange={(e) => handleChange("last_name", e.target.value)}
+        error={errors.last_name}
+        label='Фамилия'
+        required
+        readOnly={lastName !== null}
+      />
+
+      {/* Телеграм */}
+      <InputField
+        value={inputValues.telegram}
+        onChange={(e) => handleChange("telegram", e.target.value)}
+        label='Telegram'
+        isPassword
+        isVisible={showTelegram}
+        onVisibilityToggle={() => {
+          const newValue = !showTelegram;
+          setShowTelegram(newValue);
+          handleChange("show_telegram", newValue);
+        }}
+      />
+
+      {/* Телефон */}
+      <InputField
+        value={inputValues.phone}
+        onChange={(e) => handleChange("phone", e.target.value)}
+        label='Номер'
+        error={errors.phone}
+        isPassword
+        isVisible={showPhone}
+        onVisibilityToggle={() => {
+          const newValue = !showPhone;
+          setShowPhone(newValue);
+          handleChange("show_telephone", newValue);
+        }}
+      />
+      <div className={styles.dropdowns}>
+        <CountryDropdown
+          value={inputValues.country!}
+          onChange={(val) => handleChange("country", val)}
+          priorityOptions={["RU", "KZ", "AM","UZ","TJ"]}
         />
-        <span className={styles.highlight}></span>
-        <label>Введите Имя*</label>
-        {error && <p className={styles.error}>{error}</p>}
-      </div>
-      <div className={styles.group}>
-        <input
-          value={secondValue}
-          onChange={inputSecond}
-          className={styles.input}
-          type='text'
-          required
+        <img src={arrowBottomBlack} alt='' className={styles.arrow} />
+        <RegionDropdown
+          disableWhenEmpty={true}
+          country={inputValues.country!}
+          value={inputValues.city!}
+          onChange={(val) => handleChange("city", val)}
         />
-        <span className={styles.highlight}></span>
-        <label>Введите Фамилию*</label>
-        {errorSecondName && (
-          <p className={styles.error}>{errorSecondName}</p>
-        )}
-      </div>
-      <div className={styles.group}>
-        <input
-          value={telegramValue}
-          onChange={handleTelegramChange}
-          className={styles.input}
-          type='text'
-          required
+        <img
+          src={arrowBottomBlack}
+          alt=''
+          className={styles.arrowCountry}
         />
-        <span className={styles.highlight}></span>
-        <label>Введите Telegram</label>
-      </div>
-      <div className={styles.group}>
-        <input
-          value={phoneValue}
-          onChange={handlePhoneChange}
-          className={styles.input}
-          type='text'
-          required
-        />
-        <span className={styles.highlight}></span>
-        <label>Введите номер</label>
-      </div>
-      <div className={styles.group}>
-        <input
-          value={locationValue}
-          onChange={inputLocation}
-          className={styles.input}
-          type='text'
-          required
-        />
-        <span className={styles.highlight}></span>
-        <label>Введите местоположение*</label>
-        {errorLocation && (
-          <p className={styles.error}>{errorLocation}</p>
-        )}
       </div>
     </div>
   );
