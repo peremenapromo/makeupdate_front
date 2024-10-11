@@ -11,20 +11,27 @@ import { Inputs } from "components/Inputs/Inputs";
 import { toast } from "react-toastify";
 import { axiosWithRefreshToken } from "helpers/localStorage.helper";
 import { getDataUser } from "app/api/api";
-import { useDispatch } from "app/service/hooks/hooks";
+import { useDispatch, useSelector } from "app/service/hooks/hooks";
 import { NavigationProfile } from "../Navigation/Navigation";
 import { UpdateProfilePhoto } from "../LoadPhoto/LoadPhoto";
+import {
+  setDescription,
+  setIsEditing,
+  setIsSaving,
+} from "app/service/profileCard/profileCardSlice";
 
 export const ProfileMobile = ({ photoLink, userData }: any) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [inputData, setInputData] = useState({
-    
-  });
-  const [isSaving, setIsSaving] = useState(false);
-  let descriptionInitial: string | undefined = userData?.description;
-  const [description, setDescription] = useState<string | null>(
-    descriptionInitial!,
+  const { isEditing, isSaving, description } = useSelector(
+    (state) => state.profileCard,
   );
+  const [inputData, setInputData] = useState({});
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let descriptionInitial: string | undefined =
+      userData?.description;
+    dispatch(setDescription(descriptionInitial!));
+  }, [userData]);
   const [open, setOpen] = useState<boolean>(false);
 
   const toggleOpen = () => {
@@ -34,7 +41,7 @@ export const ProfileMobile = ({ photoLink, userData }: any) => {
   const handleDescriptionChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
-    setDescription(e.target.value);
+    dispatch(setDescription(e.target.value));
   };
   const handleInputChange = (
     field: string,
@@ -44,7 +51,6 @@ export const ProfileMobile = ({ photoLink, userData }: any) => {
   };
   const token = localStorage.getItem("accessToken");
   // console.log(userData);
-  const dispatch = useDispatch();
   const updateUserData = async (inputData: any) => {
     const fetchData = async () => {
       await getDataUser(dispatch);
@@ -80,27 +86,24 @@ export const ProfileMobile = ({ photoLink, userData }: any) => {
   const toggleEdit = async () => {
     if (isEditing) {
       console.log("true");
-      setIsSaving(true);
+      dispatch(setIsSaving(true));
       await updateUserData({
         ...inputData,
         description,
       });
-      setIsSaving(false);
+      dispatch(setIsSaving(false));
 
       if (!isSaving) {
-        setIsEditing(false);
+        dispatch(setIsEditing(false));
       }
     } else {
-      setIsEditing(true);
+      dispatch(setIsEditing(true));
     }
   };
   return (
     <div className={s.wrapper}>
       <div className={s.imageProfile}>
-        <UpdateProfilePhoto
-          initialPhotoUrl={userData?.photo!}
-          isEditing={isEditing}
-        />
+        <UpdateProfilePhoto initialPhotoUrl={userData?.photo!} />
       </div>
       <section className={s.name}>
         <h1>
@@ -152,12 +155,6 @@ export const ProfileMobile = ({ photoLink, userData }: any) => {
         {isEditing && (
           <Inputs
             onInputChange={handleInputChange}
-            initialFirstName={userData?.first_name}
-            initialLastName={userData?.last_name}
-            initialCity={userData?.city}
-            initialCountry={userData?.country}
-            initialTelegram={userData?.telegram}
-            initialPhone={userData?.phone}
             initialShowTelegram={userData?.show_telegram}
             initialShowPhone={userData?.show_telephone}
           />

@@ -4,6 +4,7 @@ import { axiosWithRefreshToken } from "helpers/localStorage.helper";
 import styles from "./style.module.scss";
 import mockImage from "../../../app/assets/profileCard/photo_undefined.svg";
 import loadImage from "../../../app/assets/profileCard/loadImage.svg";
+import { useSelector } from "app/service/hooks/hooks";
 
 interface UpdatePhotoResponse {
   photo: string;
@@ -11,16 +12,13 @@ interface UpdatePhotoResponse {
 
 export const UpdateProfilePhoto = ({
   initialPhotoUrl,
-  isEditing,
 }: {
   initialPhotoUrl: string;
-  isEditing: boolean;
 }) => {
   const userDataUrl = initialPhotoUrl
     ? "https://api.lr45981.tw1.ru" + initialPhotoUrl
     : null;
 
-  // Проверяем, если userDataUrl не null, и содержит ли он 'null'
   const validPhotoUrl =
     userDataUrl && userDataUrl.includes("null") ? null : userDataUrl;
 
@@ -30,7 +28,7 @@ export const UpdateProfilePhoto = ({
   const [, setPhoto] = useState<File | null>(null);
 
   const token = localStorage.getItem("accessToken");
-
+  const { isEditing } = useSelector((state) => state.profileCard);
   const updatePhoto = async (selectedPhoto: File) => {
     const formData = new FormData();
     formData.append("photo", selectedPhoto);

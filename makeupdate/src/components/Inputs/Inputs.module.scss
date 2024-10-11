@@ -1,11 +1,44 @@
 @import "/src/app/styles/variables";
 // Input styles
+
+select {
+  max-width: 365px;
+  padding: 12px 15px 12px 20px;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 15px;
+  font-size: 18px;
+  background-color: rgb(240, 240, 240);
+  appearance: none;
+  cursor: pointer;
+  height: 51px;
+}
+
+.dropdowns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  margin-bottom: 20px;
+  .arrow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+  }
+  .arrowCountry {
+    position: absolute;
+    bottom: 80px;
+    right: 20px;
+  }
+}
+
 .inputs_box {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   padding-bottom: 10px;
   margin-top: 10px;
 }
@@ -105,6 +138,19 @@ input:valid ~ label {
   }
 }
 @media screen and (max-width: 768px) {
+  select {
+    max-width: 555px;
+    height: 50px;
+  }
+
+  .dropdowns {
+    .arrow {
+      right: 50px;
+    }
+    .arrowCountry {
+      right: 50px;
+    }
+  }
   .input {
     max-width: 520px;
   }
@@ -118,6 +164,24 @@ input:valid ~ label {
   }
 }
 @media screen and (max-width: 540px) {
+  select {
+    max-width: 435px;
+    width: 435px;
+    padding: 9px 15px 9px 20px;
+    font-size: 14px;
+    height: 38px;
+  }
+
+  .dropdowns {
+    .arrow {
+      top: 65px;
+      right: 10px;
+    }
+    .arrowCountry {
+      top: 17px;
+      right: 10px;
+    }
+  }
   .input {
     max-width: 420px;
     padding: 9px 15px 9px 20px;
@@ -136,6 +200,24 @@ input:valid ~ label {
   }
 }
 @media screen and (max-width: 450px) {
+  select {
+    max-width: 385px;
+    // width: 100%;
+    padding: 9px 15px 9px 20px;
+    font-size: 14px;
+    height: 38px;
+  }
+
+  .dropdowns {
+    .arrow {
+      top: 65px;
+      right: 10px;
+    }
+    .arrowCountry {
+      top: 17px;
+      right: 10px;
+    }
+  }
   .input {
     max-width: 350px;
     padding: 9px 15px 9px 20px;
@@ -146,78 +228,79 @@ input:valid ~ label {
     max-width: 350px;
     width: 100%;
   }
-
+  .showIcon {
+    top: 15%;
+  }
   .group {
     padding: 0;
     max-width: 450px;
     width: 100%;
   }
 }
+@media screen and (max-width: 400px) {
+  select {
+    max-width: 355px;
+    // width: 100%;
+    padding: 9px 15px 9px 20px;
+    font-size: 14px;
+    height: 38px;
+  }
+  .input {
+    max-width: 350px;
+    padding: 9px 15px 9px 20px;
+    font-size: 14px;
+  }
+  .inputs_box {
+    align-items: normal;
+    max-width: 320px;
+    width: 100%;
+  }
+  .showIcon {
+    top: 15%;
+    right: 30px;
+  }
+  .group {
+    padding: 0;
+    max-width: 400px;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 360px) {
+  select {
+    max-width: 325px;
+    width: 355px;
+    padding: 9px 15px 9px 20px;
+    font-size: 14px;
+    height: 38px;
+  }
 
-// @media (width <= 425px) {
-//   .inputs_box {
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//     max-width: 400px;
-//     gap: 8px;
-//     margin-bottom: 10px;
-//   }
-
-//   .input {
-//     width: 350px;
-//     border-radius: 20px;
-//     border: none;
-//     background: rgba(240, 240, 240, 1);
-//     padding: 14px 22px;
-
-//     outline: none;
-//     &::placeholder {
-//       font-family: $primary_font;
-//       font-size: 1rem;
-//       color: rgba(152, 152, 152, 1);
-//     }
-//   }
-// }
-
-// @media (width <= 375px) {
-//   .input {
-//     max-width: 305px;
-//   }
-// }
-
-// @media (width <= 325px) {
-//   .input {
-//     max-width: 250px;
-//     padding: 10px 20px;
-//     font-size: 0.8rem;
-//     &::placeholder {
-//       font-size: 0.8rem;
-//     }
-//   }
-// }
-
-// Old styles input
-
-// .input {
-// 	width: 320px;
-// 	border-radius: 20px;
-// 	border: none;
-// 	background: rgba(240, 240, 240, 1);
-// 	padding: 14px 22px;
-// 	font-size: $secondary_font;
-
-// 	outline: none;
-// 	&::placeholder {
-// 		font-family: $primary_font;
-// 		font-size: 1rem;
-// 		color: rgba(152, 152, 152, 1);
-// 	}
-// }
-
-// .input[type='number']::-webkit-inner-spin-button,
-// .input[type='number']::-webkit-outer-spin-button {
-// 	-webkit-appearance: none;
-// 	margin: 0;
-// }
+  .dropdowns {
+    .arrow {
+      top: 65px;
+      right: 10px;
+    }
+    .arrowCountry {
+      top: 17px;
+      right:10px;
+    }
+  }
+  .input {
+    max-width: 290px;
+    padding: 9px 15px 9px 20px;
+    font-size: 14px;
+  }
+  .inputs_box {
+    align-items: normal;
+    max-width: 320px;
+    width: 100%;
+  }
+  .showIcon {
+    top: 15%;
+    right: -20px;
+  }
+  .group {
+    padding: 0;
+    max-width: 300px;
+    width: 100%;
+  }
+}

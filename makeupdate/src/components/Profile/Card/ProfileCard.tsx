@@ -11,10 +11,17 @@ import mockImage from "../../../app/assets/profileCard/MockImage.png";
 import { axiosWithRefreshToken } from "helpers/localStorage.helper";
 import { UpdateProfilePhoto } from "components/Profile/LoadPhoto/LoadPhoto";
 import { IGetUserData } from "app/types/type";
+import {
+  setDescription,
+  setIsEditing,
+  setIsSaving,
+  setActiveButton,
+} from "app/service/profileCard/profileCardSlice";
 
 const ProfileCard: FC = () => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [, setActiveButton] = useState<string | null>(null);
+  const { isEditing, isSaving, description } = useSelector(
+    (state) => state.profileCard,
+  );
   const [inputData, setInputData] = useState({
     first_name: "",
     last_name: "",
@@ -25,15 +32,10 @@ const ProfileCard: FC = () => {
     show_telegram: true,
     show_telephone: true,
   });
-
-  const [isSaving, setIsSaving] = useState(false);
   const token = localStorage.getItem("accessToken");
-
   const { userData } = useSelector((state) => state.user);
-  let descriptionInitial: string | undefined = userData?.description;
-  const [description, setDescription] = useState<string | null>(
-    descriptionInitial!,
-  );
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (userData) {
       setInputData({
@@ -46,9 +48,11 @@ const ProfileCard: FC = () => {
         show_telegram: userData.show_telegram ?? true,
         show_telephone: userData.show_telephone ?? true,
       });
+      let descriptionInitial: string | undefined =
+        userData?.description;
+      dispatch(setDescription(descriptionInitial));
     }
   }, [userData]);
-  const dispatch = useDispatch();
   useEffect(() => {
     const fetchData = async () => {
       await getDataUser(dispatch);
@@ -58,7 +62,7 @@ const ProfileCard: FC = () => {
 
     const savedButton = localStorage.getItem("activeButton");
     if (savedButton) {
-      setActiveButton(savedButton);
+      dispatch(setActiveButton(savedButton));
     }
   }, [dispatch]);
   const updateUserData = async (inputData: any) => {
@@ -82,33 +86,41 @@ const ProfileCard: FC = () => {
       fetchData();
       return true;
     } catch (error: any) {
-      if (error.response.data[0] === "first_name already exists") {
+      console.log(error.response.data.telegram?.[0]);
+      if (error.response.data?.[0] === "first_name already exists") {
         toast.error("Имя / Фамилию нельзя изменить!");
       } else if (
-        error.response.data[0] === "last_name already exists"
+        error.response.data?.[0] === "last_name already exists"
       ) {
         toast.error("Фамилию нельзя изменить!");
       } else if (
-        error.response.data.phone[0] ===
+        error.response.data.phone?.[0] ===
         "Phone number must be format: '+999999999'. Allow from 7 to 15 digits."
       ) {
         toast.error(
-          "Телефон должен быть формата: +999999999. От 7 до 15 символов ",
+          "Телефон должен иметь формат: +999999999.От 7 до 15 символов.",
         );
+      } else if (
+        error.response.data.telegram?.[0] ===
+        "Это поле не может быть пустым."
+      ) {
+        toast.error("Поле телеграм не должно быть пустым");
+      } else {
+        toast.error("Произошла ошибка при обновлении профиля.");
       }
       return false;
     }
   };
 
   const handleButtonClick = (buttonName: string) => {
-    setActiveButton(buttonName);
+    dispatch(setActiveButton(buttonName));
     localStorage.setItem("activeButton", buttonName);
   };
 
   const handleDescriptionChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
-    setDescription(e.target.value);
+    dispatch(setDescription(e.target.value));
   };
 
   const handleInputChange = (
@@ -119,7 +131,9 @@ const ProfileCard: FC = () => {
   };
   const toggleEdit = async () => {
     if (isEditing) {
-      setIsSaving(true);
+      // Начинаем процесс сохранения
+      dispatch(setIsSaving(true));
+
       const updatedData: Partial<IGetUserData> = {};
 
       Object.keys(inputData).forEach((key) => {
@@ -138,28 +152,29 @@ const ProfileCard: FC = () => {
         updatedData.description = description as string;
       }
 
+      // Проверяем, есть ли изменения, которые нужно сохранить
       if (Object.keys(updatedData).length > 0) {
         const isUpdated = await updateUserData(updatedData);
+
         if (isUpdated) {
-          setIsEditing(false);
+          dispatch(setIsEditing(false));
         }
+      } else {
+        dispatch(setIsEditing(false));
       }
-      setIsSaving(false);
-      if (!isSaving) {
-        setIsEditing(false);
-      }
+
+      // Останавливаем процесс сохранения
+      dispatch(setIsSaving(false));
     } else {
-      setIsEditing(true);
+      // Включаем режим редактирования
+      dispatch(setIsEditing(true));
     }
   };
 
   return (
     <div className={styles.profile_box}>
       <div className={styles.profile_img_box}>
-        <UpdateProfilePhoto
-          initialPhotoUrl={userData?.photo!}
-          isEditing={isEditing}
-        />
+        <UpdateProfilePhoto initialPhotoUrl={userData?.photo!} />
       </div>
       <div className={styles.username_box}>
         <p className={styles.username}>
@@ -216,12 +231,6 @@ const ProfileCard: FC = () => {
         {isEditing && (
           <Inputs
             onInputChange={handleInputChange}
-            initialFirstName={userData?.first_name}
-            initialLastName={userData?.last_name}
-            initialCity={userData?.city}
-            initialCountry={userData?.country}
-            initialTelegram={userData?.telegram}
-            initialPhone={userData?.phone}
             initialShowTelegram={userData?.show_telegram!}
             initialShowPhone={userData?.show_telephone!}
           />

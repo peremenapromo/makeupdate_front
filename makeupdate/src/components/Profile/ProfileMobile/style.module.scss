@@ -210,6 +210,9 @@
   margin: 0;
   font-family: $primary_font;
   font-size: 18px;
+  max-height: 160px;
+  overflow: auto;
+  overflow-y: none;
 }
 
 .buttonDescContainer {
@@ -241,6 +244,17 @@
 .openNavigation {
   @extend .navigation;
   top: 190px;
+}
+@media screen and (max-width: 768px) {
+  .wrapper {
+    .infoBlock {
+      .location {
+        .locationText {
+          font-size: 18px;
+        }
+      }
+    }
+  }
 }
 @media screen and (max-width: 540px) {
   .wrapper {
@@ -335,6 +349,7 @@
       }
     }
     .navigation {
+      top: 180px;
       height: 52px;
     }
     //Дескрипшон тайтл
@@ -368,26 +383,41 @@
 }
 @media screen and (max-width: 430px) {
   .wrapper {
-    // height: 85.7vh;
+    width: 100%;
     .imageProfile {
-      // height: 165px;
+      height: 250px;
       margin-bottom: 0px;
     }
-    .buttons {
-      margin-bottom: 7px;
-    }
     .info_me {
-      margin-bottom: 60px;
+      margin-bottom: 100px;
 
       .textareaContainer {
-        max-width: 330px;
+        max-width: 320px;
         width: 100%;
       }
     }
-    .name {
-      margin-bottom: 5px;
-      h1 {
-        margin: 0px;
+  }
+}
+@media screen and (max-width: 360px) {
+  .wrapper {
+    width: 100%;
+    .imageProfile {
+      height: 250px;
+      margin-bottom: 0px;
+    }
+    .infoBlock {
+      .location {
+        .locationText {
+          font-size: 12px;
+        }
+      }
+    }
+    .info_me {
+      margin-bottom: 100px;
+
+      .textareaContainer {
+        max-width: 280px;
+        width: 100%;
       }
     }
   }

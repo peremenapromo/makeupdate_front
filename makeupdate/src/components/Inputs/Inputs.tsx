@@ -3,8 +3,12 @@ import styles from "./Inputs.module.scss";
 import showIcon from "../../app/assets/profileCard/ShowIcon.svg";
 import hideIcon from "../../app/assets/profileCard/NotShowIcon.svg";
 import { InputFieldProps, InputsProps } from "app/types/type";
-import { toast } from "react-toastify";
+import arrowBottomBlack from "../../app/assets/profileCard/bottomArrowBlack.svg";
 import { useSelector } from "app/service/hooks/hooks";
+import {
+  CountryDropdown,
+  RegionDropdown,
+} from "react-country-region-selector";
 
 const InputField: React.FC<InputFieldProps> = ({
   value,
@@ -46,25 +50,21 @@ const InputField: React.FC<InputFieldProps> = ({
 
 export const Inputs: React.FC<InputsProps> = ({
   onInputChange,
-  initialFirstName = "",
-  initialLastName = "",
-  initialCity = "",
-  initialCountry = "",
-  initialTelegram = "",
-  initialPhone = "",
+
   initialShowPhone = true,
   initialShowTelegram = true,
 }) => {
   const { userData } = useSelector((state) => state.user);
   const name = userData?.first_name;
   const lastName = userData?.last_name;
+  // const [country, setCountry] = useState<string>("");
   const [inputValues, setInputValues] = useState({
-    first_name: initialFirstName,
-    last_name: initialLastName,
-    city: initialCity,
-    country: initialCountry,
-    telegram: initialTelegram,
-    phone: initialPhone,
+    first_name: name || "",
+    last_name: lastName || "",
+    city: userData?.city || null,
+    country: userData?.country || null,
+    telegram: userData?.telegram || "",
+    phone: userData?.phone || "",
   });
 
   const [showTelegram, setShowTelegram] = useState<boolean>(
@@ -104,7 +104,7 @@ export const Inputs: React.FC<InputsProps> = ({
     <div className={styles.inputs_box}>
       {/* Имя */}
       <InputField
-        value={inputValues.first_name}
+        value={name!}
         onChange={(e) => handleChange("first_name", e.target.value)}
         error={errors.first_name}
         label='Имя'
@@ -114,7 +114,7 @@ export const Inputs: React.FC<InputsProps> = ({
 
       {/* Фамилия */}
       <InputField
-        value={inputValues.last_name}
+        value={lastName!}
         onChange={(e) => handleChange("last_name", e.target.value)}
         error={errors.last_name}
         label='Фамилия'
@@ -141,6 +141,7 @@ export const Inputs: React.FC<InputsProps> = ({
         value={inputValues.phone}
         onChange={(e) => handleChange("phone", e.target.value)}
         label='Номер'
+        error={errors.phone}
         isPassword
         isVisible={showPhone}
         onVisibilityToggle={() => {
@@ -149,23 +150,25 @@ export const Inputs: React.FC<InputsProps> = ({
           handleChange("show_telephone", newValue);
         }}
       />
-
-      {/* Город */}
-      <InputField
-        value={inputValues.city}
-        onChange={(e) => handleChange("city", e.target.value)}
-        error={errors.city}
-        label='Город'
-        required
-      />
-
-      {/* Страна */}
-      <InputField
-        value={inputValues.country}
-        onChange={(e) => handleChange("country", e.target.value)}
-        label='Страна'
-        required
-      />
+      <div className={styles.dropdowns}>
+        <CountryDropdown
+          value={inputValues.country!}
+          onChange={(val) => handleChange("country", val)}
+          priorityOptions={["RU", "KZ", "AM","UZ","TJ"]}
+        />
+        <img src={arrowBottomBlack} alt='' className={styles.arrow} />
+        <RegionDropdown
+          disableWhenEmpty={true}
+          country={inputValues.country!}
+          value={inputValues.city!}
+          onChange={(val) => handleChange("city", val)}
+        />
+        <img
+          src={arrowBottomBlack}
+          alt=''
+          className={styles.arrowCountry}
+        />
+      </div>
     </div>
   );
 };

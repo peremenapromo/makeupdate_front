@@ -8,21 +8,31 @@ import styles from "./AuthFrm.module.scss";
 // Import img
 import { AuthForm as AuthFormType } from "../../app/types/modal";
 import cross from "./cross.svg";
-import { useDispatch } from "app/service/hooks/hooks";
+import { useDispatch, useSelector } from "app/service/hooks/hooks";
 import { IGetUserData, IUser } from "app/types/type";
 import checkedIcon from "../../app/assets/other/checkedIcon.svg";
 import { useLocation, useNavigate } from "react-router";
 import { axiosWithRefreshToken } from "helpers/localStorage.helper";
+import { ConfirmEmailModal } from "components/ConfirmEmailModal";
+import {
+  setConfirmPassword,
+  setEmail,
+  setIsChecked,
+  setIsConfirmEmail,
+  setIsLogin,
+  setPassword,
+  setTelegram,
+} from "app/service/auth/authSlice";
 export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
-  const [isChecked, setIsChecked] = useState<boolean>(false);
-
-  const [email, setEmail] = useState<string>("");
-  const [telegram, setTelegram] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
-
-  const [isLogin, setIsLogin] = useState<boolean>(true);
+  const {
+    email,
+    telegram,
+    password,
+    confirmPassword,
+    isLogin,
+    isConfirmEmail,
+    isChecked,
+  } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -53,7 +63,7 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
     }
   };
   const toggleForm = () => {
-    setIsLogin((prev) => !prev);
+    dispatch(setIsLogin(!isLogin));
   };
 
   const registrationHandler = async (
@@ -74,7 +84,7 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
       if (data) {
         localStorage.setItem("email", data.email);
         toast.success("Аккаунт успешно создан,проверьте почту");
-        setIsLogin(true);
+        dispatch(setIsConfirmEmail(true));
       }
     } catch (error: any) {
       const err = error.response.data.email;
@@ -144,7 +154,8 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
   ];
   return (
     <div className={styles.authWrapper}>
-      <div className={styles.box_auth}>
+      <div
+        className={isConfirmEmail ? styles.hidden : styles.box_auth}>
         <button onClick={closeModal} className={styles.closeModal}>
           <img src={cross} alt='close' />
         </button>
@@ -162,7 +173,7 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
           </h1>
           <div className={styles.inputs}>
             <input
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => dispatch(setEmail(e.target.value))}
               id='email'
               className={styles.input_auth}
               placeholder='Почта'
@@ -171,7 +182,9 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
             />
             {!isLogin && (
               <input
-                onChange={(e) => setTelegram(e.target.value)}
+                onChange={(e) =>
+                  dispatch(setTelegram(e.target.value))
+                }
                 id='username'
                 className={styles.input_auth}
                 placeholder='Телеграмм'
@@ -183,7 +196,7 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
               className={styles.input_auth}
               id='password'
               type='password'
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => dispatch(setPassword(e.target.value))}
               placeholder='Пароль'
               value={password}
             />
@@ -192,7 +205,9 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
                 className={styles.input_auth}
                 placeholder='Повторить пароль'
                 type='password'
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={(e) =>
+                  dispatch(setConfirmPassword(e.target.value))
+                }
                 value={confirmPassword}
               />
             )}
@@ -209,7 +224,9 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
                 className={
                   isChecked ? styles.checked : styles.buttonCheckbox
                 }
-                onClick={() => setIsChecked(!isChecked)}></button>
+                onClick={() =>
+                  dispatch(setIsChecked(!isChecked))
+                }></button>
               <p>
                 Я даю согласие на{" "}
                 <span className={styles.gradientText}>
@@ -222,7 +239,7 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
               </p>
               {isChecked && (
                 <img
-                  onClick={() => setIsChecked(!isChecked)}
+                  onClick={() => dispatch(setIsChecked(!isChecked))}
                   src={checkedIcon}
                   alt='checkedIcon'
                   className={styles.checkedIcon}
@@ -252,6 +269,9 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
           </p>
         </form>
       </div>
+      {isConfirmEmail && (
+        <ConfirmEmailModal closeModal={closeModal} />
+      )}
     </div>
   );
 };

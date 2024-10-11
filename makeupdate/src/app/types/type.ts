@@ -125,7 +125,7 @@ export interface InputFieldProps {
   icon?: string;
   isPassword?: boolean;
   isVisible?: boolean;
-  onVisibilityToggle?: any
+  onVisibilityToggle?: any;
 }
 export interface InputsProps {
   onInputChange: (field: string, value: string | boolean) => void;
@@ -137,4 +137,31 @@ export interface InputsProps {
   initialPhone?: string;
   initialShowPhone: boolean;
   initialShowTelegram: boolean;
+}
+
+export interface IInitialStateAuth {
+  email: string;
+  telegram: string;
+  password: string;
+  confirmPassword: string;
+  isLogin: boolean;
+  isConfirmEmail: boolean;
+  isChecked: boolean;
+}
+
+export interface IInputData {
+  first_name: string;
+  last_name: string;
+  city: string;
+  country: string;
+  telegram: string;
+  phone: string;
+  show_telegram: boolean;
+  show_telephone: boolean;
+}
+
+export interface IInitialStateProfileCard {
+  isEditing: boolean;
+  isSaving: boolean;
+  description: string;
 }

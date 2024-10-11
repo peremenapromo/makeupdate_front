@@ -24,6 +24,9 @@
   background-color: rgba(0, 0, 0, 0.5); // Полупрозрачный темный фон
   z-index: 1000;
 }
+.hidden {
+  display: none;
+}
 .closeModal {
   top: 5%;
   left: 80%;

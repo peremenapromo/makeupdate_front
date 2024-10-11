@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import s from "./style.module.scss";
 import search from "../../../app/assets/events/searchIcon.svg";
 import searchGradient from "../../../app/assets/events/searchGradient.svg";
+import img from "../../../app/assets/users/filter.svg";
 export const Navigation = () => {
   const [activeButton, setAcitveButton] = useState<number>(1);
   const buttons = [
@@ -38,7 +39,16 @@ export const Navigation = () => {
             alt='searchIcon'
             className={s.searchIcon}
           />
-          <input type='search' className={s.search} />
+          <img
+            src={img}
+            alt='mobileIcon'
+            className={s.mobileInputIcon}
+          />
+          <input
+            type='search'
+            className={s.search}
+            placeholder='Поиск...'
+          />
           <img
             src={searchGradient}
             alt='searchGradient'

@@ -33,6 +33,7 @@
         border: none;
         border-radius: 15px;
         outline: none;
+        cursor: pointer;
       }
     }
     .info {
@@ -51,6 +52,100 @@
         font-size: 15px;
         line-height: 20.5px;
         margin-bottom: 5px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 1440px) {
+  .wrapper {
+    max-width: 320px;
+    width: 100%;
+    max-height: 324px;
+    height: 100%;
+    font-family: $primary_font;
+    .container {
+      .photoWithBtn {
+        margin-bottom: 0;
+        img {
+          max-width: 320px;
+          height: 185px;
+          object-fit: cover;
+          border-radius: 12px;
+        }
+        .signUp {
+          right: 8px;
+          bottom: 20px;
+          max-width: 106px;
+          font-size: 14px;
+        }
+      }
+      .info {
+        .title {
+          font-size: 18px;
+          line-height: 26px;
+        }
+        .description {
+          color: rgba(130, 130, 130, 1);
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 17px;
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 690px) {
+  .wrapper {
+    max-width: 455px;
+    max-height: 334px;
+    .container {
+      .photoWithBtn {
+        img {
+          max-width: 455px;
+          height: 255px;
+        }
+        .signUp {
+          right: 8px;
+          bottom: 20px;
+          max-width: 146px;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 500px) {
+  .wrapper {
+    max-width: 396px;
+    max-height: 334px;
+    .container {
+      
+      .photoWithBtn {
+        margin-bottom: 11px;
+        img {
+          max-width: 396px;
+          height: 223px;
+        }
+        .signUp {
+          right: 8px;
+          bottom: 20px;
+          max-width: 146px;
+          font-size: 18px;
+        }
+      }
+      .info {
+        .title {
+          font-size: 22px;
+          line-height: 30px;
+        }
+        .description {
+          color: rgba(130, 130, 130, 1);
+          font-weight: 500;
+          font-size: 15px;
+          line-height: 20.5px;
+          margin-bottom: 5px;
+        }
       }
     }
   }

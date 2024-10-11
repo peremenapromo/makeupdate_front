@@ -51,3 +51,23 @@
     width: 100%;
   }
 }
+@media screen and (max-width: 430px) {
+
+  .profileContainerMobile {
+    display:inline;
+    position: absolute;
+    top: 56px;
+    max-width: 91.9vw;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 350px) {
+
+  .profileContainerMobile {
+    display:inline;
+    position: absolute;
+    top: 56px;
+    max-width: 84vw;
+    width: 100%;
+  }
+}
