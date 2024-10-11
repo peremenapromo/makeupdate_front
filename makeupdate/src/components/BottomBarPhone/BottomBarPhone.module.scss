@@ -51,6 +51,9 @@
     }
     .profileLink {
       display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
       width: 80px;
       height: 50px;
       background: rgba(255, 255, 255, 0.5);
@@ -62,9 +65,16 @@
     }
   }
 }
-.burger{
+.burger {
   position: absolute;
-  
+}
+.img_icon {
+  display: flex;
+  justify-content: center;
+  object-fit: cover;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
 }
 @media screen and (max-width: 430px) {
   .mobileNavigationContainer {

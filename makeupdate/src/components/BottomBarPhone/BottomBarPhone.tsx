@@ -9,8 +9,12 @@ import lessons from "./img/lessons.svg";
 import top_arrow from "./img/top_arrow.svg";
 import usersPhoto from "../Burger/img/motinova.svg";
 import users from "./img/users.svg";
+import { useSelector } from "app/service/hooks/hooks";
+import icon_profile from "../../app/assets/other/profile_icon.svg";
 
 export const BottomBarPhone: FC = () => {
+  const { userData } = useSelector((state) => state.user);
+  const photoLink = "https://api.lr45981.tw1.ru" + userData?.photo;
   return (
     <div className={styles.mobileNavigationContainer}>
       <nav className={styles.navigate}>
@@ -61,11 +65,19 @@ export const BottomBarPhone: FC = () => {
         </ul>
         <Link to='/profile' className={styles.link}>
           <div className={styles.profileLink}>
-            <img
-              className={styles.img_link}
-              src={usersPhoto}
-              alt='undefined'
-            />
+            {userData?.photo ? (
+              <img
+                className={styles.img_icon}
+                src={photoLink}
+                alt='icon_profile'
+              />
+            ) : (
+              <img
+                className={styles.img_icon}
+                src={icon_profile}
+                alt='icon_profile'
+              />
+            )}
             <img
               className={styles.img_link}
               src={top_arrow}
