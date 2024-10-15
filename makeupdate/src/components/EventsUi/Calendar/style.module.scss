@@ -4,6 +4,9 @@
   overflow-x: auto;
   scroll-behavior: smooth;
   white-space: nowrap; //
+  justify-content: space-between;
+  max-width: 1920px;
+
 }
 
 .calendarContainer {
@@ -57,9 +60,13 @@
   border: none;
   cursor: pointer;
 }
-.navButtonLeft{
+.navButtonLeft {
   position: absolute;
-  left: 10px;
+  left: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
   background-color: transparent;
   border: none;
   cursor: pointer;

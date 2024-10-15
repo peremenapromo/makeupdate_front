@@ -1,7 +1,9 @@
+@import "./styles/variables";
 .App {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  font-family: $primary_font;
 }
 
 .overlay {
@@ -32,7 +34,7 @@
   position: relative;
 }
 // .burger {
-  //   width: 100%;
+//   width: 100%;
 //   position: absolute;
 //   top: 65px;
 //   right: 75px;

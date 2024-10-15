@@ -10,9 +10,9 @@ import events from "../../app/assets/other/events.svg";
 import eventsActitve from "../../app/assets/other/eventsActitve.svg";
 import home from "../../app/assets/other/home.svg";
 import homeActive from "../../app/assets/other/homeActive.svg";
-import lessonsActive from "../../app/assets/other/lessonsActive.svg";
+import lessonsActive from "../../app/assets/other/tutorialsActive.svg";
 import language_rus from "../../app/assets/other/language_rus.svg";
-import lessons from "../../app/assets/other/lessons.svg";
+import lessons from "../../app/assets/other/tutorials.svg";
 import notification from "../../app/assets/other/notification.svg";
 import users from "../../app/assets/other/people.svg";
 import usersActive from "../../app/assets/other/peopleActive.svg";
@@ -130,6 +130,7 @@ export const Header: FC<HeaderProps> = ({
     "/events",
     "/menu",
     "/login",
+    '/editProfile',
     "*",
   ].includes(location.pathname);
 

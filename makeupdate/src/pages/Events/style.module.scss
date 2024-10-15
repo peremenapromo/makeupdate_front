@@ -6,26 +6,44 @@
     display: flex;
     flex-direction: column;
     // height: 100%;
-    .bigCardBlock {
+    max-width: 1920px;
+
+    .topBlock {
       position: relative;
+      max-width: 1920px;
+    }
+    .bigCardBlock {
+      // position: relative;
       display: flex;
+      overflow: hidden;
+      scroll-behavior: smooth;
       // flex-wrap: wrap;
-      gap: 30px;
+      gap: 20px;
       // max-height: 553px;
+      max-width: 1920px;
       height: 100%;
       margin-bottom: 40px;
     }
     .navButtonLeft {
-      @extend .navButton;
-    }
-    .navButton {
-      display: none;
       font-size: 16px;
       padding: 10px 11px;
       cursor: pointer;
       position: absolute;
-      right: 25px;
-      top: 25%;
+      left: -45px;
+      top: 35%;
+      border: 1px solid rgba(225, 225, 225, 1);
+      outline: none;
+      height: 70px;
+      border-radius: 12px;
+    }
+    .navButton {
+      // display: none;
+      font-size: 16px;
+      padding: 10px 11px;
+      cursor: pointer;
+      position: absolute;
+      right: -45px;
+      top: 35%;
       border: 1px solid rgba(225, 225, 225, 1);
       outline: none;
       height: 70px;
@@ -33,14 +51,17 @@
     }
     .navigation {
       margin-bottom: 25px;
+      max-width: 1920px;
     }
     .calendar {
       margin-bottom: 25px;
+      max-width: 1920px;
     }
     .smallCardEvent {
       display: flex;
       flex-wrap: wrap;
       gap: 40px;
+      max-width: 1920px;
     }
   }
 }
@@ -89,7 +110,7 @@
           overflow: hidden;
           scroll-behavior: smooth;
         }
-        .navBlock{
+        .navBlock {
           display: flex;
           overflow-x: auto;
           scroll-behavior: smooth;

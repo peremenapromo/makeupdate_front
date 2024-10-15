@@ -41,17 +41,22 @@ export const Burger: FC<ModalWindow & BurgerAuth> = ({
       <ul className={styles.list}>
         <li className={styles.list_section}>
           {isAuth ? (
-            <span>Вы авторизованы</span>
+            <span>
+              {userData
+                ? `${userData.first_name} ${userData.last_name}`
+                : ""}
+            </span>
           ) : (
             <span>Вы посетитель</span>
           )}
         </li>
-
-        <li className={styles.list_section}>Стать пользователем</li>
+        {!isAuth && (
+          <li className={styles.list_section}>Стать пользователем</li>
+        )}
         <li className={styles.list_section}>Стать продавцом</li>
         <div className={styles.line}></div>
 
-        <Link to='/profile' className={styles.list_section}>
+        <Link to='/editProfile' className={styles.list_section}>
           Настройки профиля
         </Link>
         <li onClick={onOpen} className={styles.list_section}>

@@ -17,6 +17,7 @@ import {
   setIsSaving,
   setActiveButton,
 } from "app/service/profileCard/profileCardSlice";
+import { Loading } from "components/Loading/Loading";
 
 const ProfileCard: FC = () => {
   const { isEditing, isSaving, description } = useSelector(
@@ -35,6 +36,7 @@ const ProfileCard: FC = () => {
   const token = localStorage.getItem("accessToken");
   const { userData } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     if (userData) {
@@ -174,17 +176,25 @@ const ProfileCard: FC = () => {
   return (
     <div className={styles.profile_box}>
       <div className={styles.profile_img_box}>
-        <UpdateProfilePhoto initialPhotoUrl={userData?.photo!} />
+        <UpdateProfilePhoto
+          initialPhotoUrl={userData?.photo ? userData?.photo! : ""}
+        />
       </div>
       <div className={styles.username_box}>
-        <p className={styles.username}>
-          <span>
-            {userData?.first_name ? userData.first_name : "ИМЯ"}{" "}
-          </span>
-          <span>
-            {userData?.last_name ? userData.last_name : "ФАМИЛИЯ"}
-          </span>
-        </p>
+        {userData && (
+          <p className={styles.username}>
+            <span>
+              {userData?.first_name
+                ? userData?.first_name.toUpperCase()
+                : "ИМЯ"}{" "}
+            </span>
+            <span>
+              {userData?.last_name
+                ? userData?.last_name.toUpperCase()
+                : "ФАМИЛИЯ"}
+            </span>
+          </p>
+        )}
       </div>
 
       <div className={styles.containerInfo}>
@@ -236,7 +246,7 @@ const ProfileCard: FC = () => {
           />
         )}
 
-        <div className={styles.buttons}>
+        {/* <div className={styles.buttons}>
           {[
             "Опубликовать урок",
             "Опубликовать событие",
@@ -249,7 +259,7 @@ const ProfileCard: FC = () => {
               <span className={styles.btn_text}>{button}</span>
             </button>
           ))}
-        </div>
+        </div> */}
 
         <div className={styles.info_me}>
           <h3 className={styles.title_me}>Обо мне:</h3>

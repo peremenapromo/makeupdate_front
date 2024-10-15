@@ -1,17 +1,20 @@
 @import "../../../app/styles/variables";
 .wrapper {
-  max-width: 553px;
+  max-width: 400px;
   width: 100%;
   max-height: 553px;
   height: 100%;
+  background-size: cover;
   background-image: url("../../../app/assets/events/eventCardPhoto.png");
+  border-radius: 12px;
 
   .container {
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 513px;
+    height: 413px;
+    width: 360px;
     font-family: $primary_font;
   }
   .name {
@@ -24,8 +27,8 @@
 
   // bottomBlock
   .title {
-    font-size: 48px;
-    line-height: 65.6px;
+    font-size: 35px;
+    line-height: 55.6px;
     color: white;
     margin: 0;
   }
@@ -66,13 +69,14 @@
 
 @media screen and (max-width: 1440px) {
   .wrapper {
-    max-width: 453px;
+    max-width: 353px;
     max-height: 453px;
     background-position: center;
     background-size: cover;
     border-radius: 12px;
     .container {
       height: 413px;
+      width: 313px;
     }
     .title {
       font-size: 30px;
@@ -82,15 +86,15 @@
 }
 @media screen and (max-width: 1250px) {
   .wrapper {
-    max-width: 371px;
+    max-width: 271px;
     max-height: 371px;
 
     .container {
-      width: 331px;
+      width: 231px;
       height: 331px;
     }
     .name {
-      font-size: 32px;
+      font-size: 24px;
     }
     .title {
       font-size: 22px;
@@ -101,7 +105,7 @@
         margin: 0;
         max-width: 140px;
         width: 100%;
-        font-size: 15px;
+        font-size: 12px;
         line-height: 20.5px;
         font-weight: 700;
         color: white;
@@ -121,7 +125,7 @@
         font-weight: 700;
         line-height: 30px;
         border-radius: 15px;
-        max-width: 129px;
+        max-width: 109px;
         width: 100%;
       }
     }

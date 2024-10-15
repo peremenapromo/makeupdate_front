@@ -39,6 +39,22 @@ export const Users: FC = () => {
         <User />
         <User />
         <User />
+        <User />
+        <User />
+        <User />
+        <User />
+        <User />
+        <User />
+        <User />
+        <User />
+        <User />
+        <User />
+        <User />
+        <User />
+        <User />
+        <User />
+        <User />
+        <User />
       </div>
     </div>
   );

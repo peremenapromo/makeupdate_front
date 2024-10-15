@@ -74,6 +74,10 @@ export const NavigationProfile = () => {
     { text: "Доступ к урокам", count: 13 },
     { text: "Избранные уроки", count: 13 },
     { text: "Мои события", count: 13 },
+    { text: "Мое портфолио" },
+    { text: "Подписчики", count: 13 },
+    { text: "Подписки", count: 13 },
+    { text: "Финансы" },
   ];
 
   const buttonsBottom = [

@@ -14,26 +14,30 @@
 }
 .menu {
   position: absolute;
-  // background-image: url("../../app/assets/other/bgBurger.svg");
+  background-image: url("../../app/assets/other/Subtract.png");
   //   max-width: 180px;
   //   width: 100%;
-  padding: 13px 20px;
+  // padding: 43px 36px 10px 36px;
   right: 0;
-  top: 40px;
+  top: -9px;
   border-radius: 10px;
-  z-index: 20;
-  background-color: rgba(88, 88, 88, 0.7);
+  // z-index: 20;
+  // background-color: rgba(88, 88, 88, 0.7);
   //   backdrop-filter: blur(7px);
 }
 
 .menu ul {
   list-style: none;
   padding: 0;
+  width: 212px;
+  padding: 20px;
   margin: 0;
+  height: 300px;
 }
 
 .menu li {
-  padding: 10px 0;
+  // padding: 10px 0;
+  font-size: 20px;
   cursor: pointer;
 }
 
@@ -41,7 +45,7 @@
 
 .list {
   display: flex;
-  justify-content: center;
+  justify-content: end;
   flex-direction: column;
   align-items: start;
   gap: 10px;
@@ -49,7 +53,7 @@
 
 .list_section {
   display: flex;
-  font-size: 1rem;
+  font-size: 20px;
   font-family: $primary_font;
   color: $primary_color;
   font-weight: 400;
@@ -57,7 +61,8 @@
   align-items: start;
   text-decoration: none;
   transition: 0.5s all;
-  height: 10px;
+  // height: 10px;
+  padding: 0;
   &:hover {
     color: #01919f;
   }
@@ -71,6 +76,9 @@
   align-items: center;
   flex-direction: row;
   gap: 7px;
+  span {
+    font-size: 20px;
+  }
 }
 
 .box_img {
@@ -92,7 +100,6 @@
 }
 
 .prof_select {
-  font-size: 1rem;
   font-weight: 400;
   color: $primary_color;
 }
