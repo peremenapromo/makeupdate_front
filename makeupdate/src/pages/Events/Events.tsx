@@ -12,7 +12,7 @@ export const Events = () => {
   const cardBlockRef = useRef<HTMLDivElement>(null);
   const handleScrollRight = () => {
     if (cardBlockRef.current) {
-      cardBlockRef.current.scrollLeft += 410;
+      cardBlockRef.current.scrollLeft += 500;
     }
   };
   const handleScrollLeft = () => {
@@ -51,6 +51,11 @@ export const Events = () => {
             <img src={leftArrow} alt='' />
           </button>
           <div className={s.bigCardBlock} ref={cardBlockRef}>
+            <BigCardEvent />
+            <BigCardEvent />
+            <BigCardEvent />
+            <BigCardEvent />
+            <BigCardEvent />
             <BigCardEvent />
             <BigCardEvent />
             <BigCardEvent />

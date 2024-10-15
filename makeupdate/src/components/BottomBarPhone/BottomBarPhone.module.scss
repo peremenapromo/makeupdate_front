@@ -99,10 +99,20 @@
     }
   }
 }
-@media screen and (max-width: 330px) {
+@media screen and (max-width: 350px) {
   .mobileNavigationContainer {
+    justify-content: center;
     .navigate {
-      gap: 5px;
+      gap: 15px;
+      .link {
+        .listElement {
+          width: 45px;
+          height: 45px;
+        }
+        span {
+          font-size: 8px;
+        }
+      }
     }
   }
 }

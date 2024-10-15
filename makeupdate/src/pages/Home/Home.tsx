@@ -8,8 +8,8 @@ export const Home: FC = () => {
       <section className={styles.text_box_home}>
         <h1 className={styles.title}>MAKEUPDATE</h1>
         <h2 className={styles.subtitle}>
-          Смотри и продавай уроки по макияжу в любой точке мира на
-          любом цифровом устройстве и удобном языке
+          СМОТРИ И ПРОДАВАЙ УРОКИ ПО МАКИЯЖУ В ЛЮБОЙ ТОЧКЕ МИРА НА
+          ЛЮБОМ ЦИФРОВОМ УСТРОЙСТВЕ И УДОБНОМ ЯЗЫКЕ
         </h2>
       </section>
       <div className={styles.lessons_users_box}>

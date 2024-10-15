@@ -11,6 +11,8 @@ import { Menu } from "../Menu/Menu";
 import { AuthForm } from "components/AuthForm/AuthForm";
 import PrivateRoute from "components/PrivateRoute/PrivateRoute";
 import { Events } from "pages/Events/Events";
+import { EditProfile } from "pages/EditProfile/EditProfile";
+// import {Test} from "pages/test/test";
 
 function AppRouter({
   isAuthenticated,
@@ -31,9 +33,11 @@ function AppRouter({
       <Route path='*' element={<Error />} />
       <Route path='/users' element={<Users />} />
       <Route path='/menu' element={<Menu />} />
+      {/* <Route path='/test' element={<Test />} /> */}
       <Route
         element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
         <Route path='/profile' element={<Profile />} />
+        <Route path='/editProfile' element={<EditProfile />} />
       </Route>
     </Routes>
   );

@@ -70,15 +70,34 @@ export const ProfileMobile = ({ photoLink, userData }: any) => {
 
       toast.success("Профиль успешно обновлен");
       fetchData();
+      return true;
     } catch (error: any) {
-      console.error("Ошибка при сохранении данных:", error);
-
-      if (error.response.data[0] === "first_name already exists") {
+      console.log(error.response.data.telegram?.[0]);
+      if (error.response.data?.[0] === "first_name already exists") {
         toast.error("Имя / Фамилию нельзя изменить!");
       } else if (
-        error.response.data[0] === "last_name already exists"
+        error.response.data?.[0] === "last_name already exists"
       ) {
         toast.error("Фамилию нельзя изменить!");
+      } else if (
+        error.response.data.phone?.[0] ===
+        "Phone number must be format: '+999999999'. Allow from 7 to 15 digits."
+      ) {
+        toast.error(
+          "Телефон должен иметь формат: +999999999.От 7 до 15 символов.",
+        );
+      } else if (
+        error.response.data.phone?.[0] ===
+        "Это поле не может быть пустым."
+      ) {
+        toast.error("Поле телефон не может быть пустым");
+      } else if (
+        error.response.data.telegram?.[0] ===
+        "Это поле не может быть пустым."
+      ) {
+        toast.error("Поле телеграм не должно быть пустым");
+      } else {
+        toast.error("Произошла ошибка при обновлении профиля.");
       }
       return false;
     }
@@ -107,8 +126,12 @@ export const ProfileMobile = ({ photoLink, userData }: any) => {
       </div>
       <section className={s.name}>
         <h1>
-          {userData.first_name ?? `Имя `}{" "}
-          {userData.last_name ?? "ФАМИЛИЯ"}
+          {userData?.first_name
+            ? userData.first_name.toUpperCase()
+            : "Имя"}{" "}
+          {userData?.last_name
+            ? userData.last_name.toUpperCase()
+            : "ФАМИЛИЯ"}
         </h1>
       </section>
       <div className={s.infoBlock}>

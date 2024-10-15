@@ -61,6 +61,9 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
     if (onClose) {
       onClose();
     }
+    if (isConfirmEmail) {
+      dispatch(setIsConfirmEmail(false));
+    }
   };
   const toggleForm = () => {
     dispatch(setIsLogin(!isLogin));
@@ -270,7 +273,10 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
         </form>
       </div>
       {isConfirmEmail && (
-        <ConfirmEmailModal closeModal={closeModal} />
+        <ConfirmEmailModal
+          closeModal={closeModal}
+          
+        />
       )}
     </div>
   );

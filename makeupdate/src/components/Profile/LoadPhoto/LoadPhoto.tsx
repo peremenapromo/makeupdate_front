@@ -5,6 +5,7 @@ import styles from "./style.module.scss";
 import mockImage from "../../../app/assets/profileCard/photo_undefined.svg";
 import loadImage from "../../../app/assets/profileCard/loadImage.svg";
 import { useSelector } from "app/service/hooks/hooks";
+import { useLocation } from "react-router";
 
 interface UpdatePhotoResponse {
   photo: string;
@@ -18,7 +19,7 @@ export const UpdateProfilePhoto = ({
   const userDataUrl = initialPhotoUrl
     ? "https://api.lr45981.tw1.ru" + initialPhotoUrl
     : null;
-
+  const location = useLocation();
   const validPhotoUrl =
     userDataUrl && userDataUrl.includes("null") ? null : userDataUrl;
 
@@ -76,8 +77,14 @@ export const UpdateProfilePhoto = ({
         id='photo-upload'
         onChange={handlePhotoChange}
       />
-      <button className={styles.loadImage}>
-        {isEditing && (
+
+      <button
+        className={
+          location.pathname === "/editProfile"
+            ? styles.loadImageEdited
+            : styles.loadImage
+        }>
+        {location.pathname === "/editProfile" && (
           <>
             <div
               className={styles.hoverBg}
@@ -96,11 +103,19 @@ export const UpdateProfilePhoto = ({
             />
           </>
         )}
-        <img
-          className={styles.img_me}
-          src={photoUrl || mockImage}
-          alt='profile_photo or icon'
-        />
+        {location.pathname === "/editProfile" ? (
+          <img
+            className={styles.img_meEdited}
+            src={photoUrl || mockImage}
+            alt='profile_photo or icon'
+          />
+        ) : (
+          <img
+            className={styles.img_me}
+            src={photoUrl || mockImage}
+            alt='profile_photo or icon'
+          />
+        )}
       </button>
     </div>
   );

@@ -15,7 +15,6 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-
   const defaultOption =
     options.find((option) => option.value === "popular") || null;
 
@@ -26,7 +25,14 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
     setSelectedOption(option);
     setIsOpen(false);
   };
-
+  const toggleOption = () => {
+    setSelectedOption((prev) =>
+      prev?.value === "popular"
+        ? options.find((option) => option.value === "date") || null
+        : options.find((option) => option.value === "popular") ||
+          null,
+    );
+  };
   const toggleOpen = () => {
     setIsOpen((prev) => !prev);
   };
@@ -38,7 +44,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   );
 
   return (
-    <button className={styles.custom_select} onClick={toggleOpen}>
+    <button className={styles.custom_select} onClick={toggleOption}>
       <img
         className={styles.img_filter}
         src={filter}
@@ -48,19 +54,16 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
         <span>
           {selectedOption ? selectedOption.label : placeholder}
         </span>
-        {isOpen && (
-          <div className={styles.optionBlock} onClick={toggleOpen}>
+        {/* {isOpen && (
+          <div className={styles.optionBlock}>
             {filteredOptions.map((option) => (
-              <div
-                className={styles.option}
-                key={option.value}
-                onClick={() => handleSelect(option)}>
+              <div className={styles.option} key={option.value}>
                 <div className={styles.bottom_line}></div>
                 <span>{option.label}</span>
               </div>
             ))}
           </div>
-        )}
+        )} */}
       </div>
     </button>
   );
@@ -78,14 +81,20 @@ export const Lessons: FC = () => {
           <div className={styles.filter}>
             <CustomSelect options={options} />
           </div>
-          <div className={styles.search}>
-            <img className={styles.vol} src={img} alt='' />
-            <input
-              className={styles.input}
-              placeholder='Поиск'
-              type='text'
-            />
-            <img className={styles.search_img} src={search} alt='' />
+          <div className={styles.inputContainer}>
+            <div className={styles.search}>
+              <img className={styles.vol} src={img} alt='' />
+              <input
+                className={styles.input}
+                placeholder='Поиск'
+                type='text'
+              />
+              <img
+                className={styles.search_img}
+                src={search}
+                alt=''
+              />
+            </div>
           </div>
         </div>
       </div>

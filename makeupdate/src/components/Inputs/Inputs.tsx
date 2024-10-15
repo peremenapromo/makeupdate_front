@@ -5,10 +5,13 @@ import hideIcon from "../../app/assets/profileCard/NotShowIcon.svg";
 import { InputFieldProps, InputsProps } from "app/types/type";
 import arrowBottomBlack from "../../app/assets/profileCard/bottomArrowBlack.svg";
 import { useSelector } from "app/service/hooks/hooks";
+import "react-dadata/dist/react-dadata.css";
+import "./style.css";
 import {
-  CountryDropdown,
-  RegionDropdown,
-} from "react-country-region-selector";
+  AddressSuggestions,
+  DaDataAddress,
+  DaDataSuggestion,
+} from "react-dadata";
 
 const InputField: React.FC<InputFieldProps> = ({
   value,
@@ -24,7 +27,7 @@ const InputField: React.FC<InputFieldProps> = ({
   return (
     <div className={styles.group}>
       <input
-        value={value ?? ""}
+        value={value}
         onChange={onChange}
         className={readOnly ? styles.inputRead : styles.input}
         type={isPassword && !isVisible ? "password" : "text"}
@@ -59,7 +62,7 @@ export const Inputs: React.FC<InputsProps> = ({
   const lastName = userData?.last_name;
   // const [country, setCountry] = useState<string>("");
   const [inputValues, setInputValues] = useState({
-    first_name: name || "",
+    first_name: name,
     last_name: lastName || "",
     city: userData?.city || null,
     country: userData?.country || null,
@@ -92,19 +95,36 @@ export const Inputs: React.FC<InputsProps> = ({
     } else {
       setInputValues((prev) => ({ ...prev, [field]: value }));
 
-      setErrors((prev) => ({
-        ...prev,
-        [field]:
-          value.trim() === "" ? "Поле не должно быть пустым!" : "",
-      }));
+      // setErrors((prev) => ({
+      //   ...prev,
+      //   [field]:
+      //     value.trim() === "" ? "Поле не должно быть пустым!" : "",
+      // }));
     }
   };
+  const [valueCity, setValueCity] = useState<
+    DaDataSuggestion<DaDataAddress> | undefined
+  >(undefined);
+  const handleSuggestionChange = (
+    suggestion: DaDataSuggestion<DaDataAddress> | undefined,
+  ) => {
+    if (suggestion) {
+      const country = suggestion.data.country;
+      const city =
+        suggestion.data.city ?? suggestion.data.region_with_type;
 
+      handleChange("country", country);
+      handleChange("city", city!);
+    } else {
+      handleChange("country", " ");
+      handleChange("city", " ");
+    }
+  };
   return (
     <div className={styles.inputs_box}>
       {/* Имя */}
       <InputField
-        value={name!}
+        value={userData?.first_name!}
         onChange={(e) => handleChange("first_name", e.target.value)}
         error={errors.first_name}
         label='Имя'
@@ -150,25 +170,16 @@ export const Inputs: React.FC<InputsProps> = ({
           handleChange("show_telephone", newValue);
         }}
       />
-      <div className={styles.dropdowns}>
-        <CountryDropdown
-          value={inputValues.country!}
-          onChange={(val) => handleChange("country", val)}
-          priorityOptions={["RU", "KZ", "AM","UZ","TJ"]}
-        />
-        <img src={arrowBottomBlack} alt='' className={styles.arrow} />
-        <RegionDropdown
-          disableWhenEmpty={true}
-          country={inputValues.country!}
-          value={inputValues.city!}
-          onChange={(val) => handleChange("city", val)}
-        />
-        <img
-          src={arrowBottomBlack}
-          alt=''
-          className={styles.arrowCountry}
-        />
-      </div>
+      {/* <div className={styles.dropdowns}> */}
+      <AddressSuggestions
+        token='bcbe8a79e4b94cc3270a0204684977965ab06020'
+        value={valueCity}
+        onChange={handleSuggestionChange}
+        filterLocations={[{ country: "*" }]}
+        defaultQuery='Россия, г Москва'
+        containerClassName={styles.inputCountry}
+      />
+      {/* </div> */}
     </div>
   );
 };

@@ -1,0 +1,40 @@
+.react-dadata__container {
+  max-width: 365px;
+  width: 100%;
+}
+.react-dadata__input {
+  max-width: 385px;
+  width: 100%;
+  border-radius: 12px;
+  position: relative;
+  font-size: 18px;
+  padding: 12px 15px 12px 20px;
+  display: block;
+  height: 50px;
+  font-family: "Jost", sans-serif;
+  border: none;
+  border-radius: 15px;
+  background-color: rgb(240, 240, 240);
+}
+.react-dadata__input:focus {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+@media screen and (max-width: 768px) {
+  .react-dadata__container {
+    max-width: 555px;
+  }
+  .react-dadata__input {
+    max-width: 555px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .react-dadata__container {
+    max-width: 390px;
+  }
+  .react-dadata__input {
+    max-width: 385px;
+    height: 38px;
+  }
+}
