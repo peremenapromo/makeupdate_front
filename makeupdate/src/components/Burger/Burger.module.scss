@@ -15,30 +15,12 @@
 .menu {
   position: absolute;
   background-image: url("../../app/assets/other/Subtract.png");
-  //   max-width: 180px;
-  //   width: 100%;
-  // padding: 43px 36px 10px 36px;
-  right: 0;
-  top: -9px;
-  border-radius: 10px;
-  // z-index: 20;
-  // background-color: rgba(88, 88, 88, 0.7);
-  //   backdrop-filter: blur(7px);
-}
 
-.menu ul {
-  list-style: none;
-  padding: 0;
-  width: 212px;
-  padding: 20px;
-  margin: 0;
-  height: 300px;
-}
-
-.menu li {
-  // padding: 10px 0;
-  font-size: 20px;
-  cursor: pointer;
+  background-size: cover;
+  background-repeat: no-repeat;
+  right: 0px;
+  top: -0.625vw;
+  border-radius: 0.521vw;
 }
 
 // Styles burger links
@@ -48,12 +30,18 @@
   justify-content: end;
   flex-direction: column;
   align-items: start;
-  gap: 10px;
+  gap: 0.521vw;
+  list-style: none;
+  padding: 0;
+  width: 11.042vw;
+  padding: 1.042vw;
+  margin: 0;
+  height: 14.323vw;
 }
 
 .list_section {
   display: flex;
-  font-size: 20px;
+  font-size: 0.938vw;
   font-family: $primary_font;
   color: $primary_color;
   font-weight: 400;
@@ -61,7 +49,6 @@
   align-items: start;
   text-decoration: none;
   transition: 0.5s all;
-  // height: 10px;
   padding: 0;
   &:hover {
     color: #01919f;
@@ -75,47 +62,150 @@
   justify-content: left;
   align-items: center;
   flex-direction: row;
-  gap: 7px;
-  span {
-    font-size: 20px;
-  }
+  gap: 0.365vw;
 }
 
 .box_img {
   display: flex;
   background-color: $primary_color;
   border-radius: 100%;
-  padding: 2px;
+  padding: 0.104vw;
   img {
-    width: 21px;
-    height: 21px;
+    width: 1.042vw;
+    height: 1.042vw;
     border-radius: 50%;
+    object-fit: cover;
   }
 }
 
 .prof_sec_img {
-  width: 25px;
-  height: 25px;
-  border-radius: 30px;
+  width: 1.302vw;
+  height: 1.302vw;
+  border-radius: 1.563vw;
 }
 
 .prof_select {
   font-weight: 400;
   color: $primary_color;
+  font-size: 0.938vw;
 }
 .icon_profile {
-  width: 21;
-  height: 21;
+  width: 1.094vw;
+  height: 1.094vw;
 }
 // Styles line
 .line {
-  height: 2px;
-  width: 180px;
+  height: 0.104vw;
+  width: 9.375vw;
   background-color: $primary_color;
-  margin: 2px 0;
+  margin: 0.104vw 0;
   transition: all 0.3s ease;
 }
 .linkProfile {
   color: white;
   text-decoration: none;
+}
+
+@media screen and (max-width: 1920px) {
+  .burger {
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 300;
+    transition: 1s;
+  }
+  .menu {
+    position: absolute;
+    background: none;
+    background-image: url("../../app/assets/other/Subtract.png");
+
+    right: 0px;
+    top: -12px;
+    border-radius: 10px;
+  }
+
+  .list {
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    width: 212px;
+    padding: 20px;
+    margin: 0;
+    height: 275px;
+  }
+
+  .list_section {
+    display: flex;
+    font-size: 18px;
+    font-family: $primary_font;
+    color: $primary_color;
+    font-weight: 400;
+    text-align: left;
+    align-items: start;
+    text-decoration: none;
+    transition: 0.5s all;
+    padding: 0;
+    &:hover {
+      color: #01919f;
+    }
+  }
+
+  .profile_section {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-direction: row;
+    gap: 7px;
+    span {
+      font-size: 18px;
+    }
+  }
+
+  .box_img {
+    display: flex;
+    background-color: $primary_color;
+    border-radius: 100%;
+    padding: 2px;
+    img {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .prof_sec_img {
+    width: 25px;
+    height: 25px;
+    border-radius: 30px;
+  }
+
+  .prof_select {
+    font-weight: 400;
+    color: $primary_color;
+  }
+
+  .icon_profile {
+    width: 21;
+    height: 21;
+  }
+
+  .line {
+    height: 2px;
+    width: 180px;
+    background-color: $primary_color;
+    margin: 2px 0;
+    transition: all 0.3s ease;
+  }
+  .linkProfile {
+    color: white;
+    text-decoration: none;
+  }
 }

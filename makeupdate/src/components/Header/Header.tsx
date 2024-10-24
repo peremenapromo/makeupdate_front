@@ -23,7 +23,12 @@ import { HeaderProps } from "../../app/types/modal";
 // import { InfoModal } from "../InfoModal/InfoModal";
 import styles from "./Header.module.scss";
 import { Burger } from "components/Burger/Burger";
-import { useSelector } from "app/service/hooks/hooks";
+import { useDispatch, useSelector } from "app/service/hooks/hooks";
+import {
+  setActiveLink,
+  setIsArrowUp,
+  setLanguage,
+} from "app/service/header/headerSlice";
 
 const translations = {
   ru: {
@@ -88,14 +93,20 @@ export const Header: FC<HeaderProps> = ({
   onClose,
 }) => {
   const location = useLocation();
-  const [activeLink, setActiveLink] = useState<string>("");
-  const [language, setLanguage] = useState<"ru" | "en">("ru");
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [isArrowUp, setIsArrowUp] = useState<boolean>(false);
+  // const [activeLink, setActiveLink] = useState<string>("");
+  // const [language, setLanguage] = useState<"ru" | "en">("ru");
+  // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  // const [isArrowUp, setIsArrowUp] = useState<boolean>(false);
+
   const { userData } = useSelector((store) => store.user);
+
+  const { activeLink, language, isModalOpen, isArrowUp } =
+    useSelector((store) => store.header);
+
+  const dispatch = useDispatch();
   const photoLink = "https://api.lr45981.tw1.ru" + userData?.photo;
   const toggleArrow = () => {
-    setIsArrowUp((prev) => !prev); // Переключаем состояние стрелки
+    dispatch(setIsArrowUp(!isArrowUp));
   };
 
   const handleCloseModal = () => {};
@@ -103,34 +114,33 @@ export const Header: FC<HeaderProps> = ({
   useEffect(() => {
     const savedActiveLink = localStorage.getItem("activeLink");
     if (savedActiveLink) {
-      setActiveLink(savedActiveLink);
+      dispatch(setActiveLink(savedActiveLink));
     } else {
-      setActiveLink(location.pathname);
+      dispatch(setActiveLink(location.pathname));
     }
-  }, [location.pathname]);
+  }, [location.pathname, dispatch]);
 
   useEffect(() => {
-    setActiveLink(location.pathname);
+    dispatch(setActiveLink(location.pathname));
     localStorage.setItem("activeLink", location.pathname);
-  }, [location.pathname]);
+  }, [location.pathname,dispatch]);
 
   const handleLinkClick = (link: string) => {
-    setActiveLink(link);
+    dispatch(setActiveLink(link));
     localStorage.setItem("activeLink", link);
   };
 
   const toggleLanguage = () => {
-    setLanguage((prev) => (prev === "ru" ? "en" : "ru"));
+    dispatch(setLanguage(language === "ru" ? "en" : "ru"));
   };
 
-  // Styles header on route
   const shouldShowBackground = [
     "/users",
     "/lessons",
     "/events",
     "/menu",
     "/login",
-    '/editProfile',
+    "/editProfile",
     "*",
   ].includes(location.pathname);
 
@@ -142,9 +152,11 @@ export const Header: FC<HeaderProps> = ({
           : styles.header
       }>
       <div className={styles.containerHeader}>
-        <h1 className={styles.title}>
-          {translations[language].title}{" "}
-        </h1>
+        <Link to='/'>
+          <h1 className={styles.title}>
+            {translations[language].title}{" "}
+          </h1>
+        </Link>
         <div className={styles.links}>
           {translations[language].links.map((link) => (
             <Link
@@ -216,7 +228,6 @@ export const Header: FC<HeaderProps> = ({
               alt='arrow'
             />
             {isOpenBurger && (
-              // <div className={styles.overlay} onClick={handleOverlayClick}>
               <div className={styles.burger}>
                 <Burger
                   onOpen={onOpenAuth}
@@ -224,7 +235,6 @@ export const Header: FC<HeaderProps> = ({
                   onClose={handleCloseModal}
                 />
               </div>
-              // </div>
             )}
           </div>
           {/* <button className={styles.button}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { axiosWithRefreshToken } from "helpers/localStorage.helper";
 import styles from "./style.module.scss";
@@ -16,20 +16,36 @@ export const UpdateProfilePhoto = ({
 }: {
   initialPhotoUrl: string;
 }) => {
+  const token = localStorage.getItem("accessToken");
+  const { isEditing } = useSelector((state) => state.profileCard);
   const userDataUrl = initialPhotoUrl
     ? "https://api.lr45981.tw1.ru" + initialPhotoUrl
     : null;
+
   const location = useLocation();
+
   const validPhotoUrl =
     userDataUrl && userDataUrl.includes("null") ? null : userDataUrl;
 
   const [photoUrl, setPhotoUrl] = useState<string | null>(
     validPhotoUrl || null,
   );
+
   const [, setPhoto] = useState<File | null>(null);
 
-  const token = localStorage.getItem("accessToken");
-  const { isEditing } = useSelector((state) => state.profileCard);
+  useEffect(() => {
+    const userDataUrl = initialPhotoUrl
+      ? `https://api.lr45981.tw1.ru${initialPhotoUrl}`
+      : null;
+
+    const validPhotoUrl =
+      userDataUrl && !userDataUrl.includes("null")
+        ? userDataUrl
+        : null;
+
+    setPhotoUrl(validPhotoUrl || null);
+  }, [initialPhotoUrl]);
+
   const updatePhoto = async (selectedPhoto: File) => {
     const formData = new FormData();
     formData.append("photo", selectedPhoto);
@@ -78,13 +94,8 @@ export const UpdateProfilePhoto = ({
         onChange={handlePhotoChange}
       />
 
-      <button
-        className={
-          location.pathname === "/editProfile"
-            ? styles.loadImageEdited
-            : styles.loadImage
-        }>
-        {location.pathname === "/editProfile" && (
+      <button className={styles.loadImage}>
+        {isEditing && (
           <>
             <div
               className={styles.hoverBg}
@@ -103,6 +114,7 @@ export const UpdateProfilePhoto = ({
             />
           </>
         )}
+
         {location.pathname === "/editProfile" ? (
           <img
             className={styles.img_meEdited}

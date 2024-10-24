@@ -3,8 +3,9 @@ import s from "./style.module.scss";
 import search from "../../../app/assets/events/searchIcon.svg";
 import searchGradient from "../../../app/assets/events/searchGradient.svg";
 import img from "../../../app/assets/users/filter.svg";
+import vol from "../../../app/assets/lessons/img.svg";
 export const Navigation = () => {
-  const [activeButton, setAcitveButton] = useState<number>(1);
+  const [activeButtons, setActiveButtons] = useState<number[]>([]);
   const buttons = [
     {
       title: "События мира",
@@ -19,7 +20,15 @@ export const Navigation = () => {
       id: 3,
     },
   ];
-
+  const handleButtonClick = (id: number) => {
+    if (activeButtons.includes(id)) {
+      setActiveButtons(
+        activeButtons.filter((buttonId) => buttonId !== id),
+      );
+    } else {
+      setActiveButtons([...activeButtons, id]);
+    }
+  };
   return (
     <div className={s.wrapper}>
       <div className={s.container}>
@@ -27,15 +36,17 @@ export const Navigation = () => {
           {buttons.map((el) => (
             <button
               key={el.id}
-              className={activeButton === el.id ? s.active : s.button}
-              onClick={() => setAcitveButton(el.id)}>
+              className={
+                activeButtons.includes(el.id) ? s.active : s.button
+              }
+              onClick={() => handleButtonClick(el.id)}>
               {el.title}
             </button>
           ))}
         </div>
         <div className={s.rightSide}>
           <img
-            src={search}
+            src={vol}
             alt='searchIcon'
             className={s.searchIcon}
           />

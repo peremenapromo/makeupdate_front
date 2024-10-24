@@ -48,7 +48,7 @@ export const AuthForm: FC<AuthFormType> = ({ isOpen, onClose }) => {
           },
         },
       );
-      // console.log(data);
+     
       dispatch(setUserData(data));
     } catch (error) {
       console.error("Ошибка при получении данных:", error);

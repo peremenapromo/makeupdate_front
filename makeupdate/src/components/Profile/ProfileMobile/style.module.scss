@@ -1,31 +1,20 @@
 @import "../../../app/styles/variables";
 .wrapper {
-  // position: relative;
   max-width: 100%;
-  width: 92%;
-  padding: 0px 15px;
+  width: 89.7%;
   height: 100%;
   flex-direction: column;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0px 40px;
 
   .imageProfile {
     display: flex;
     justify-content: center;
     width: 100%;
     height: 430px;
-    margin-bottom: 60px;
-
-    // img {
-    //   position: absolute;
-    //   top: 50px;
-    //   border: 10px solid white;
-    //   border-radius: 50%;
-    //   width: 410px;
-    //   height: 410px;
-    //   object-fit: cover;
-    // }
+    margin-bottom: 25px;
   }
   .name {
     position: relative;
@@ -57,7 +46,7 @@
       flex-direction: row;
       gap: 10px;
       font-family: $primary_font;
-      font-size: 1.4rem;
+      font-size: 16px;
       font-weight: 400;
     }
     .locationText {
@@ -79,13 +68,12 @@
       justify-content: center;
       align-items: center;
       gap: 10px;
-      font-size: 1.4rem;
-      font-family: $secondary_font;
+      font-size: 16px;
+      font-family: $primary_font;
       font-weight: 400;
     }
   }
 
-  // buttons
   .buttonsContainer {
     max-width: 580px;
     width: 100%;
@@ -117,9 +105,10 @@
     outline: none;
     .editButtonText {
       color: white;
-      font-size: 22px;
+      font-size: 16px;
       line-height: 30px;
       font-weight: 500;
+      font-family: $primary_font;
     }
     &:hover {
       scale: 1.01;
@@ -142,7 +131,7 @@
 
   .btn_text {
     font-family: $primary_font;
-    font-size: 22px;
+    font-size: 16px;
     background-size: 100%;
     background-image: $gradient_color;
     background-clip: text;
@@ -181,7 +170,7 @@
   font-family: $primary_font;
   color: rgba(0, 0, 0, 1);
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   word-break: break-word;
   max-height: 110px;
   height: 100%;
@@ -189,6 +178,7 @@
   margin: 0;
   margin-bottom: 10px;
 }
+
 .description {
   width: 100%;
   height: 141px;
@@ -200,7 +190,7 @@
   padding: 15px 20px;
 }
 .textareaContainer {
-  max-width: 540px;
+  max-width: 510px;
   width: 100%;
   max-height: 171px;
   height: 100%;
@@ -209,7 +199,7 @@
 .open {
   margin: 0;
   font-family: $primary_font;
-  font-size: 18px;
+  font-size: 16px;
   max-height: 160px;
   overflow: auto;
   overflow-y: none;
@@ -236,7 +226,7 @@
 
 .navigation {
   position: absolute;
-  top: 140px;
+  top: 150px;
   width: 100%;
   height: 80px;
   left: 0;
@@ -247,35 +237,34 @@
 }
 @media screen and (max-width: 768px) {
   .wrapper {
+    width: 87.7%;
     .infoBlock {
       .location {
         .locationText {
-          font-size: 18px;
+          font-size: 16px;
         }
       }
     }
   }
 }
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 590px) {
   .wrapper {
-    width: 93%;
-    // height: 100vh;
+    width: 84vw;
     justify-content: normal;
     .imageProfile {
-      height: 250px;
-      margin-bottom: 60px;
+      height: 320px;
+      width: 320px;
+      margin-bottom: 25px;
     }
-    // name
     .name {
       margin-bottom: 10px;
       line-height: 17px;
       h1 {
         margin-top: 12px;
-        font-size: 20px;
+        font-size: 30px;
         line-height: 29px;
       }
     }
-    // location
     .infoBlock {
       margin-bottom: 15px;
       .box_loc_vid_view {
@@ -299,7 +288,7 @@
         }
       }
       .locationText {
-        font-size: 12px;
+        font-size: 16px;
         line-height: 16px;
         color: rgba(58, 58, 56, 1);
       }
@@ -319,13 +308,18 @@
       }
     }
     .buttonsContainer {
+      max-width: 450px;
       margin-bottom: 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .editButton {
       padding: 9px;
+      width: 100%;
       .editButtonText {
         color: white;
-        font-size: 14px;
+        font-size: 16px;
         line-height: 19px;
         font-weight: 500;
       }
@@ -334,6 +328,8 @@
     .buttons {
       gap: 8px;
       margin-bottom: 15px;
+      max-width: 450px;
+      width: 100%;
       .button_main_profile {
         box-shadow: 1px 2px 25px 0px rgba(20, 47, 136, 0.25);
         backdrop-filter: blur(10px);
@@ -355,12 +351,14 @@
     //Дескрипшон тайтл
     .info_me {
       margin-bottom: 40px;
+      max-width: 430px;
+      width: 100%;
       .title_me {
-        font-size: 18px;
+        font-size: 16px;
         line-height: 24.5px;
       }
       .text_me {
-        font-size: 12px;
+        font-size: 16px;
         line-height: 16.4px;
       }
 
@@ -374,36 +372,83 @@
       .open {
         margin: 0;
         font-family: $primary_font;
-        font-size: 12px;
+        font-size: 16px;
 
         line-height: 16.4px;
       }
     }
   }
 }
+
+@media screen and (max-width: 490px) {
+  .wrapper {
+    width: 83%;
+    .buttonsContainer {
+      max-width: 430px;
+      .editButton {
+        padding: 9px;
+      }
+    }
+    .info_me {
+      max-width: 390px;
+      .textareaContainer {
+        max-width: 350px;
+        width: 100%;
+      }
+    }
+  }
+}
 @media screen and (max-width: 430px) {
   .wrapper {
-    width: 100%;
+    width: 80.7%;
+    .navigation {
+      top: 145px;
+      height: 52px;
+      margin-bottom: 140px;
+    }
+    .buttonsContainer {
+      max-width: 400px;
+      margin-bottom: 40px;
+      .editButton {
+        padding: 9px;
+      }
+    }
+    .buttons {
+      margin-bottom: 7px;
+      max-width: 400px;
+    }
     .imageProfile {
-      height: 250px;
+      height: 210px;
       margin-bottom: 0px;
     }
     .info_me {
       margin-bottom: 100px;
 
       .textareaContainer {
-        max-width: 320px;
+        max-width: 340px;
         width: 100%;
       }
     }
   }
 }
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 390px) {
   .wrapper {
-    width: 100%;
+    width: 88.7%;
     .imageProfile {
-      height: 250px;
+      height: 200px;
       margin-bottom: 0px;
+    }
+    .buttonsContainer {
+      max-width: 350px;
+      margin-bottom: 40px;
+      .editButton {
+        padding: 9px;
+      
+      }
+    }
+    .buttons {
+      margin-bottom: 7px;
+      max-width: 400px;
     }
     .infoBlock {
       .location {
@@ -414,9 +459,9 @@
     }
     .info_me {
       margin-bottom: 100px;
-
+      max-width: 330px;
       .textareaContainer {
-        max-width: 280px;
+        max-width: 300px;
         width: 100%;
       }
     }

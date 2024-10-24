@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styles from "./Home.module.scss";
-import lessons from "../../app/assets/home/lessons.svg";
+import lessons from "../../app/assets/other/tutorials.svg";
 import users from "../../app/assets/home/users.svg";
 export const Home: FC = () => {
   return (

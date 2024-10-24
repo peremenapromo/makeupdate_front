@@ -3,13 +3,9 @@ import { Link } from "react-router-dom";
 import styles from "./Burger.module.scss";
 import noUser from "./img/photo_undefined.svg";
 import icon_profile from "../../app/assets/other/profile_icon.svg";
-// Types
 import { BurgerAuth, ModalWindow } from "../../app/types/modal";
 import { toast } from "react-toastify";
-import {
-  logoutProfile,
-  removeTokenFromLocalStorage,
-} from "helpers/localStorage.helper";
+import { logoutProfile } from "helpers/localStorage.helper";
 import { useDispatch, useSelector } from "app/service/hooks/hooks";
 import { logout } from "app/service/user/userSlice";
 
@@ -18,13 +14,17 @@ export const Burger: FC<ModalWindow & BurgerAuth> = ({
   onOpen,
   onClose,
 }) => {
+
   const { isAuth, userData } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
   if (!isOpen) return null;
+
   const access = localStorage.getItem("accessToken");
   const refresh = localStorage.getItem("refreshToken");
-  // console.log("123", userData);
+
   const photoLink = "https://api.lr45981.tw1.ru" + userData?.photo;
+  
   const logOut = () => {
     if (!refresh && !access) {
       toast.error("Вы уже вышли с аккаунта");
@@ -56,7 +56,7 @@ export const Burger: FC<ModalWindow & BurgerAuth> = ({
         <li className={styles.list_section}>Стать продавцом</li>
         <div className={styles.line}></div>
 
-        <Link to='/editProfile' className={styles.list_section}>
+        <Link to='/profile' className={styles.list_section}>
           Настройки профиля
         </Link>
         <li onClick={onOpen} className={styles.list_section}>

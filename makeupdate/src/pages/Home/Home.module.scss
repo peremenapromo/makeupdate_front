@@ -23,32 +23,31 @@
 }
 
 .title {
-  font-size: 160px;
+  font-size: 5.208vw;
   color: $primary_color;
   font-weight: 700;
   margin: 0;
-  margin-top: 60px;
-
-  line-height: 242.76px;
+  margin-top: 4.688vw;
+  line-height: 10.417vw;
 }
 
 .subtitle {
   margin: 0;
   text-align: center;
-  font-size: 24px;
+  font-size: 1.25vw;
   color: $primary_color;
   font-weight: 400;
-  max-width: 700px;
+  max-width: 39.063vw;
   width: 100%;
-  line-height: 34.68px;
+  line-height: 1.806vw;
 }
 
 .lessons_users_box {
   display: flex;
   gap: 0;
-  width: calc(100vw - 200px);
+  width: calc(100vw - 10.417vw);
   justify-content: space-between;
-  font-size: 40px;
+  font-size: 2.083vw;
 }
 
 .les_us {
@@ -56,20 +55,106 @@
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  gap: 10px;
+  gap: 0.521vw;
+  img {
+    width: 2.083vw;
+    height: 2.083vw;
+  }
 }
 
 .les_us_text {
   font-weight: 400;
   display: flex;
   align-items: center;
+  font-size: 1.667vw;
   color: $primary_color;
-  padding-left: 10px;
+  padding-left: 0.521vw;
 }
 
 .num {
+  font-size: 1.667vw;
   font-weight: 800;
   color: $primary_color;
+}
+
+@media screen and (max-width: 1920px) {
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../../app/assets/home/bg_home.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    font-family: $primary_font;
+  }
+
+  .text_box_home {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    font-family: $secondary_font;
+    margin-bottom: 11.2%;
+    // padding-bottom: 160px;
+  }
+
+  .title {
+    font-size: 100px;
+    color: $primary_color;
+    font-weight: 700;
+    margin: 0;
+    margin-top: 90px;
+    line-height: 200px;
+  }
+
+  .subtitle {
+    margin: 0;
+    text-align: center;
+    font-size: 24px;
+    color: $primary_color;
+    font-weight: 400;
+    max-width: 750px;
+    width: 100%;
+    line-height: 34.68px;
+  }
+
+  .lessons_users_box {
+    display: flex;
+    gap: 0;
+    width: calc(100vw - 200px);
+    justify-content: space-between;
+    font-size: 40px;
+  }
+
+  .les_us {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 10px;
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .les_us_text {
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    font-size: 32px;
+    color: $primary_color;
+    padding-left: 10px;
+  }
+
+  .num {
+    font-size: 32px;
+    font-weight: 800;
+    color: $primary_color;
+  }
 }
 
 @media screen and (max-width: 1024px) {
@@ -85,6 +170,7 @@
     font-size: 80px;
   }
   .lessons_users_box {
+    flex-direction: column;
     font-size: 20px;
     img {
       width: 40px;
@@ -93,6 +179,7 @@
 }
 @media screen and (max-width: 535px) {
   .title {
+    margin: 0;
     font-size: 55px;
   }
   .lessons_users_box {

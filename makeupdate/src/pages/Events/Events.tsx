@@ -59,6 +59,10 @@ export const Events = () => {
             <BigCardEvent />
             <BigCardEvent />
             <BigCardEvent />
+            <BigCardEvent />
+            <BigCardEvent />
+            <BigCardEvent />
+            <BigCardEvent />
           </div>
           <button className={s.navButton} onClick={handleScrollRight}>
             <img src={rightArrow} alt='' />
@@ -71,10 +75,24 @@ export const Events = () => {
           <CalendarEvents />
         </div>
         <div className={s.smallCardEvent}>
-          <SmallCardEvents />
-          <SmallCardEvents />
-          <SmallCardEvents />
-          <SmallCardEvents />
+          <div className={s.card}>
+            <SmallCardEvents />
+          </div>
+
+          <div className={s.card}>
+            <SmallCardEvents />
+          </div>
+
+          <div className={s.card}>
+            <SmallCardEvents />
+          </div>
+
+          <div className={s.card}>
+            <SmallCardEvents />
+          </div>
+          <div className={s.card}>
+            <SmallCardEvents />
+          </div>
         </div>
       </div>
     </div>

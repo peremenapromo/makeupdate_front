@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import s from "./style.module.scss";
-import mockImage from "../../../app/assets/profileCard/MockImage.png";
-import { IProfileMobileProps } from "app/types/type";
+import { IGetUserData } from "app/types/type";
 import arrow_bottom from "../../../app/assets/profileCard/arrow_bottomProfile.svg";
 import arrow_top from "../../../app/assets/profileCard/arrow_topProfile.svg";
 import location from "../../../app/assets/profileCard/location.svg";
@@ -20,10 +19,11 @@ import {
   setIsSaving,
 } from "app/service/profileCard/profileCardSlice";
 
-export const ProfileMobile = ({ photoLink, userData }: any) => {
-  const { isEditing, isSaving, description } = useSelector(
+export const ProfileMobile = () => {
+  const { isEditing, description, counter } = useSelector(
     (state) => state.profileCard,
   );
+  const { userData } = useSelector((store) => store.user);
   const [inputData, setInputData] = useState({});
   const dispatch = useDispatch();
 
@@ -50,7 +50,6 @@ export const ProfileMobile = ({ photoLink, userData }: any) => {
     setInputData((prev) => ({ ...prev, [field]: value }));
   };
   const token = localStorage.getItem("accessToken");
-  // console.log(userData);
   const updateUserData = async (inputData: any) => {
     const fetchData = async () => {
       await getDataUser(dispatch);
@@ -104,17 +103,36 @@ export const ProfileMobile = ({ photoLink, userData }: any) => {
   };
   const toggleEdit = async () => {
     if (isEditing) {
-      console.log("true");
       dispatch(setIsSaving(true));
-      await updateUserData({
-        ...inputData,
-        description,
-      });
-      dispatch(setIsSaving(false));
 
-      if (!isSaving) {
+      const updatedData: Partial<IGetUserData> = {};
+
+      Object.keys(inputData).forEach((key) => {
+        const newValue = inputData[key as keyof typeof inputData];
+        const oldValue = userData?.[key as keyof IGetUserData];
+
+        if (newValue !== oldValue) {
+          if (newValue !== undefined) {
+            updatedData[key as keyof IGetUserData] =
+              newValue as never;
+          }
+        }
+      });
+
+      if (description !== userData?.description) {
+        updatedData.description = description as string;
+      }
+
+      if (Object.keys(updatedData).length > 0) {
+        const isUpdated = await updateUserData(updatedData);
+
+        if (isUpdated) {
+          dispatch(setIsEditing(false));
+        }
+      } else {
         dispatch(setIsEditing(false));
       }
+      dispatch(setIsSaving(false));
     } else {
       dispatch(setIsEditing(true));
     }
@@ -143,7 +161,7 @@ export const ProfileMobile = ({ photoLink, userData }: any) => {
               alt='location_icon'
             />
             <span className={s.locationText}>
-              {userData.city && userData.country
+              {userData?.city && userData.country
                 ? `${userData.city},${userData.country}`
                 : "Не задано"}
             </span>
@@ -152,18 +170,18 @@ export const ProfileMobile = ({ photoLink, userData }: any) => {
             <p className={s.vid_see}>
               <img
                 className={s.vid_see_img}
-                src={videos}
-                alt='videos_icon'
+                src={view}
+                alt='view_icon'
               />
-              0
+              {counter ? counter[0].total_views : 0}
             </p>
             <p className={s.vid_see}>
               <img
                 className={s.vid_see_img}
-                src={view}
-                alt='view_icon'
+                src={videos}
+                alt='videos_icon'
               />
-              0
+              {counter ? counter[0].count_lessons : 0}
             </p>
           </div>
         </div>
@@ -178,22 +196,23 @@ export const ProfileMobile = ({ photoLink, userData }: any) => {
         {isEditing && (
           <Inputs
             onInputChange={handleInputChange}
-            initialShowTelegram={userData?.show_telegram}
-            initialShowPhone={userData?.show_telephone}
+            initialShowTelegram={userData?.show_telegram!}
+            initialShowPhone={userData?.show_telephone!}
           />
         )}
-
-        <div className={s.buttons}>
-          {[
-            "Опубликовать урок",
-            "Опубликовать событие",
-            "Опубликовать фото",
-          ].map((button) => (
-            <button key={button} className={s.button}>
-              <span className={s.btn_text}>{button}</span>
-            </button>
-          ))}
-        </div>
+        {!isEditing && (
+          <div className={s.buttons}>
+            {[
+              "Опубликовать урок",
+              "Опубликовать событие",
+              "Опубликовать фото",
+            ].map((button) => (
+              <button key={button} className={s.button}>
+                <span className={s.btn_text}>{button}</span>
+              </button>
+            ))}
+          </div>
+        )}
         <div className={s.info_me}>
           <h3 className={s.title_me}>Обо мне:</h3>
           {isEditing ? (

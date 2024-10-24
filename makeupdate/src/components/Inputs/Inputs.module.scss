@@ -5,34 +5,36 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  padding-bottom: 10px;
-  margin-top: 10px;
+  align-items: start;
+  gap: 0.781vw;
+  padding-bottom: 0.521vw;
+  margin-top: 0.521vw;
 }
 
 .group {
   position: relative;
-  width: 700px;
-  padding-right: 10px;
+  width: 12.76vw;
+  padding-right: 0.521vw;
 }
 .input {
   position: relative;
-  font-size: 18px;
-  padding: 20px 30px;
-  font-size: 25px;
+  font-size: 0.938vw;
+  padding: 0.521vw 1.042vw;
+  font-size: 0.833vw;
   display: block;
-  font-family: $secondary_font;
+  font-family: $primary_font;
   width: 100%;
   border: none;
-  border-radius: 15px;
+  border-radius: 0.781vw;
   background-color: rgba(240, 240, 240, 1);
 }
 .showIcon {
   position: absolute;
   right: 0;
-  top: 30%;
+  top: 0.6vw;
   cursor: pointer;
+  width: 1.042vw;
+  height: 1.042vw;
 }
 .inputRead {
   @extend .input;
@@ -50,26 +52,26 @@ input:focus {
 // Label
 label {
   color: #999;
-  font-size: 1rem;
+  font-size: 0.729vw;
   font-weight: normal;
   position: absolute;
   pointer-events: none;
-  left: 20px;
-  top: 11px;
+  left: 1.042vw;
+  top: 0.573vw;
   transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;
 }
 .labelRead {
-  top: -10px;
-  font-size: 14px;
+  top: -0.521vw;
+  font-size: 0.729vw;
   color: rgba(152, 152, 152, 1);
 }
-// Active state input
+
 input:focus ~ label,
 input:valid ~ label {
-  top: -10px;
-  font-size: 14px;
+  top: -0.521vw;
+  font-size: 0.729vw;
   color: rgba(152, 152, 152, 1);
 }
 
@@ -78,7 +80,76 @@ input:valid ~ label {
   font-size: 0.8rem;
   color: red;
   margin: 0;
-  padding-left: 10px;
+  padding-left: 0.521vw;
+}
+.cityGroup {
+  position: relative;
+  max-width: 14.844vw;
+  width: 100%;
+  .city {
+    position: absolute;
+    top: -0.573vw;
+    z-index: 10;
+    font-size: 0.729vw;
+  }
+}
+
+@media screen and (max-width: 1920px) {
+  .inputs_box {
+    gap: 15px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  .group {
+    width: 245px;
+    padding-right: 10px;
+  }
+  .input {
+    font-size: 18px;
+    padding: 10px 20px;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 15px;
+  }
+  .showIcon {
+    right: 0;
+    top: 28%;
+    width: 20px;
+    height: 20px;
+  }
+
+  label {
+    font-size: 1rem;
+    left: 20px;
+    top: 11px;
+  }
+  .labelRead {
+    top: -15px;
+    font-size: 14px;
+  }
+
+  input:focus ~ label,
+  input:valid ~ label {
+    top: -15px;
+    font-size: 14px;
+  }
+
+  .error {
+    font-size: 0.8rem;
+    margin: 0;
+    padding-left: 10px;
+  }
+
+  .cityGroup {
+    max-width: 285px;
+    width: 100%;
+    .city {
+      top: -15px;
+      z-index: 10;
+      font-size: 14px;
+    }
+  }
 }
 
 @media screen and (max-width: 1290px) {
@@ -90,66 +161,35 @@ input:valid ~ label {
   }
   .group {
     padding: 0;
-    width: 320px;
+    width: 250px;
+  }
+  .showIcon {
+    right: -25px;
   }
 }
-@media screen and (max-width: 868px) {
-  .input {
-    max-width: 200px;
-  }
-  .containerInfo {
-    width: 220px;
-  }
-  .group {
-    padding: 0;
-    width: 240px;
-  }
-}
-@media screen and (max-width: 768px) {
-  select {
-    max-width: 555px;
-    height: 50px;
-  }
 
-  .dropdowns {
-    .arrow {
-      right: 50px;
-    }
-    .arrowCountry {
-      right: 50px;
-    }
-  }
+@media screen and (max-width: 850px) {
   .input {
-    max-width: 520px;
+    max-width: 515px;
   }
   .inputs_box {
     align-items: normal;
   }
-
+  .showIcon {
+    right: -5px;
+  }
   .group {
     padding: 0;
-    width: 540px;
+    width: 535px;
+  }
+  .cityGroup {
+    position: relative;
+    max-width: 565px;
+    width: 100%;
   }
 }
-@media screen and (max-width: 540px) {
-  select {
-    max-width: 435px;
-    width: 435px;
-    padding: 9px 15px 9px 20px;
-    font-size: 14px;
-    height: 38px;
-  }
 
-  .dropdowns {
-    .arrow {
-      top: 65px;
-      right: 10px;
-    }
-    .arrowCountry {
-      top: 17px;
-      right: 10px;
-    }
-  }
+@media screen and (max-width: 590px) {
   .input {
     max-width: 420px;
     padding: 9px 15px 9px 20px;
@@ -157,35 +197,23 @@ input:valid ~ label {
   }
   .inputs_box {
     align-items: normal;
-    max-width: 400px;
+    max-width: 450px;
     width: 100%;
   }
 
   .group {
     padding: 0;
-    max-width: 450px;
+    max-width: 420px;
+    width: 100%;
+  }
+  .cityGroup {
+    position: relative;
+    max-width: 475px;
     width: 100%;
   }
 }
-@media screen and (max-width: 450px) {
-  select {
-    max-width: 385px;
-    // width: 100%;
-    padding: 9px 15px 9px 20px;
-    font-size: 14px;
-    height: 38px;
-  }
 
-  .dropdowns {
-    .arrow {
-      top: 65px;
-      right: 10px;
-    }
-    .arrowCountry {
-      top: 17px;
-      right: 10px;
-    }
-  }
+@media screen and (max-width: 480px) {
   .input {
     max-width: 350px;
     padding: 9px 15px 9px 20px;
@@ -206,16 +234,10 @@ input:valid ~ label {
     width: 100%;
   }
 }
+
 @media screen and (max-width: 400px) {
-  select {
-    max-width: 355px;
-    // width: 100%;
-    padding: 9px 15px 9px 20px;
-    font-size: 14px;
-    height: 38px;
-  }
   .input {
-    max-width: 350px;
+    max-width: 280px;
     padding: 9px 15px 9px 20px;
     font-size: 14px;
   }
@@ -234,6 +256,7 @@ input:valid ~ label {
     width: 100%;
   }
 }
+
 @media screen and (max-width: 360px) {
   select {
     max-width: 325px;

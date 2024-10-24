@@ -31,7 +31,6 @@ export const confirmEmail = {
       "api/v1/auth/users/activation/",
       userData,
     );
-    console.log(response.status);
     return response;
   },
   async resend(): Promise<void> {

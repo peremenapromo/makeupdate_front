@@ -1,0 +1,541 @@
+@import "../../../app/styles/variables";
+.wrapper {
+  max-width: 100%;
+  width: 99%;
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .imageProfile {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 430px;
+    margin-bottom: 25px;
+  }
+  .name {
+    position: relative;
+    font-size: 32px;
+    line-height: 50px;
+    margin-bottom: 20px;
+    background-image: $gradient_color;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    h1 {
+      margin: 0;
+    }
+  }
+  .infoBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 100%;
+    .box_loc_vid_view {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      p {
+        margin: 0;
+      }
+    }
+
+    .location {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      gap: 10px;
+      font-family: $primary_font;
+      font-size: 1.4rem;
+      font-weight: 400;
+    }
+    .locationText {
+      font-size: 30px;
+      line-height: 30px;
+    }
+
+    .videos_view {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      gap: 15px;
+      max-height: 24px;
+    }
+
+    .vid_see {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.4rem;
+      font-family: $secondary_font;
+      font-weight: 400;
+    }
+  }
+
+  .buttonsContainerUser {
+    margin-top: 15px;
+
+    display: flex;
+    flex-direction: column;
+    max-width: 580px;
+    width: 100%;
+    gap: 10px;
+
+    .subscribe {
+      font-family: $primary-font;
+      width: 100%;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-size: 20px;
+      font-weight: 500;
+      background: linear-gradient(
+        89.45deg,
+        #05ad25 0.48%,
+        #0294a1 73.77%,
+        #181381 147.06%
+      );
+      width: 100%;
+      padding: 12px 10px;
+      border-radius: 25px;
+      color: white;
+    }
+    .isSubscribed {
+      font-family: $primary-font;
+      box-shadow: 1px 2px 25px 0px #142f8840;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-size: 20px;
+      font-weight: 500;
+      background: white;
+      width: 100%;
+      padding: 12px 10px;
+      border-radius: 25px;
+      background-image: linear-gradient(
+        89.45deg,
+        #05ad25 0.48%,
+        #0294a1 73.77%,
+        #181381 147.06%
+      );
+
+      background-size: 100%;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .underSubscribeButtons {
+      display: flex;
+      button {
+        font-family: $primary-font;
+
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        gap: 7px;
+        align-items: center;
+        max-width: 298px;
+        width: 100%;
+        border: none;
+
+        outline: none;
+        height: 46px;
+        border-radius: 25px;
+        box-shadow: 1px 2px 25px 0px #142f8840;
+        background-image: linear-gradient(
+          89.45deg,
+          #05ad25 0.48%,
+          #0294a1 73.77%,
+          #181381 147.06%
+        );
+
+        background-size: 100%;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        padding: 0px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 27px;
+      }
+    }
+  }
+  // buttons
+  .buttonsContainer {
+    max-width: 580px;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .button {
+    cursor: pointer;
+    border-radius: 25px;
+    box-shadow: 1px 2px 25px 0px rgba(20, 47, 136, 0.25);
+    border: none;
+    padding: 13px;
+    text-align: center;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    &:hover {
+      scale: 1.01;
+    }
+  }
+
+  .btn_text {
+    font-family: $primary_font;
+    font-size: 22px;
+    background-size: 100%;
+    background-image: $gradient_color;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .active_button {
+    background-image: $gradient_color;
+  }
+
+  .btn_text_active {
+    background-image: none;
+    -webkit-text-fill-color: $primary_color;
+  }
+}
+
+.info_me {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  position: relative;
+}
+
+.title_me {
+  font-family: $primary_font;
+  color: rgba(0, 0, 0, 1);
+  font-weight: 600;
+  margin: 0;
+  font-size: 22px;
+  margin-bottom: 5px;
+  line-height: 30px;
+}
+
+.text_me {
+  font-family: $primary_font;
+  color: rgba(0, 0, 0, 1);
+  font-weight: 400;
+  font-size: 18px;
+  word-break: break-word;
+  max-height: 110px;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  margin-bottom: 10px;
+}
+.description {
+  width: 100%;
+  height: 141px;
+  border-radius: 10px;
+  background: rgba(240, 240, 240, 1);
+  resize: none;
+  outline: none;
+  border: none;
+  padding: 15px 20px;
+}
+.textareaContainer {
+  max-width: 540px;
+  width: 100%;
+  max-height: 171px;
+  height: 100%;
+}
+
+.open {
+  margin: 0;
+  font-family: $primary_font;
+  font-size: 18px;
+  max-height: 160px;
+  overflow: auto;
+  overflow-y: none;
+}
+
+.buttonDescContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 40px;
+  z-index: 10;
+}
+.openDesc {
+  cursor: pointer;
+  margin: 0;
+  outline: none;
+  border: none;
+  background: rgba(255, 255, 255, 0.002);
+  box-shadow: 0px 0px 0px 1px rgba(225, 225, 225, 1) inset;
+  background: transparent;
+  width: 62px;
+  border-radius: 30px;
+}
+
+.navigation {
+  position: absolute;
+  top: 160px;
+  width: 100%;
+  height: 80px;
+  left: 0;
+}
+.openNavigation {
+  @extend .navigation;
+  top: 190px;
+}
+@media screen and (max-width: 768px) {
+  .wrapper {
+    .infoBlock {
+      .location {
+        .locationText {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 570px) {
+  .wrapper {
+    width: 100%;
+    justify-content: normal;
+    .imageProfile {
+      height: 320px;
+      width: 320px;
+      margin-bottom: 25px;
+    }
+    // name
+    .name {
+      margin-bottom: 10px;
+      line-height: 17px;
+      h1 {
+        margin-top: 12px;
+        font-size: 30px;
+        line-height: 29px;
+      }
+    }
+    // location
+    .infoBlock {
+      max-width: 480px;
+      .buttonsContainerUser {
+        max-width: 480px;
+      }
+      .box_loc_vid_view {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        p {
+          margin: 0;
+        }
+      }
+
+      .location {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 5px;
+        img {
+          width: 12px;
+          height: 17px;
+        }
+      }
+      .locationText {
+        font-size: 12px;
+        line-height: 16px;
+        color: rgba(58, 58, 56, 1);
+      }
+      .videos_view {
+        img {
+          width: 12px;
+          height: 17px;
+        }
+      }
+      .vid_see {
+        font-size: 12px;
+        font-family: $primary_font;
+        img {
+          width: 12px;
+          height: 17px;
+        }
+      }
+    }
+    .buttonsContainer {
+      margin-bottom: 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .editButton {
+      padding: 9px;
+      width: 450px;
+      .editButtonText {
+        color: white;
+        font-size: 14px;
+        line-height: 19px;
+        font-weight: 500;
+      }
+    }
+
+    .buttons {
+      gap: 8px;
+      margin-bottom: 15px;
+      max-width: 450px;
+      width: 100%;
+      .button_main_profile {
+        box-shadow: 1px 2px 25px 0px rgba(20, 47, 136, 0.25);
+        backdrop-filter: blur(10px);
+      }
+    }
+    .button {
+      padding: 9px;
+      .btn_text {
+        font-size: 14px;
+      }
+      &:hover {
+        scale: 1.01;
+      }
+    }
+    .navigation {
+      top: 180px;
+      height: 52px;
+    }
+    //Дескрипшон тайтл
+    .info_me {
+      margin-bottom: 40px;
+      max-width: 450px;
+      width: 100%;
+      .title_me {
+        font-size: 18px;
+        line-height: 24.5px;
+      }
+      .text_me {
+        font-size: 12px;
+        line-height: 16.4px;
+      }
+
+      .textareaContainer {
+        max-width: 400px;
+        width: 100%;
+      }
+      .buttonDescContainer {
+        margin-bottom: 0px;
+      }
+      .open {
+        margin: 0;
+        font-family: $primary_font;
+        font-size: 12px;
+
+        line-height: 16.4px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .wrapper {
+    width: 100%;
+    padding: 0px 0px;
+    .buttonsContainer {
+      max-width: 430px;
+      .editButton {
+        padding: 9px;
+        width: 430px;
+      }
+    }
+    .info_me {
+      max-width: 390px;
+      .textareaContainer {
+        max-width: 350px;
+        width: 100%;
+      }
+    }
+  }
+}
+@media screen and (max-width: 430px) {
+  .wrapper {
+    width: 100%;
+    .navigation {
+      top: 145px;
+      height: 52px;
+      margin-bottom: 140px;
+    }
+    .buttonsContainer {
+      max-width: 400px;
+      margin-bottom: 40px;
+      .editButton {
+        padding: 9px;
+      }
+    }
+    .buttons {
+      margin-bottom: 7px;
+      max-width: 400px;
+    }
+    .imageProfile {
+      height: 210px;
+      margin-bottom: 0px;
+    }
+    
+    .infoBlock {
+      max-width: 400px;
+      .buttonsContainerUser {
+        max-width: 400px;
+      }
+    }
+    .info_me {
+      margin-bottom: 100px;
+
+      .textareaContainer {
+        max-width: 320px;
+        width: 100%;
+      }
+    }
+  }
+}
+@media screen and (max-width: 390px) {
+  .wrapper {
+    .imageProfile {
+      height: 200px;
+      margin-bottom: 0px;
+    }
+    .buttonsContainer {
+      max-width: 350px;
+      margin-bottom: 40px;
+      .editButton {
+        padding: 9px;
+      }
+    }
+    .buttons {
+      margin-bottom: 7px;
+      max-width: 400px;
+    }
+    .infoBlock {
+      .location {
+        .locationText {
+          font-size: 12px;
+        }
+      }
+    }
+    .info_me {
+      margin-bottom: 100px;
+      max-width: 330px;
+      .textareaContainer {
+        max-width: 300px;
+        width: 100%;
+      }
+    }
+  }
+}

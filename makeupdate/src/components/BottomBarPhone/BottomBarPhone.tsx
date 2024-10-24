@@ -81,7 +81,7 @@ export const BottomBarPhone: FC = () => {
             <img
               className={styles.img_link}
               src={top_arrow}
-              alt='undefined'
+              alt='top_arrow'
             />
           </div>
           <span>Профиль</span>

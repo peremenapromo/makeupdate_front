@@ -4,14 +4,14 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  max-width: 408px;
+  max-width: 16.034vw;
   height: auto;
   width: 100%;
-  bottom: 445px;
-  left: 100px;
-  border-radius: 20px;
+  bottom: 11.458vw;
+  left: 2.083vw;
+  border-radius: 1.042vw;
   box-shadow: 2px 4px 10px 0px rgba(25, 18, 129, 0.25);
-  margin-bottom: 40px;
+  margin-bottom: 2.084vw;
 }
 .loadImage {
   background: transparent;
@@ -24,36 +24,43 @@
 }
 
 .profile_img_box {
-  height: 440px;
-  width: 408px;
-  // position: relative;
+  height: 16.034vw;
+  width: 16.034vw;
 }
 .img_me {
-  max-width: 408px;
+  max-width: 16.034vw;
   width: 100%;
-  max-height: 440px;
+  max-height: 16.034vw;
   height: 100%;
 }
 .username_box {
   z-index: 10;
   text-align: start;
   position: absolute;
-  top: 35px;
-  left: 445px;
+  top: 0px;
+  left: 18.2vw;
+  width: 41.65vw;
 }
 
 .username {
-  max-width: 679px;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 1.042vw;
   width: 100%;
-  font-size: 128px;
+  font-size: 4.165vw;
   font-family: $secondary_font;
   font-weight: 700;
-  line-height: 185px;
+  line-height: 4.165vw;
   margin: 0;
   color: rgba(255, 255, 255, 1);
+  .usernameLang {
+    display: flex;
+    gap: 10px;
+  }
 }
 .containerInfo {
-  padding: 20px 15px;
+  padding: 1.042vw 0.526vw;
   p {
     margin: 0;
   }
@@ -63,22 +70,25 @@
   justify-content: center;
   align-items: start;
   flex-direction: column;
-  gap: 15px;
-  margin-bottom: 30px;
+  gap: 0.781vw;
+  margin-bottom: 0.781vw;
 }
 
 .location {
   display: flex;
   align-items: center;
   flex-direction: row;
-  gap: 10px;
+  gap: 0.526vw;
   font-family: $primary_font;
-  font-size: 1.4rem;
   font-weight: 500;
+  img {
+    width: 0.885vw;
+    height: 1.25vw;
+  }
 }
 .locationText {
-  font-size: 18px;
-  line-height: 30px;
+  font-size: 0.833vw;
+  line-height: 1.562vw;
   font-weight: 500;
 }
 
@@ -87,17 +97,21 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  gap: 45px;
-  max-height: 24px;
+  gap: 2.3426vw;
+  max-height: 1.2494vw;
+  img {
+    width: 1.458vw;
+    height: 1.094vw;
+  }
 }
 
 .vid_see {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  font-size: 1.4rem;
-  font-family: $secondary_font;
+  gap: 0.526vw;
+  font-size: 0.833vw;
+  font-family: $primary_font;
   font-weight: 400;
 }
 
@@ -106,17 +120,18 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 30px;
+  gap: 0.526vw;
+  margin-bottom: 1.562vw;
 }
 
 .editButton {
-  max-width: 378px;
+  max-width: 19.688vw;
   width: 100%;
-  padding: 13px;
-  margin-bottom: 7px;
-  border-radius: 25px;
+  padding: 0.26vw;
+  margin-bottom: 0.365vw;
+  border-radius: 1.302vw;
   cursor: pointer;
+
   background: linear-gradient(
     89.45deg,
     #05ad25 0.48%,
@@ -127,9 +142,10 @@
   border: none;
   outline: none;
   .editButtonText {
+    font-family: $primary_font;
     color: white;
-    font-size: 22px;
-    line-height: 30px;
+    font-size: 0.833vw;
+    line-height: 1.563vw;
     font-weight: 500;
   }
   &:hover {
@@ -139,10 +155,10 @@
 
 .button {
   cursor: pointer;
-  border-radius: 25px;
+  border-radius: 1.302vw;
   box-shadow: 1px 2px 25px 0px rgba(20, 47, 136, 0.25);
   border: none;
-  padding: 13px;
+  padding: 0.677vw;
   text-align: center;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.8);
@@ -153,7 +169,7 @@
 
 .btn_text {
   font-family: $primary_font;
-  font-size: 22px;
+  font-size: 1.146vw;
   background-size: 100%;
   background-image: $gradient_color;
   background-clip: text;
@@ -181,166 +197,297 @@
   color: rgba(0, 0, 0, 1);
   font-weight: 600;
   margin: 0;
-  font-size: 22px;
-  margin-bottom: 5px;
-  line-height: 30px;
+  font-size: 0.938vw;
+  margin-bottom: 0.26vw;
+  line-height: 1.563vw;
+  margin-left: 0.521vw;
 }
 
 .text_me {
   font-family: $primary_font;
   color: rgba(0, 0, 0, 1);
   font-weight: 400;
-  font-size: 1.1rem;
-  max-width: 350px;
+  font-size: 0.833vw;
+  max-width: 18.229vw;
   width: 100%;
   word-break: break-word;
 }
 .description {
   width: 100%;
-  height: 141px;
-  border-radius: 10px;
+  height: 7.344vw;
+  border-radius: 0.521vw;
   background: rgba(240, 240, 240, 1);
   resize: none;
   outline: none;
   border: none;
-  padding: 15px 20px;
+  padding: 0.781vw 1.042vw;
+  font-size: 0.729vw;
 }
 .textareaContainer {
-  max-width: 338px;
+  max-width: 12.76vw;
   width: 100%;
-  max-height: 171px;
+  max-height: 8.906vw;
   height: 100%;
 }
-
-@media screen and (max-width: 1860px) {
+@media screen and (max-width: 1920px) {
   .profile_box {
-    bottom: 354px;
+    max-width: 308px;
+    height: auto;
+    width: 100%;
+    bottom: 220px;
+    left: 40px;
+    border-radius: 20px;
+    box-shadow: 2px 4px 10px 0px rgba(25, 18, 129, 0.25);
+    margin-bottom: 40px;
   }
   .profile_img_box {
-    height: 350px;
+    height: 308px;
+    width: 308px;
   }
-  .username {
-    line-height: 130px;
-  }
-  .locationText {
-    font-size: 16px;
-    line-height: 25px;
-  }
-  .box_loc_vid_view {
-    margin-bottom: 15px;
-  }
-}
-@media screen and (max-width: 1485px) {
-  .profile_box {
-    bottom: 304px;
-    max-width: 350px;
-  }
-  .profile_img_box {
-    height: 300px;
-    width: 350px;
-  }
-
-  .username_box {
-    top: 80px;
-    left: 380px;
-  }
-  .username {
-    font-size: 90px;
-    line-height: 100px;
-  }
-  .locationText {
-    font-size: 16px;
-    line-height: 25px;
-  }
-  .box_loc_vid_view {
-    margin-bottom: 15px;
-  }
-}
-@media screen and (max-width: 1290px) {
-  .profile_box {
-    max-width: 350px;
-    left: 15px;
-    bottom: 204px;
-  }
-  .profile_img_box {
-    height: 200px;
-    width: 350px;
+  .img_me {
+    max-width: 308px;
+    max-height: 308px;
   }
   .username_box {
     top: 0px;
-    left: 380px;
+    left: 360px;
+    width: 800px;
   }
+
   .username {
-    font-size: 90px;
-    line-height: 100px;
+    gap: 20px;
+    font-size: 4.167vw;
+    line-height: 75px;
+    margin: 0;
   }
-  .locationText {
-    font-size: 18px;
-    line-height: 25px;
+  .containerInfo {
+    padding: 20px 10px;
+    p {
+      margin: 0;
+      margin-left: 10px;
+    }
   }
   .box_loc_vid_view {
+    gap: 15px;
     margin-bottom: 15px;
   }
-  .editButton {
-    padding: 7px;
-  }
-  .button {
-    padding: 7px;
-  }
-  .textareaContainer {
-    max-width: 278px;
-    width: 100%;
-    max-height: 171px;
-    height: 100%;
-  }
-}
-@media screen and (max-width: 855px) {
-  .containerInfo {
-    padding: 10px;
-  }
-  .username {
-    font-size: 60px;
-    line-height: 70px;
-  }
-  .editButton {
-    .editButtonText {
-      font-size: 15px;
-      line-height: 20px;
+
+  .location {
+    gap: 10px;
+    font-size: 1.4rem;
+    img {
+      width: auto;
+      height: auto;
     }
   }
-  .title_me {
+  .locationText {
+    font-size: 16px;
+    line-height: 30px;
+  }
+
+  .videos_view {
+    gap: 45px;
+    max-height: 24px;
+    img {
+      width: auto;
+      height: auto;
+    }
+  }
+
+  .vid_see {
+    gap: 10px;
     font-size: 16px;
   }
-  .text_me {
-    font-size: 14px;
-  }
+
   .buttons {
-    margin-bottom: 15px;
+    gap: 10px;
+    margin-bottom: 30px;
   }
-  .button {
-    span {
-      font-size: 15px;
+
+  .editButton {
+    max-width: 378px;
+    padding: 5px;
+    margin-bottom: 7px;
+    border-radius: 25px;
+    .editButtonText {
+      font-size: 16px;
+      line-height: 30px;
+    }
+    &:hover {
+      scale: 1.01;
     }
   }
-  .username_box {
-    top: 10px;
-    left: 280px;
+
+  .button {
+    border-radius: 25px;
+    padding: 13px;
+    width: 100%;
+    &:hover {
+      scale: 1.01;
+    }
   }
-  .profile_img_box {
-    height: 150px;
-    width: 250px;
+
+  .btn_text {
+    font-size: 22px;
   }
-  .profile_box {
-    max-width: 250px;
-    left: 15px;
-    bottom: 154px;
+
+  .title_me {
+    margin: 0;
+    font-size: 18px;
+    margin-bottom: 5px;
+    line-height: 30px;
+    margin-left: 10px;
+  }
+
+  .text_me {
+    margin-left: 10px;
+    font-size: 16px;
+    max-width: 265px;
   }
   .description {
-    width: 100%;
-    height: 101px;
+    height: 141px;
     border-radius: 10px;
+    padding: 15px 20px;
+    font-size: 14px;
+    font-family: $primary_font;
   }
   .textareaContainer {
-    max-width: 188px;
+    max-width: 245px;
+    max-height: 171px;
   }
 }
+@media screen and (max-width: 1260px) {
+}
+
+// @media screen and (max-width: 1860px) {
+//   .profile_box {
+//     bottom: 354px;
+//   }
+//   .profile_img_box {
+//     height: 350px;
+//   }
+//   .username {
+//     line-height: 130px;
+//   }
+//   .locationText {
+//     font-size: 16px;
+//     line-height: 25px;
+//   }
+//   .box_loc_vid_view {
+//     margin-bottom: 15px;
+//   }
+// }
+// @media screen and (max-width: 1485px) {
+//   .profile_box {
+//     bottom: 304px;
+//     max-width: 350px;
+//   }
+//   .profile_img_box {
+//     height: 300px;
+//     width: 350px;
+//   }
+
+//   .username_box {
+//     top: 80px;
+//     left: 380px;
+//   }
+//   .username {
+//     font-size: 90px;
+//     line-height: 100px;
+//   }
+//   .locationText {
+//     font-size: 16px;
+//     line-height: 25px;
+//   }
+//   .box_loc_vid_view {
+//     margin-bottom: 15px;
+//   }
+// }
+// @media screen and (max-width: 1290px) {
+//   .profile_box {
+//     max-width: 350px;
+//     left: 15px;
+//     bottom: 204px;
+//   }
+//   .profile_img_box {
+//     height: 200px;
+//     width: 350px;
+//   }
+//   .username_box {
+//     top: 0px;
+//     left: 380px;
+//   }
+//   .username {
+//     font-size: 90px;
+//     line-height: 100px;
+//   }
+//   .locationText {
+//     font-size: 18px;
+//     line-height: 25px;
+//   }
+//   .box_loc_vid_view {
+//     margin-bottom: 15px;
+//   }
+//   .editButton {
+//     padding: 7px;
+//   }
+//   .button {
+//     padding: 7px;
+//   }
+//   .textareaContainer {
+//     max-width: 278px;
+//     width: 100%;
+//     max-height: 171px;
+//     height: 100%;
+//   }
+// }
+// @media screen and (max-width: 855px) {
+//   .containerInfo {
+//     padding: 10px;
+//   }
+//   .username {
+//     font-size: 60px;
+//     line-height: 70px;
+//   }
+//   .editButton {
+//     .editButtonText {
+//       font-size: 15px;
+//       line-height: 20px;
+//     }
+//   }
+//   .title_me {
+//     font-size: 16px;
+//   }
+//   .text_me {
+//     font-size: 14px;
+//   }
+//   .buttons {
+//     margin-bottom: 15px;
+//   }
+//   .button {
+//     span {
+//       font-size: 15px;
+//     }
+//   }
+//   .username_box {
+//     top: 10px;
+//     left: 280px;
+//   }
+//   .profile_img_box {
+//     height: 150px;
+//     width: 250px;
+//   }
+//   .profile_box {
+//     max-width: 250px;
+//     left: 15px;
+//     bottom: 154px;
+//   }
+//   .description {
+//     width: 100%;
+//     height: 101px;
+//     border-radius: 10px;
+//   }
+//   .textareaContainer {
+//     max-width: 188px;
+//   }
+// }

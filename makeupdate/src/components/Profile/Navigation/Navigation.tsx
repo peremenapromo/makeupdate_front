@@ -1,13 +1,93 @@
 import s from "./style.module.scss";
 import React, { useRef, useState } from "react";
+import { useDispatch, useSelector } from "app/service/hooks/hooks";
+import { UserProfileFollowers } from "../UserProfile/userProfileFollowers/UserProfileFollowers";
+
+import { UserProfileFollowing } from "../UserProfile/userProfileFollowing/UserProfileFollowing";
+import {
+  getFavouriteLessonsList,
+  getFollowers,
+  getFollowing,
+  getUsersLessons,
+  getUsersProfileList,
+} from "app/api/api";
+import { UserProfileLessons } from "../UserProfile/userLessons/UserProfileLessons";
+import { UserFavouriteLessons } from "../UserProfile/userFavouriteLessons/UserProfileFavouriteLessons";
+import { ILesson } from "app/types/type";
 
 export const NavigationProfile = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startPos, setStartPos] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+  const [activeButton, setActiveButton] = useState<string | null>();
+  const [activeButtonDesktop, setActiveButtonDesktop] = useState<
+    number | null
+  >(null);
 
-  // Начало перетаскивания
+  const { followers, following } = useSelector(
+    (store) => store.profileCard,
+  );
+  const { userData } = useSelector((store) => store.user);
+  const { userLesson, favouriteLessonsList } = useSelector(
+    (store) => store.lessons,
+  );
+
+  const dispatch = useDispatch();
+
+  const buttonsTop = [
+    {
+      text: "Мои уроки",
+      count: userLesson?.count ? userLesson?.count : "13",
+    },
+    { text: "Доступ к урокам", count: 13 },
+    {
+      text: "Избранные уроки",
+      count: favouriteLessonsList?.count
+        ? favouriteLessonsList?.count
+        : 13,
+    },
+    { text: "Мои события", count: 13 },
+    { text: "Мое портфолио" },
+    {
+      text: "Подписчики",
+      count: followers?.count ? followers?.count : 13,
+    },
+    {
+      text: "Подписки",
+      count: following?.count ? following?.count : 13,
+    },
+    { text: "Финансы" },
+  ];
+
+  const buttons = [
+    {
+      id: "lessons",
+      label: "Мои уроки",
+      count: userLesson?.count ? userLesson?.count : "13",
+    },
+    { id: "access", label: "Доступ к урокам", count: 13 },
+    {
+      id: "favourites",
+      label: "Избранные уроки",
+      count: favouriteLessonsList?.count
+        ? favouriteLessonsList?.count
+        : 13,
+    },
+    { id: "events", label: "Мои события", count: 13 },
+    { id: "portfolio", label: "Мое портфолио" },
+    {
+      id: "subscribers",
+      label: "Подписчики",
+      count: followers?.count ? followers?.count : 13,
+    },
+    {
+      id: "subscriptions",
+      label: "Подписки",
+      count: following?.count ? following?.count : 13,
+    },
+    { id: "finances", label: "Финансы" },
+  ];
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
     setStartPos(e.pageX - containerRef.current!.offsetLeft);
@@ -43,49 +123,40 @@ export const NavigationProfile = () => {
     containerRef.current!.scrollLeft = scrollLeft - walk;
   };
 
-  const buttons = [
-    { id: "lessons", label: "Мои уроки", count: 13 },
-    { id: "access", label: "Доступ к урокам", count: 13 },
-    { id: "favorites", label: "Избранные уроки", count: 13 },
-    { id: "events", label: "Мои события", count: 13 },
-    { id: "portfolio", label: "Мое портфолио" },
-    { id: "subscribers", label: "Подписчики", count: 13 },
-    { id: "subscriptions", label: "Подписки", count: 13 },
-    { id: "finances", label: "Финансы" },
-  ];
-
-  const [activeButton, setActiveButton] = useState<string | null>(
-    "lessons",
-  );
-
-  const handleButtonClick = (id: string) => {
+  const handleButtonClick = async (id: string) => {
     setActiveButton(id);
-  };
-  const [activeButtonDesktop, setActiveButtonDesktop] = useState<
-    number | null
-  >(0);
+    setActiveButtonDesktop(null);
+    if (activeButton === id) return;
 
-  const handleButtonClickDesktop = (index: number) => {
+    if (id === "subscribers") {
+      getFollowers(dispatch, userData?.user_id.toString()!);
+    }
+    if (id === "subscriptions") {
+      getFollowing(dispatch, userData?.user_id.toString()!);
+    }
+    if (id === "subscriptions") {
+      getFollowing(dispatch, userData?.user_id.toString()!);
+    }
+    if (id === "lessons") {
+      getUsersLessons(dispatch, userData?.user_id.toString()!);
+    }
+  };
+
+  const handleButtonClickDesktop = async (index: number) => {
     setActiveButtonDesktop(index);
+    setActiveButton(null);
+    if (activeButtonDesktop === index) return;
+
+    if (buttons[index].label === "Подписчики") {
+      await getFollowers(dispatch, userData?.user_id.toString()!);
+    }
+    if (buttons[index].label === "Подписки") {
+      await getFollowing(dispatch, userData?.user_id.toString()!);
+    }
+    if (buttons[index].label === "Мои уроки") {
+      await getUsersLessons(dispatch, userData?.user_id.toString()!);
+    }
   };
-
-  const buttonsTop = [
-    { text: "Мои уроки", count: 13 },
-    { text: "Доступ к урокам", count: 13 },
-    { text: "Избранные уроки", count: 13 },
-    { text: "Мои события", count: 13 },
-    { text: "Мое портфолио" },
-    { text: "Подписчики", count: 13 },
-    { text: "Подписки", count: 13 },
-    { text: "Финансы" },
-  ];
-
-  const buttonsBottom = [
-    { text: "Мое портфолио" },
-    { text: "Подписчики", count: 13 },
-    { text: "Подписки", count: 13 },
-    { text: "Финансы" },
-  ];
 
   const buttonClass = (index: number) =>
     activeButtonDesktop === index
@@ -100,25 +171,6 @@ export const NavigationProfile = () => {
             key={index}
             className={buttonClass(index)}
             onClick={() => handleButtonClickDesktop(index)}>
-            <span className={s.button_main_profile_text}>
-              {button.text}
-              {button.count && (
-                <sup className={s.sup}>({button.count})</sup>
-              )}
-            </span>
-          </button>
-        ))}
-      </div>
-
-      {/* Нижние кнопки */}
-      <div className={s.buttons_containers_profile_bottom}>
-        {buttonsBottom.map((button, index) => (
-          <button
-            key={index + buttonsTop.length}
-            className={buttonClass(index + buttonsTop.length)}
-            onClick={() =>
-              handleButtonClickDesktop(index + buttonsTop.length)
-            }>
             <span className={s.button_main_profile_text}>
               {button.text}
               {button.count && (
@@ -156,6 +208,14 @@ export const NavigationProfile = () => {
           ))}
         </div>
       </div>
+      {activeButtonDesktop === 5 && <UserProfileFollowers />}
+      {activeButtonDesktop === 6 && <UserProfileFollowing />}
+      {activeButtonDesktop === 0 && <UserProfileLessons />}
+      {activeButtonDesktop === 2 && <UserFavouriteLessons />}
+      {activeButton === "favourites" && <UserFavouriteLessons />}
+      {activeButton === "lessons" && <UserProfileLessons />}
+      {activeButton === "subscribers" && <UserProfileFollowers />}
+      {activeButton === "subscriptions" && <UserProfileFollowing />}
     </div>
   );
 };

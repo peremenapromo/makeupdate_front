@@ -12,9 +12,11 @@ import { toast } from "react-toastify";
 import { axiosWithRefreshToken } from "helpers/localStorage.helper";
 import { IGetUserData } from "app/types/type";
 import { UpdateProfilePhoto } from "components/Profile/LoadPhoto/LoadPhoto";
+import { useLocation } from "react-router";
 export const EditProfile = () => {
   const token = localStorage.getItem("accessToken");
   const { userData } = useSelector((state) => state.user);
+  const location = useLocation();
   const dispatch = useDispatch();
   const { isEditing, isSaving, description } = useSelector(
     (state) => state.profileCard,
@@ -71,6 +73,9 @@ export const EditProfile = () => {
       );
 
       toast.success("Профиль успешно обновлен");
+      setTimeout(() => {
+        window.location.href = "/profile";
+      }, 1000);
       fetchData();
       return true;
     } catch (error: any) {
@@ -112,45 +117,38 @@ export const EditProfile = () => {
     setInputData((prev) => ({ ...prev, [field]: value }));
   };
   const toggleEdit = async () => {
-    if (isEditing) {
-      // Начинаем процесс сохранения
-      dispatch(setIsSaving(true));
+    dispatch(setIsSaving(true));
 
-      const updatedData: Partial<IGetUserData> = {};
+    const updatedData: Partial<IGetUserData> = {};
 
-      Object.keys(inputData).forEach((key) => {
-        const newValue = inputData[key as keyof typeof inputData];
-        const oldValue = userData?.[key as keyof IGetUserData];
+    Object.keys(inputData).forEach((key) => {
+      const newValue = inputData[key as keyof typeof inputData];
+      const oldValue = userData?.[key as keyof IGetUserData];
 
-        if (newValue !== oldValue) {
-          if (newValue !== undefined) {
-            updatedData[key as keyof IGetUserData] =
-              newValue as never;
-          }
+      if (newValue !== oldValue) {
+        if (newValue !== undefined) {
+          updatedData[key as keyof IGetUserData] = newValue as never;
         }
-      });
-
-      if (description !== userData?.description) {
-        updatedData.description = description as string;
       }
+    });
 
-      // Проверяем, есть ли изменения, которые нужно сохранить
-      if (Object.keys(updatedData).length > 0) {
-        const isUpdated = await updateUserData(updatedData);
+    if (description !== userData?.description) {
+      updatedData.description = description as string;
+    }
 
-        if (isUpdated) {
-          dispatch(setIsEditing(false));
-        }
-      } else {
+    // Проверяем, есть ли изменения, которые нужно сохранить
+    if (Object.keys(updatedData).length > 0) {
+      const isUpdated = await updateUserData(updatedData);
+
+      if (isUpdated) {
         dispatch(setIsEditing(false));
       }
-
-      // Останавливаем процесс сохранения
-      dispatch(setIsSaving(false));
     } else {
-      // Включаем режим редактирования
-      dispatch(setIsEditing(true));
+      dispatch(setIsEditing(false));
     }
+
+    // Останавливаем процесс сохранения
+    dispatch(setIsSaving(false));
   };
 
   return (
@@ -161,12 +159,29 @@ export const EditProfile = () => {
           <UpdateProfilePhoto
             initialPhotoUrl={userData?.photo ? userData?.photo! : ""}
           />
+          <button onClick={toggleEdit} className={s.saveButton}>
+            Сохранить
+          </button>
         </div>
-        <Inputs
-          onInputChange={handleInputChange}
-          initialShowTelegram={userData?.show_telegram!}
-          initialShowPhone={userData?.show_telephone!}
-        />
+        <div className={s.inputsContainer}>
+          <Inputs
+            onInputChange={handleInputChange}
+            initialShowTelegram={userData?.show_telegram!}
+            initialShowPhone={userData?.show_telephone!}
+          />
+          <div className={s.info_me}>
+            <h3 className={s.title_me}>Обо мне:</h3>
+            <div className={s.textareaContainer}>
+              <textarea
+                name='description'
+                className={s.description}
+                value={description ?? ""}
+                placeholder='Заполнить описание'
+                onChange={handleDescriptionChange}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

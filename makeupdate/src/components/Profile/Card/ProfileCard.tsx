@@ -1,13 +1,16 @@
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Inputs } from "../../Inputs/Inputs";
 import styles from "./style.module.scss";
 import location from "../../../app/assets/profileCard/location.svg";
 import videos from "../../../app/assets/profileCard/videos.svg";
 import view from "../../../app/assets/profileCard/view.svg";
-import { getDataUser } from "app/api/api";
+import {
+  getCounterProfile,
+  getDataUser,
+  getDataUserProfileForLessons,
+} from "app/api/api";
 import { useDispatch, useSelector } from "app/service/hooks/hooks";
 import { toast } from "react-toastify";
-import mockImage from "../../../app/assets/profileCard/MockImage.png";
 import { axiosWithRefreshToken } from "helpers/localStorage.helper";
 import { UpdateProfilePhoto } from "components/Profile/LoadPhoto/LoadPhoto";
 import { IGetUserData } from "app/types/type";
@@ -17,12 +20,19 @@ import {
   setIsSaving,
   setActiveButton,
 } from "app/service/profileCard/profileCardSlice";
-import { Loading } from "components/Loading/Loading";
 
-const ProfileCard: FC = () => {
-  const { isEditing, isSaving, description } = useSelector(
+interface ProfileCardProps {
+  idLink: string;
+}
+
+const ProfileCard = ({ idLink }: ProfileCardProps) => {
+  const { isEditing, description, counter } = useSelector(
     (state) => state.profileCard,
   );
+
+  const { userData } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
   const [inputData, setInputData] = useState({
     first_name: "",
     last_name: "",
@@ -33,10 +43,8 @@ const ProfileCard: FC = () => {
     show_telegram: true,
     show_telephone: true,
   });
-  const token = localStorage.getItem("accessToken");
-  const { userData } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
+  const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
     if (userData) {
@@ -55,9 +63,14 @@ const ProfileCard: FC = () => {
       dispatch(setDescription(descriptionInitial));
     }
   }, [userData]);
+
   useEffect(() => {
     const fetchData = async () => {
-      await getDataUser(dispatch);
+      // await getDataUser(dispatch);
+      await getCounterProfile(
+        dispatch,
+        userData?.user_id.toString()!,
+      );
     };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -67,6 +80,7 @@ const ProfileCard: FC = () => {
       dispatch(setActiveButton(savedButton));
     }
   }, [dispatch]);
+
   const updateUserData = async (inputData: any) => {
     const fetchData = async () => {
       await getDataUser(dispatch);
@@ -114,10 +128,10 @@ const ProfileCard: FC = () => {
     }
   };
 
-  const handleButtonClick = (buttonName: string) => {
-    dispatch(setActiveButton(buttonName));
-    localStorage.setItem("activeButton", buttonName);
-  };
+  // const handleButtonClick = (buttonName: string) => {
+  //   dispatch(setActiveButton(buttonName));
+  //   localStorage.setItem("activeButton", buttonName);
+  // };
 
   const handleDescriptionChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
@@ -133,11 +147,8 @@ const ProfileCard: FC = () => {
   };
   const toggleEdit = async () => {
     if (isEditing) {
-      // Начинаем процесс сохранения
       dispatch(setIsSaving(true));
-
       const updatedData: Partial<IGetUserData> = {};
-
       Object.keys(inputData).forEach((key) => {
         const newValue = inputData[key as keyof typeof inputData];
         const oldValue = userData?.[key as keyof IGetUserData];
@@ -154,7 +165,6 @@ const ProfileCard: FC = () => {
         updatedData.description = description as string;
       }
 
-      // Проверяем, есть ли изменения, которые нужно сохранить
       if (Object.keys(updatedData).length > 0) {
         const isUpdated = await updateUserData(updatedData);
 
@@ -164,11 +174,8 @@ const ProfileCard: FC = () => {
       } else {
         dispatch(setIsEditing(false));
       }
-
-      // Останавливаем процесс сохранения
       dispatch(setIsSaving(false));
     } else {
-      // Включаем режим редактирования
       dispatch(setIsEditing(true));
     }
   };
@@ -182,18 +189,32 @@ const ProfileCard: FC = () => {
       </div>
       <div className={styles.username_box}>
         {userData && (
-          <p className={styles.username}>
-            <span>
-              {userData?.first_name
-                ? userData?.first_name.toUpperCase()
-                : "ИМЯ"}{" "}
-            </span>
-            <span>
-              {userData?.last_name
-                ? userData?.last_name.toUpperCase()
-                : "ФАМИЛИЯ"}
-            </span>
-          </p>
+          <div className={styles.username}>
+            <div className={styles.usernameLang}>
+              <span>
+                {userData?.first_name
+                  ? userData?.first_name.toUpperCase()
+                  : "ИМЯ"}{" "}
+              </span>{" "}
+              <span>
+                {userData?.last_name
+                  ? userData?.last_name.toUpperCase()
+                  : "ФАМИЛИЯ"}
+              </span>
+            </div>
+            <div className={styles.usernameLang}>
+              <span>
+                {userData?.lat_first_name
+                  ? userData?.lat_first_name.toUpperCase()
+                  : ""}{" "}
+              </span>{" "}
+              <span>
+                {userData?.lat_last_name
+                  ? userData?.lat_last_name.toUpperCase()
+                  : ""}
+              </span>
+            </div>
+          </div>
         )}
       </div>
 
@@ -215,28 +236,33 @@ const ProfileCard: FC = () => {
             <p className={styles.vid_see}>
               <img
                 className={styles.vid_see_img}
-                src={videos}
-                alt='videos_icon'
+                src={view}
+                alt='view_icon'
               />
-              0
+              {counter ? counter[0].total_views : "0"}
             </p>
             <p className={styles.vid_see}>
               <img
                 className={styles.vid_see_img}
-                src={view}
-                alt='view_icon'
+                src={videos}
+                alt='videos_icon'
               />
-              0
+              {counter ? counter[0].count_lessons : "0"}
             </p>
           </div>
         </div>
-        <button
-          className={`${styles.editButton}`}
-          onClick={toggleEdit}>
-          <span className={styles.editButtonText}>
-            {isEditing ? "Сохранить изменения" : "Редактировать"}
-          </span>
-        </button>
+        {window.location.pathname === "/profile" ||
+        userData?.user_id === +idLink ? (
+          <button
+            className={`${styles.editButton}`}
+            onClick={toggleEdit}>
+            <span className={styles.editButtonText}>
+              {isEditing ? "Сохранить изменения" : "Редактировать"}
+            </span>
+          </button>
+        ) : (
+          <div>123</div>
+        )}
 
         {isEditing && (
           <Inputs
@@ -245,21 +271,6 @@ const ProfileCard: FC = () => {
             initialShowPhone={userData?.show_telephone!}
           />
         )}
-
-        {/* <div className={styles.buttons}>
-          {[
-            "Опубликовать урок",
-            "Опубликовать событие",
-            "Опубликовать фото",
-          ].map((button) => (
-            <button
-              key={button}
-              className={styles.button}
-              onClick={() => handleButtonClick(button)}>
-              <span className={styles.btn_text}>{button}</span>
-            </button>
-          ))}
-        </div> */}
 
         <div className={styles.info_me}>
           <h3 className={styles.title_me}>Обо мне:</h3>

@@ -3,7 +3,6 @@ import styles from "./Inputs.module.scss";
 import showIcon from "../../app/assets/profileCard/ShowIcon.svg";
 import hideIcon from "../../app/assets/profileCard/NotShowIcon.svg";
 import { InputFieldProps, InputsProps } from "app/types/type";
-import arrowBottomBlack from "../../app/assets/profileCard/bottomArrowBlack.svg";
 import { useSelector } from "app/service/hooks/hooks";
 import "react-dadata/dist/react-dadata.css";
 import "./style.css";
@@ -53,14 +52,15 @@ const InputField: React.FC<InputFieldProps> = ({
 
 export const Inputs: React.FC<InputsProps> = ({
   onInputChange,
-
   initialShowPhone = true,
   initialShowTelegram = true,
 }) => {
+
   const { userData } = useSelector((state) => state.user);
+
   const name = userData?.first_name;
   const lastName = userData?.last_name;
-  // const [country, setCountry] = useState<string>("");
+  
   const [inputValues, setInputValues] = useState({
     first_name: name,
     last_name: lastName || "",
@@ -171,15 +171,21 @@ export const Inputs: React.FC<InputsProps> = ({
         }}
       />
       {/* <div className={styles.dropdowns}> */}
-      <AddressSuggestions
-        token='bcbe8a79e4b94cc3270a0204684977965ab06020'
-        value={valueCity}
-        onChange={handleSuggestionChange}
-        filterLocations={[{ country: "*" }]}
-        defaultQuery='Россия, г Москва'
-        containerClassName={styles.inputCountry}
-      />
-      {/* </div> */}
+      <div className={styles.cityGroup}>
+        <label className={styles.city}>Город</label>
+        <AddressSuggestions
+          token='bcbe8a79e4b94cc3270a0204684977965ab06020'
+          value={valueCity}
+          onChange={handleSuggestionChange}
+          filterLocations={[{ country: "*" }]}
+          defaultQuery={
+            userData
+              ? `${userData.country},${userData.city}`
+              : "Россия, г Москва"
+          }
+          containerClassName={styles.inputCountry}
+        />
+      </div>
     </div>
   );
 };

@@ -1,0 +1,100 @@
+@import "/src/app/styles/variables";
+
+// Profile_all_container
+.profile_all_container {
+  // position: relative;
+  top: 0px;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.profileContainer {
+  position: relative;
+  height: 200px;
+}
+.profile_top_img {
+  width: 99.7vw;
+  height: 33vh;
+  z-index: 0;
+}
+.profileContainerMobile {
+  display: none;
+}
+.profile_top_img_mobile {
+  display: none;
+}
+
+@media screen and (max-width: 850px) {
+  .profile_top_img {
+    width: 99.2vw;
+    z-index: 0;
+  }
+  .profileContainer {
+    display: none;
+  }
+  .profile_top_img {
+    display: none;
+  }
+  .profile_top_img_mobile {
+    position: relative;
+    display: flex;
+    width: 100%;
+  }
+  .profileContainerMobile {
+    display: inline;
+    position: absolute;
+    top: 130px;
+    width: 100%;
+    max-width: 88.9vw;
+    padding: 0px 40px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .profileContainerMobile {
+    max-width: 85.9vw;
+  }
+}
+@media screen and (max-width: 570px) {
+  .profile_top_img_mobile {
+    height: auto;
+  }
+
+  .profileContainerMobile {
+    display: inline;
+    position: absolute;
+    top: 56px;
+    max-width: 83vw;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 490px) {
+  .profile_top_img_mobile {
+    height: auto;
+  }
+
+  .profileContainerMobile {
+    display: inline;
+    position: absolute;
+    top: 56px;
+    max-width: 81vw;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 430px) {
+  .profileContainerMobile {
+    display: inline;
+    position: absolute;
+    top: 75px;
+    // max-width: 91.9vw;
+    width: 90.7%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .profileContainerMobile {
+    display: inline;
+    position: absolute;
+    top: 56px;
+    // max-width: 84vw;
+    width: 88.7%;
+  }
+}

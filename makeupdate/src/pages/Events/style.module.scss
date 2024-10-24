@@ -1,170 +1,172 @@
 .wrapper {
-  padding: 156px 90px 100px 90px;
+  padding: 5.521vw 2.083vw 100px 2.083vw;
   height: calc(100vh - 156px);
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+
   .container {
     display: flex;
     flex-direction: column;
     // height: 100%;
-    max-width: 1920px;
+    max-width: 100%;
+    justify-content: center;
+    align-items: center;
 
     .topBlock {
       position: relative;
-      max-width: 1920px;
+      max-width: 95%;
     }
     .bigCardBlock {
-      // position: relative;
       display: flex;
       overflow: hidden;
       scroll-behavior: smooth;
-      // flex-wrap: wrap;
-      gap: 20px;
-      // max-height: 553px;
-      max-width: 1920px;
+      gap: 0.52vw;
+      max-width: 100%;
       height: 100%;
-      margin-bottom: 40px;
+      margin-bottom: 2.084vw;
     }
     .navButtonLeft {
-      font-size: 16px;
-      padding: 10px 11px;
+      padding: 0.5vw 0.6vw;
       cursor: pointer;
       position: absolute;
-      left: -45px;
+      left: -1.5vw;
+      display: flex;
+      align-items: center;
       top: 35%;
       border: 1px solid rgba(225, 225, 225, 1);
       outline: none;
-      height: 70px;
-      border-radius: 12px;
+      height: 5vw;
+      border-radius: 0.8vw;
+      img {
+        width: 0.5vw;
+        height: 1.1vw;
+      }
     }
     .navButton {
-      // display: none;
-      font-size: 16px;
-      padding: 10px 11px;
+      padding: 0.5vw 0.6vw;
       cursor: pointer;
       position: absolute;
-      right: -45px;
+      right: -1.5vw;
+      display: flex;
+      align-items: center;
       top: 35%;
       border: 1px solid rgba(225, 225, 225, 1);
       outline: none;
-      height: 70px;
-      border-radius: 12px;
+      height: 5vw;
+      border-radius: 0.8vw;
+      img {
+        width: 0.5vw;
+        height: 1.1vw;
+      }
     }
     .navigation {
       margin-bottom: 25px;
-      max-width: 1920px;
+      max-width: 99vw;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      min-height: 40px;
     }
     .calendar {
       margin-bottom: 25px;
-      max-width: 1920px;
+      max-width: 95%;
     }
     .smallCardEvent {
       display: flex;
       flex-wrap: wrap;
-      gap: 40px;
-      max-width: 1920px;
+      gap: 0.52vw;
+      justify-content: center;
+
+      .card {
+        flex: 1 1 calc(20% - 0.52vw);
+        max-width: 20%;
+        min-width: 150px;
+      }
     }
   }
 }
 
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: 1920px) {
   .wrapper {
-    padding: 156px 50px 100px 50px;
-    .container {
-      .topBlock {
-        position: relative;
-        .bigCardBlock {
-          overflow: hidden;
-          scroll-behavior: smooth;
-        }
-
-        .navButtonLeft {
-          left: -20px;
-          right: 0;
-          display: flex;
-          width: 32px;
-          z-index: 10;
-        }
-        .navButton {
-          top: 35%;
-          right: -20px;
-          display: block;
-        }
-      }
-      .smallCardEvent {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        justify-content: center;
-      }
-    }
+    padding: 106px 40px 100px 40px;
   }
 }
-@media screen and (max-width: 850px) {
-  .wrapper {
-    padding: 156px 20px 60px 20px;
-    height: auto;
-    .container {
-      .topBlock {
-        position: relative;
-        .bigCardBlock {
-          overflow: hidden;
-          scroll-behavior: smooth;
-        }
-        .navBlock {
-          display: flex;
-          overflow-x: auto;
-          scroll-behavior: smooth;
-        }
-        .navButtonLeft {
-          left: -20px;
-          right: 0;
-          display: flex;
-          width: 32px;
-          z-index: 10;
-        }
-        .navButton {
-          top: 35%;
-          right: -20px;
-          display: block;
-        }
-      }
-      .smallCardEvent {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        justify-content: center;
-      }
-    }
-  }
-}
-@media screen and (max-width: 690px) {
-  .wrapper {
-    padding: 156px 20px 60px 20px;
-    height: auto;
-    .container {
-      .smallCardEvent {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-  }
-}
-@media screen and (max-width: 500px) {
+@media (max-width: 1024px) {
   .wrapper {
     padding: 156px 20px 100px 20px;
     .container {
-      .topBlock {
-        .bigCardBlock {
-          gap: 10px;
+      .bigCardBlock {
+        gap: 10px;
+        margin-bottom: 40px;
+      }
+      .smallCardEvent {
+        .card {
+          flex: 1 1 calc(25% - 0.52vw);
+          max-width: 25%;
         }
-        .navButtonLeft {
-          display: none;
+      }
+    }
+  }
+}
+@media (max-width: 850px) {
+  .wrapper {
+    .container {
+      // .bigCardBlock {
+      //   gap: 1.2vw;
+      // }
+      .navButton {
+        right: -25px;
+        height: 50px;
+        img {
+          width: 2.5vw;
+          height: 2.1vw;
         }
-        .navButton {
-          display: none;
+      }
+      .navButtonLeft {
+        left: -25px;
+        height: 50px;
+        img {
+          width: 2.5vw;
+          height: 2.1vw;
+        }
+      }
+      .smallCardEvent {
+        gap: 10px;
+        .card {
+          flex: 1 1 calc(50% - 10px);
+          max-width: 50%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .wrapper {
+    padding: 50px 20px;
+    .container {
+      .navButton {
+        right: -10px;
+        img {
+          width: 2.5vw;
+          height: 2.1vw;
+        }
+      }
+      .navButtonLeft {
+        left: -10px;
+        img {
+          width: 2.5vw;
+          height: 2.1vw;
+        }
+      }
+      .smallCardEvent {
+        margin-bottom: 100px;
+
+        .card {
+          flex: 1 1 100%;
+          max-width: 100%;
         }
       }
     }

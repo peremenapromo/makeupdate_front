@@ -1,9 +1,6 @@
-import { useDispatch, useSelector } from "app/service/hooks/hooks";
-import { logout } from "app/service/user/userSlice";
-import { IGetUserData } from "app/types/type";
 import axios, { AxiosRequestConfig } from "axios";
 import { jwtDecode } from "jwt-decode"; // Именованный импорт
-import { useNavigate } from "react-router";
+
 import { toast } from "react-toastify";
 export async function getTokenFromLocalStorage(
   key: string,
@@ -42,7 +39,7 @@ export const getTokenExpiration = (token: string): string | null => {
     const decoded: { exp: number } = jwtDecode(token);
     const expirationTime = new Date(
       decoded.exp * 1000,
-    ).toLocaleString(); // Преобразуем в читаемый формат
+    ).toLocaleString();
     return expirationTime;
   } catch (error) {
     console.error("Ошибка при декодировании токена:", error);
@@ -109,7 +106,6 @@ export const axiosWithRefreshToken = async <T>(
     return Promise.reject("Не удалось обновить токены");
   }
 
-  // Добавляем заголовок авторизации
   const accessToken = getAccessToken();
   options = {
     ...options,
@@ -124,10 +120,10 @@ export const axiosWithRefreshToken = async <T>(
     return response.data;
   } catch (error: any) {
     if (
-      error.response?.status === 401 &&
-      isTokenExpired(getAccessToken()!)
+      error.response?.status === 401 ||
+      (error.response?.status === 400 &&
+        isTokenExpired(getAccessToken()!))
     ) {
-      // Если токен истек, пробуем обновить токен
       const refresh = getRefreshToken();
 
       if (refresh && !isTokenExpired(refresh)) {
@@ -135,7 +131,6 @@ export const axiosWithRefreshToken = async <T>(
           const refreshData = await refreshToken();
           localStorage.setItem("accessToken", refreshData);
 
-          // Пытаемся снова выполнить запрос с новым accessToken
           options.headers!.Authorization = `Bearer ${refreshData}`;
           const retryResponse = await axios(url, options);
           return retryResponse.data;

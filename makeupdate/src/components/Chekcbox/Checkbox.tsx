@@ -3,7 +3,7 @@ import { FC } from "react";
 import styles from "./Checkbox.module.scss";
 
 interface CheckboxProps {
-  checked: boolean; // Убедитесь, что это тип boolean
+  checked: boolean;
   onChange: (checked: boolean) => void;
 }
 

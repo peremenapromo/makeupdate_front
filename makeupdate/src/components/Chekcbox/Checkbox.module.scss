@@ -6,7 +6,6 @@
 
 .input_checkbox {
   cursor: pointer;
-  // display: none; /* Скрываем стандартный чекбокс */
 }
 
 .checkbox {
@@ -22,7 +21,7 @@
   border-radius: 4px;
   position: relative;
   margin-right: 10px;
-  transition: background 0.3s ease; /* Плавный переход фона */
+  transition: background 0.3s ease;
 }
 
 .checked {

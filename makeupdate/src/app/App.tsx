@@ -9,7 +9,6 @@ import { Header } from "../components/Header/Header";
 import { Loading } from "../components/Loading/Loading";
 import AppRouter from "./router";
 import { useLocation, useNavigate } from "react-router";
-import { axiosWithRefreshToken } from "helpers/localStorage.helper";
 import { useSelector } from "./service/hooks/hooks";
 
 const App: FC = () => {
@@ -18,7 +17,6 @@ const App: FC = () => {
   const [isAuthOpen, setIsAuthOpen] = useState<boolean>(false);
   const { isAuth } = useSelector((state) => state.user);
   const location = useLocation();
-  // console.log(isModalOpen)
   useEffect(() => {
     const fetchData = async () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));

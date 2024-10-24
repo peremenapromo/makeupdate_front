@@ -56,12 +56,9 @@ export const Confirm = () => {
       }
     };
 
-    // Задержка перед проверкой (например, 2 секунды)
     const timer = setTimeout(() => {
       handleConfirmEmail();
     }, 2000);
-
-    // Очистка таймера при размонтировании компонента
     return () => clearTimeout(timer);
   }, [uid, token]);
 

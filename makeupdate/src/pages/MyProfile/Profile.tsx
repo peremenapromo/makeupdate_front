@@ -1,28 +1,38 @@
 import { FC, useEffect } from "react";
 import styles from "./Profile.module.scss";
 import ProfileCard from "../../components/Profile/Card/ProfileCard";
-import profile_top from "../../app/assets/profileCard/profile_top.svg";
+// import profile_top from "../../app/assets/profileCard/profile_top.svg";
 import bgMobile from "../../app/assets/profileCard/BgMobile.png";
 import { useDispatch, useSelector } from "app/service/hooks/hooks";
-import { getDataUser } from "app/api/api";
+import {
+  getDataUser,
+  getDataUserProfile,
+  getFollowers,
+  getFollowing,
+  getUsersLessons,
+} from "app/api/api";
 import { NavigationProfile } from "components/Profile/Navigation/Navigation";
 import { ProfileMobile } from "components/Profile/ProfileMobile";
+import { useParams } from "react-router";
 
 export const Profile: FC = () => {
+  const { id } = useParams<{ id: string }>();
   const { userData } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchData = async () => {
-      await getDataUser(dispatch);
+      await getDataUserProfile(
+        dispatch,
+        userData?.user_id.toString()!,
+      );
     };
     fetchData();
-  }, [dispatch]);
-
+  }, [dispatch, id, userData?.user_id]);
   return (
     <div className={styles.profile_all_container}>
       <img
         className={styles.profile_top_img}
-        src={profile_top}
+        src={bgMobile}
         alt='profile_bg'
       />
       <img
@@ -32,15 +42,12 @@ export const Profile: FC = () => {
       />
 
       <div className={styles.profileContainer}>
-        <ProfileCard />
+        <ProfileCard idLink={id || ""} />
 
         <NavigationProfile />
       </div>
       <div className={styles.profileContainerMobile}>
-        <ProfileMobile
-          userData={{ ...userData }}
-          photoLink={"https://api.lr45981.tw1.ru/" + userData?.photo}
-        />
+        <ProfileMobile />
       </div>
     </div>
   );

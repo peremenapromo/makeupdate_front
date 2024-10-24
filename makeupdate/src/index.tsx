@@ -7,26 +7,24 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./app/service/store";
 import { setUserData } from "app/service/user/userSlice";
-const userDataFromLocalStorage = localStorage.getItem('userData');
+const userDataFromLocalStorage = localStorage.getItem("userData");
 
 if (userDataFromLocalStorage) {
   const parsedUserData = JSON.parse(userDataFromLocalStorage);
   store.dispatch(setUserData(parsedUserData));
-  // console.log(parsedUserData)
 }
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>,
+  // </React.StrictMode>,
 );
-
 
 reportWebVitals();

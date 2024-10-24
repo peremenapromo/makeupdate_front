@@ -1,30 +1,30 @@
 @import "../../../app/styles/variables";
 .wrapper {
-  width: 100%;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
   font-family: $primary_font;
   .container {
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    max-width: 1920px;
+    width: 95.5vw;
     .leftSide {
       display: flex;
-      gap: 16px;
-      max-width: 690px;
-      width: 100%;
+      gap: 0.84vw;
+      align-items: center;
       .button {
+        font-family: $primary_font;
         outline: none;
         border: none;
-        max-width: 215px;
-        width: 100%;
+        width: 14vw;
         color: rgba(130, 130, 130, 1);
         line-height: 25px;
-        border-radius: 31px;
+        border-radius: 1.6vw;
         box-shadow: 0px 2px 16px 0px rgba(21, 19, 113, 0.25);
-        max-height: 51px;
-        height: 100%;
-        padding: 12px 0px;
-        font-size: 16px;
+        height: 2vw;
+        min-height: 36px;
+        padding: 0px;
+        font-size: 1.2vw;
         cursor: pointer;
       }
       .active {
@@ -39,31 +39,40 @@
       }
     }
     .rightSide {
-      max-width: 552px;
+      max-width: 27.5vw;
       width: 100%;
       position: relative;
       display: flex;
       .search {
         width: 100%;
-        border-radius: 30px;
+        border-radius: 1.6vw;
         outline: none;
         border: none;
         box-shadow: 0px 2px 16px 0px rgba(21, 19, 113, 0.25);
-        padding-left: 52px;
-        line-height: 24.6px;
-        font-size: 18px;
+        padding-left: 2.7vw;
+        line-height: 1.25vw;
+        font-size: 1vw;
+        min-height: 36px;
       }
       .searchIcon {
+        width: 1.3vw;
+        height: 1.3vw;
         position: absolute;
-        top: 13px;
-        left: 12px;
+        top: 27%;
+        left: 0.63vw;
       }
       .mobileInputIcon {
         display: none;
       }
       .gradientSearch {
+        width: 2.6vw;
+        height: 2.6vw;
+        max-height: 154px;
+        max-width: 154px;
         position: absolute;
         right: 0;
+        min-width: 36px;
+        min-height: 36px;
       }
     }
   }
@@ -75,30 +84,54 @@ input[type="search"]::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
 
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: 1920px) {
   .wrapper {
     .container {
       .leftSide {
-        max-width: 490px;
+        display: flex;
+        gap: 0.84vw;
+        align-items: center;
+        .button {
+          height: 40px;
+          font-size: 16px;
+        }
       }
       .rightSide {
-        max-width: 452px;
+        .searchIcon {
+          width: 40px;
+          height: 40px;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+        }
+        .mobileInputIcon {
+          display: none;
+        }
+        .gradientSearch {
+          width: 40px;
+          height: 40px;
+          max-height: 154px;
+          max-width: 154px;
+          position: absolute;
+          right: 0;
+          min-width: 36px;
+          min-height: 36px;
+        }
       }
     }
   }
 }
+
 @media screen and (max-width: 1050px) {
   .wrapper {
     .container {
       .leftSide {
-        max-width: 390px;
-        // border: 1px solid;
         border-radius: 31px;
         box-shadow: 0px 2px 16px 0px rgba(21, 19, 113, 0.25);
-
         .button {
           box-shadow: 0px 0px 0px 0px rgba(21, 19, 113, 0.25);
           background: white;
+          border-radius: 31px;
         }
         .active {
           background: linear-gradient(
@@ -110,11 +143,15 @@ input[type="search"]::-webkit-search-results-decoration {
         }
       }
       .rightSide {
-        max-width: 352px;
+        .search {
+          border-radius: 31px;
+          padding-left: 75px;
+        }
       }
     }
   }
 }
+
 @media screen and (max-width: 850px) {
   .wrapper {
     .container {
@@ -125,14 +162,11 @@ input[type="search"]::-webkit-search-results-decoration {
         max-width: 100%;
         justify-content: space-between;
         .button {
-          font-size: 13px;
-          line-height: 15px;
-          padding: 15px 0;
+          flex: 1 1;
         }
       }
       .rightSide {
         max-width: 100%;
-
         .searchIcon {
           display: none;
         }
@@ -140,10 +174,41 @@ input[type="search"]::-webkit-search-results-decoration {
           display: flex;
           position: absolute;
           left: 0;
+          width: 36px;
+          height: 36px;
         }
         .search {
-          height: 50px;
-          padding-left: 75px;
+          font-size: 1.89vw;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .wrapper {
+    .container {
+      .leftSide {
+        .button {
+          flex: 1 1;
+          font-size: 14px;
+        }
+      }
+      .rightSide {
+        max-width: 100%;
+        .searchIcon {
+          display: none;
+        }
+        .mobileInputIcon {
+          display: flex;
+          position: absolute;
+          left: 0;
+          width: 36px;
+          height: 36px;
+        }
+        .search {
+          padding-left: 45px;
+          font-size: 2.89vw;
         }
       }
     }
